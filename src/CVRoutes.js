@@ -1,0 +1,52 @@
+import React, { useEffect, useState } from 'react'
+import Resume from '../src/views/Resume'
+import Home from '../src/views/Home';
+import Portfolio from '../src/views/Portfolio';
+import Services from '../src/views/Services';
+import Contact from '../src/views/Contact';
+
+import { useParams } from "react-router-dom";
+
+const New = () => {
+    const { roomId } = useParams();
+    if(roomId=='home'){
+        return(
+            <Home/>
+        )
+    }else if(roomId=='resume'){
+        return(
+            <Resume/>
+        )
+    }else if(roomId=='portfolio'){
+        return(
+            <Portfolio/>
+        )
+    }else if(roomId=='services'){
+        return(
+            <Services/>
+        )
+    }else if(roomId=='contact'){
+        return(
+            <Contact/>
+        )
+    }
+    
+    
+    
+
+}
+
+const CVRoutes = () => {
+  
+    
+    // console.log('room id :: ' ,roomId)
+    return (
+        <div>
+        <div>
+            <New/>
+        </div>
+        </div>
+    )
+}
+
+export default CVRoutes
