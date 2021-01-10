@@ -1,4 +1,5 @@
-import React,{useState} from 'react'
+import React,{useState} from 'react';
+import {useSelector, useDispatch} from 'react-redux';
 import { 
     makeStyles,
     TextField,
@@ -9,7 +10,6 @@ import {
  import EmailOutlinedIcon from '@material-ui/icons/EmailOutlined';
  import PhoneIphoneOutlinedIcon from '@material-ui/icons/PhoneIphoneOutlined';
  import LocationOnOutlinedIcon from '@material-ui/icons/LocationOnOutlined';
- import FacebookIcon from '@material-ui/icons/Facebook';
 import Footer from './Footer';
 import * as Yup from 'yup';
 import { useFormik } from 'formik';
@@ -25,9 +25,12 @@ const useStyles = makeStyles((theme) => ({
       margin: {
         margin: theme.spacing(1),
       },
+      cardvisit: {
+        opacity: 0.7
+      },
   }));
 
-const initValues ={
+const initialValues ={
     information: '',
     phoneNumber: '',
     email: '',
@@ -62,6 +65,7 @@ const validationSchema = Yup.object({
 
 function Home() {
     const classes = useStyles();
+    const dispatch = useDispatch()
     const [SkillsValue, setSkillsValue] = useState('')
     const [fields, setFields] = useState([{ value: null, skval:null }]);
         
@@ -75,6 +79,7 @@ function Home() {
             const values = [...fields];
             values[i].value = event.target.value;
             values[i].skval = event.target.skval;
+
             
             setFields(values);
             console.log(fields)
@@ -93,13 +98,13 @@ function Home() {
           }
 
           const formik = useFormik({
-            initValues,
+            initialValues,
             validationSchema,
             onSubmit: (values, onSubmitProps) => {
             onSubmitProps.setSubmitting(false)
-
             }
           })
+
     return (
         <div id="lonon-main">
         <form onSubmit={formik.handleSubmit}>
@@ -112,7 +117,7 @@ function Home() {
                     <div class="col-md-5 animate-box fadeInLeft animated" data-animate-effect="fadeInLeft"> <span class="heading-meta style-1">Informations</span>
                         <h3 class="lonon-about-heading">I'm Lonon F. Smith</h3>
                         
-                        <form  >
+                        <form onSubmit={formik.handleSubmit} >
                         <TextField
                             id="outlined-multiline-static"
                             fullWidth
@@ -121,17 +126,20 @@ function Home() {
                             rows={15}
                             name='information'
                             variant="outlined"
+                            error={Boolean(formik.touched.information && formik.errors.information)}
+                            helperText={formik.touched.information && formik.errors.information}
+                            onBlur={formik.handleBlur}
+                            value={formik.values.information}
+                            onChange={formik.handleChange}
                             />
-                            
                         </form>
 
-                        <div className="cardvisit" style={{
-                             opacity: 0.7
-                        }}>
+                        <div className="cardvisit">
                             <h3>Lonon F. Smith</h3>
                            <div className={classes.margin}>
                          <TextField
                             label="Phone Number"
+                            fullWidth
                             name='phoneNumber'
                             InputProps={{
                             startAdornment: (
@@ -144,6 +152,7 @@ function Home() {
                         
                             <TextField
                             label="Email"
+                            fullWidth
                             name='email'
                             InputProps={{
                             startAdornment: (
@@ -153,21 +162,11 @@ function Home() {
                             ),
                             }}
                         />
-                         <TextField
-                            label="Facebook"
-                            name='facebook'
-                            InputProps={{
-                            startAdornment: (
-                                <InputAdornment position="start">
-                                <FacebookIcon />
-                                </InputAdornment>
-                            ),
-                            }}
-                        />
                          <TextField  
                          
                             label="Location"
                             name='location'
+                            fullWidth
                             InputProps={{
                             startAdornment: (
                                 <InputAdornment position="start">
@@ -202,7 +201,12 @@ function Home() {
                             multiline
                             rows={15}
                             name='abilities'
-                            variant="outlined"
+                            variant="outlined" 
+                            error={Boolean(formik.touched.abilities && formik.errors.abilities)}
+                            helperText={formik.touched.abilities && formik.errors.abilities}
+                            onBlur={formik.handleBlur}
+                            value={formik.values.abilities}
+                            onChange={formik.handleChange}
                             />
                
              </form>
@@ -217,23 +221,21 @@ function Home() {
            
            <TextField 
            id="outlined-basic" 
-           label="Skills" 
-           name='skills'
-           variant="outlined" />
-             {/* <Slider
-                        defaultValue={50}
-                        getAriaValueText={valuetext}
-                        aria-labelledby="discrete-slider"
-                        valueLabelDisplay="auto"
-                        onChange={e => handleChange(idx, e)}
-                        step={5}
-                        min={10}
-                        max={100}
-            /> */}
+           label="Skill" 
+           name='skill'
+           variant="outlined"
+           error={Boolean(formik.touched.skill && formik.errors.skill)}
+           helperText={formik.touched.skill && formik.errors.skill}
+           onBlur={formik.handleBlur}
+           value={formik.values.skill}
+           onChange={formik.handleChange} />
              <Slider
                     defaultValue={50}
                     aria-labelledby="discrete-slider"
                     valueLabelDisplay="auto"
+                    onBlur={formik.handleBlur}
+                    // value={formik.values.rating}
+                    onChange={formik.handleChange}
                     step={10}
                     marks
                     min={10}
@@ -272,7 +274,7 @@ function Home() {
             </div>
         </div>
 
-        <div class="lonon-testiominal">
+        {/* <div class="lonon-testiominal">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-12"> <span class="heading-meta style-1">Expertise</span>
@@ -289,7 +291,7 @@ function Home() {
                     </div>
                 </div>
             </div>
-        </div>
+        </div> */}
       
         {/* <div class="lonon-testiominal">
             <div class="container-fluid">
