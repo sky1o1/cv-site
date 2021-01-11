@@ -49,7 +49,6 @@ function Sidebar() {
         console.log('name', inputFieldName)
         console.log('value', inputFieldValue)
         const updatedProfileData = {...profile, [inputFieldName]: inputFieldValue}
-        console.log('data', updatedProfileData)
         dispatch(setProfile(updatedProfileData))
         formik.setFieldValue(inputFieldName, inputFieldValue)
       }
@@ -79,7 +78,6 @@ function Sidebar() {
                             const selectedUrl = URL.createObjectURL(selectedFile)
                             formik.setFieldValue("image", selectedUrl);
                             setImage(selectedFile)
-                            // dispatch(setImage(selectedFile))
 
                         }}
                         style={{
@@ -90,7 +88,7 @@ function Sidebar() {
                         className="textfield"
                         id="standard-basic"
                         fullWidth
-                        name='fullName'
+                        name='FullName'
                         label="fullName"
                         error={Boolean(formik.touched.fullName && formik.errors.fullName)}
                         helperText={formik.touched.fullName && formik.errors.fullName}
@@ -108,7 +106,7 @@ function Sidebar() {
                         helperText={formik.touched.profession && formik.errors.profession}
                         onBlur={formik.handleBlur}
                         value={formik.values.profession}
-                        onChange={formik.handleChange}
+                        onChange={handleChange}
                     />
                 </section>
 

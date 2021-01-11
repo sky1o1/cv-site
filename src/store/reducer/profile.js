@@ -30,7 +30,7 @@ const INITIAL_STATE = {
 
 const profileReducer = handleActions(
     {
-        'SET_PROFILE':
+    'SET_PROFILE':
     (state, action) => {
         console.log('action,', action.payload)
         return {...action.payload}

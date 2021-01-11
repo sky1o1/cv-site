@@ -14,10 +14,12 @@ const INITIAL_VALUES = {
     }]
 }
 
-handleAction(
+const languageReducer = handleAction(
     'SET_LANGUAGE',
     (state, action) =>( {
         languageList: [state.languageList, ...action.payload]
     }),
     INITIAL_VALUES
 )
+
+export default languageReducer;

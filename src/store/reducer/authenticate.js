@@ -6,7 +6,7 @@ const INITIAL_VALUES = {
     isAuthenticated: ''
 }
 
-handleAction(
+const authReducer = handleAction(
     'SET_AUTHENTICATE',
     (state, action) => ({
         ...state,
@@ -14,3 +14,5 @@ handleAction(
     }),
     INITIAL_VALUES
 )
+
+export default authReducer;
