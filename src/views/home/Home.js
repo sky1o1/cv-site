@@ -3,6 +3,7 @@ import {useSelector, useDispatch} from 'react-redux';
 import {setProfile} from '../../store/reducer/profile';
 import validationSchema from './validationSchema/validationSchema';
 import Skills from './Skills';
+import Language from './Language';
 import { 
     makeStyles,
     TextField,
@@ -38,15 +39,7 @@ const initialValues ={
     phoneNumber: '',
     email: '',
     location: '',
-    
-    language:'',
-    level:'',
-    listening: '',
-    writing: '',
-    speaking: '',
-    reading: '',
-    avg:'',
-}  
+    }  
 
 
 
@@ -175,24 +168,7 @@ function Home() {
             </div>
         </div>
 
-        {/* <div class="lonon-testiominal">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-md-12"> <span class="heading-meta style-1">Expertise</span>
-                        <h2 class="lonon-heading animate-box" data-animate-effect="fadeInLeft">Language</h2> </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6 animate-box" data-animate-effect="fadeInLeft">
-                        <div class="lonon-quote-card"> 
-                        <img src="images/quote.png" alt="" class="lonon-quote-2"/>
-                            <p>"Drana convallis lacinia est et volutpat. Ut interdum lecistion velit, ac venenatis odio fringi ut. Mauris tincidunt diame nisi mollis rhoncus!</p>
-                            <h5><strong>Samuel Tomei</strong></h5>
-                            <p class="occupation">Project Manager</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> */}
+        <Language/>
       
         {/* <div class="lonon-testiominal">
             <div class="container-fluid">

@@ -9,7 +9,6 @@ import {
     Slider,
     Button
 } from '@material-ui/core';
-import Footer from '../Footer';
 import { useFormik } from 'formik';
 
 
@@ -95,7 +94,8 @@ function Skills(){
            helperText={formik.touched.skill && formik.errors.skill}
            onBlur={formik.handleBlur}
            value={formik.values.skill}
-           onChange={handleChange} />
+           onChange={handleChange} 
+           />
              <Slider
                     defaultValue={50}
                     aria-labelledby="discrete-slider"
