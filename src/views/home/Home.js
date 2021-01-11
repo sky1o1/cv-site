@@ -1,6 +1,8 @@
 import React,{useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import {setProfile} from '../store/reducer/profile';
+import {setProfile} from '../../store/reducer/profile';
+import validationSchema from './validationSchema/validationSchema';
+import Skills from './Skills';
 import { 
     makeStyles,
     TextField,
@@ -11,8 +13,7 @@ import {
  import EmailOutlinedIcon from '@material-ui/icons/EmailOutlined';
  import PhoneIphoneOutlinedIcon from '@material-ui/icons/PhoneIphoneOutlined';
  import LocationOnOutlinedIcon from '@material-ui/icons/LocationOnOutlined';
-import Footer from './Footer';
-import * as Yup from 'yup';
+import Footer from '../Footer';
 import { useFormik } from 'formik';
 
 const useStyles = makeStyles((theme) => ({
@@ -32,13 +33,12 @@ const useStyles = makeStyles((theme) => ({
   }));
 
 const initialValues ={
+    image: '/static/images/avatar.png',
     information: '',
     phoneNumber: '',
     email: '',
     location: '',
-    skill: '',
-    rating: '',
-    abilities: '',
+    
     language:'',
     level:'',
     listening: '',
@@ -48,54 +48,21 @@ const initialValues ={
     avg:'',
 }  
 
-const validationSchema = Yup.object({
-    information:Yup.string().required('Information is required'),
-    phoneNumber:Yup.number().required('Phone Number is required'),
-    email:Yup.string().email('Invalid email format').required('Name is required'),
-    location:Yup.string().required('Location is required'),
-    skill:Yup.string().required('Skill is required'),
-    rating:Yup.number().required('Rating is required'),
-    abilities:Yup.string().required('Abilities is required'),
-    language:Yup.string().required('Language is required'),
-    level:Yup.string().required('Level is required'),
-    listening:Yup.number().required('Listening is required'),
-    writing:Yup.number().required('Writing is required'),
-    speaking:Yup.number().required('Speaking is required'),
-    reading:Yup.number().required('Reading is required'),
-})
+
 
 function Home() {
     const classes = useStyles();
     const dispatch = useDispatch();
     const profile = useSelector(state => state.profile)
-    const [SkillsValue, setSkillsValue] = useState('')
-    const [fields, setFields] = useState([{ value: null, skval:null }]);
         
-        function valuetext(value,skva) {
-            return (
-                setSkillsValue(value)
-                )
-            }
-
         function handleChange( event) {
             const inputFieldName = event.currentTarget.name
             const inputFieldValue = event.currentTarget.value
             const updatedProfileData = {...profile, [inputFieldName]: inputFieldValue}
-            // dispatch(setProfile(updatedProfileData))
+            dispatch(setProfile(updatedProfileData))
             formik.setFieldValue(inputFieldName, inputFieldValue)
           }
         
-          function handleAdd() {
-            const values = [...fields];
-            values.push({ value: null });
-            setFields(values);
-          }
-        
-          function handleRemove(i) {
-            const values = [...fields];
-            values.splice(i, 1);
-            setFields(values);
-          }
 
           const formik = useFormik({
             initialValues,
@@ -115,7 +82,7 @@ function Home() {
                     <img src="/static/images/avatar.png" class="img-fluid mb-15 animate-box fadeInLeft animated" data-animate-effect="fadeInLeft" alt=""/> 
                     </div>
                     <div class="col-md-5 animate-box fadeInLeft animated" data-animate-effect="fadeInLeft"> <span class="heading-meta style-1">Informations</span>
-                        <h3 class="lonon-about-heading">MMy name is {profile.fullName}</h3>
+                        <h3 class="lonon-about-heading">My name is {profile.fullName}</h3>
                         
                         <form onSubmit={formik.handleSubmit} >
                         <TextField
@@ -135,12 +102,13 @@ function Home() {
                         </form>
 
                         <div className="cardvisit">
-                            <h3>Lonon F. Smith</h3>
+                            <h3> {profile.fullName}</h3>
                            <div className={classes.margin}>
                          <TextField
                             label="Phone Number"
                             fullWidth
                             name='phoneNumber'
+                            onChange={handleChange}
                             InputProps={{
                             startAdornment: (
                                 <InputAdornment position="start">
@@ -154,6 +122,7 @@ function Home() {
                             label="Email"
                             fullWidth
                             name='email'
+                            onChange={handleChange}
                             InputProps={{
                             startAdornment: (
                                 <InputAdornment position="start">
@@ -167,6 +136,7 @@ function Home() {
                             label="Location"
                             name='location'
                             fullWidth
+                            onChange={handleChange}
                             InputProps={{
                             startAdornment: (
                                 <InputAdornment position="start">
@@ -181,79 +151,10 @@ function Home() {
                 </div>
             </div>
         </div>
-        <div class="divider1"></div>
+
+        <Skills/>
    
-        <div class="lonon-skills">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-md-12"> <span class="heading-meta style-1">Abilities</span>
-                        <h2 class="lonon-heading animate-box" data-animate-effect="fadeInLeft">My Skills</h2> 
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-5 animate-box" data-animate-effect="fadeInLeft">
-                    <form className={classes.root} >
-                 
-                    <TextField
-                            id="outlined-multiline-static"
-                            fullWidth
-                            label="Abilities"
-                            multiline
-                            rows={15}
-                            name='abilities'
-                            variant="outlined" 
-                            error={Boolean(formik.touched.abilities && formik.errors.abilities)}
-                            helperText={formik.touched.abilities && formik.errors.abilities}
-                            onBlur={formik.handleBlur}
-                            value={formik.values.abilities}
-                            onChange={formik.handleChange}
-                            />
-               
-             </form>
-                     </div>
-                  
-                    <div class="col-md-7 animate-box" data-animate-effect="fadeInLeft">
-                        
-   
-      {fields.map((field, idx) => {
-        return (
-          <div key={`${field}-${idx}`}>
-           
-           <TextField 
-           id="outlined-basic" 
-           label="Skill" 
-           name='skill'
-           variant="outlined"
-           error={Boolean(formik.touched.skill && formik.errors.skill)}
-           helperText={formik.touched.skill && formik.errors.skill}
-           onBlur={formik.handleBlur}
-           value={formik.values.skill}
-           onChange={formik.handleChange} />
-             <Slider
-                    defaultValue={50}
-                    aria-labelledby="discrete-slider"
-                    valueLabelDisplay="auto"
-                    onBlur={formik.handleBlur}
-                    // value={formik.values.rating}
-                    onChange={formik.handleChange}
-                    step={10}
-                    marks
-                    min={10}
-                    max={100}
-                />
-            <Button variant="contained" type="button" color="secondary" onClick={() => handleRemove(idx)}>
-              X
-            </Button>
-          </div>
-        );
-      })}
-         <Button variant="contained" type="button" color="primary" onClick={() => handleAdd()}>
-        +
-      </Button>
-                    </div>
-                </div>
-            </div>
-        </div>
+        
 
         <div class="lonon-testiominal">
             <div class="container-fluid">
@@ -319,8 +220,6 @@ function Home() {
                 </div>
             </div>
         </div> */}
-        <div class="divider1"></div>
-
      
         </form>
        <Footer/>

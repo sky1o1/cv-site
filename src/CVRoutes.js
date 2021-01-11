@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react'
-import Resume from '../src/views/Resume'
-import Home from '../src/views/Home';
+import React, { useEffect, useState } from 'react';
+import Resume from '../src/views/resume/Resume';
+import Home from '../src/views/home/Home';
 import Portfolio from '../src/views/Portfolio';
 import Services from '../src/views/Services';
 import Contact from '../src/views/Contact';

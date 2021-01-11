@@ -1,8 +1,9 @@
 import { combineReducers } from 'redux';
 import authenticate from './authenticate';
-import profile from '../reducer/profile';
+import profile from './profile';
 import skills from './skills';
 import language from './language';
+import education from './education';
 import recommendation from './recommendation';
 import experience from './experience';
 
@@ -13,7 +14,8 @@ const rootReducer = combineReducers({
     skills,
     language,
     recommendation,
-    experience
+    experience,
+    education
 })
 
 export default rootReducer;

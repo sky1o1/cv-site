@@ -12,10 +12,12 @@ const INITIAL_VALUES = {
     }]
 }
 
-handleAction(
+const educationReducer = handleAction(
     'SET_EDUCATION',
     (state, action) =>( {
         educationList: [state.educationList, ...action.payload]
     }),
     INITIAL_VALUES
 )
+
+export default educationReducer;

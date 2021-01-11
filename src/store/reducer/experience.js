@@ -12,10 +12,12 @@ const INITIAL_STATE = {
     }]
 }; 
 
-handleAction(
+const experienceReducer = handleAction(
     'SET_EXPERIENCE',
     (state, action) => ({
         experienceList: [state.experienceList, ...action.payload]
     }),
     INITIAL_STATE
 )
+
+export default experienceReducer;

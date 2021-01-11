@@ -1,6 +1,6 @@
 import { createAction, handleAction } from 'redux-actions';
 
-export const setLanguage = createAction('SET_SKILLS');
+export const setSkills = createAction('SET_SKILLS');
 
 const INITIAL_VALUES = {
     skillsList : [{
@@ -10,10 +10,12 @@ const INITIAL_VALUES = {
     }]   
 }
 
-handleAction(
+const skillsReducer = handleAction(
     'SET_SKILLS',
     (state, action) =>( {
         skillsList: [state.skillsList, ...action.payload]
     }),
     INITIAL_VALUES
 )
+
+export default skillsReducer;

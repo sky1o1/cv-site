@@ -11,10 +11,12 @@ const INITIAL_VALUES = {
     }]
 }
 
-handleAction(
+const recommendationReducer = handleAction(
     'SET_RECOMMENDATION',
     (state, action) =>( {
         recommmendationList: [state.recommmendationList, action.payload]
     }),
     INITIAL_VALUES
 )
+
+export default recommendationReducer;
