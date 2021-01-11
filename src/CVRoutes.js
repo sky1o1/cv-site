@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import Resume from '../src/views/resume/Resume';
 import Home from '../src/views/home/Home';
-import Portfolio from '../src/views/Portfolio';
-import Services from '../src/views/Services';
+import Projects from '../src/views/project/projects';
+import Services from '../src/views/services/Services';
 import Contact from '../src/views/Contact';
 
 import { useParams } from "react-router-dom";
@@ -19,7 +19,7 @@ const New = () => {
         )
     }else if(roomId=='portfolio'){
         return(
-            <Portfolio/>
+            <Projects/>
         )
     }else if(roomId=='services'){
         return(

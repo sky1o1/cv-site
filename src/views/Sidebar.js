@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {setProfile} from '../store/reducer/profile';
+import {setProfile, setProfileImage} from '../store/reducer/profile';
 import {
     makeStyles,
     TextField,
@@ -15,7 +15,7 @@ import { useFormik } from 'formik';
 const initValues = {
     fullName: '',
     profession: '',
-    image: '/static/images/avatar.png',
+    profileImage: '/static/images/avatar.png',
 }
 
 const validationSchema = Yup.object({
@@ -61,8 +61,8 @@ function Sidebar() {
                 <section id="lonon-logo">
                     <div onClick={() => wrapperRef.current.click()}   >
                         {
-                            formik.initialValues.image &&
-                            <img src={formik.values.image} />
+                            formik.initialValues.profileImage &&
+                            <img src={formik.values.profileImage} />
                         }
                     </div>
 
@@ -71,13 +71,14 @@ function Sidebar() {
                         fullWidth
                         type="file"
                         label="Image"
-                        name="image"
+                        name="profileImage"
                         ref={wrapperRef}
                         onChange={(event) => {
                             const selectedFile = event.currentTarget.files[0]
                             const selectedUrl = URL.createObjectURL(selectedFile)
-                            formik.setFieldValue("image", selectedUrl);
-                            setImage(selectedFile)
+                            formik.setFieldValue("profileImage", selectedUrl);
+                            console.log(selectedFile)
+                            dispatch(setProfileImage(selectedUrl))
 
                         }}
                         style={{
@@ -86,10 +87,9 @@ function Sidebar() {
                     />
                     <TextField
                         className="textfield"
-                        id="standard-basic"
                         fullWidth
-                        name='FullName'
-                        label="fullName"
+                        name='fullName'
+                        label="Full name"
                         error={Boolean(formik.touched.fullName && formik.errors.fullName)}
                         helperText={formik.touched.fullName && formik.errors.fullName}
                         onBlur={formik.handleBlur}

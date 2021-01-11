@@ -23,6 +23,7 @@ const initialValues = {
 
 function Experience() {
     const [fields, setFields] = useState([{ value: null}]);
+    const [exp, setExp] = useState([])
     const dispatch = useDispatch()
     const experience = useSelector(state => state.experience)
 
@@ -42,14 +43,26 @@ function Experience() {
         const inputFieldName = event.currentTarget.name
         const inputFieldValue = event.currentTarget.value
         const updatedExperienceData = {...experience, [inputFieldName]: inputFieldValue}
-        dispatch(setExperience(updatedExperienceData))
+        // dispatch(setExperience(updatedExperienceData))
+        setExp(updatedExperienceData)
         formik.setFieldValue(inputFieldName, inputFieldValue)
       }
+
+    //   const handleSubmit = (event) => {
+    //       event.preventDefault()
+    //       console.log(exp)
+    //     dispatch(setExperience(exp))
+
+    //   }
     const formik = useFormik({
         initialValues,
+        onSubmit: (values) => {
+            // setExp(values)
+            console.log('--------------------------')
+
+        },
         validationSchema,
       })
-
     return(
         <div class="lonon-lonon-timeline">
                     <div class="container-fluid">
@@ -57,6 +70,7 @@ function Experience() {
                             <div class="col-md-12"> <span class="heading-meta style-1">Resume</span>
                                 <h2 class="lonon-heading animate-box" data-animate-effect="fadeInLeft">Experience</h2> </div>
                         </div>
+                        <form onSubmit={formik.handleSubmit}>
                         <div class="row">
                             <div class="col-md-12 animate-box" data-animate-effect="fadeInLeft">
                                
@@ -129,12 +143,18 @@ function Experience() {
                                                 X
                                                 </Button>
                                                 </span>   
+                                               
                                         </div>
                                     );
                                 })}
-                                
+                                 <span>
+                                            <Button variant="contained" type="submit" color="secondary" >
+                                               submit
+                                                </Button>
+                                                </span>   
                             </div>
                         </div>
+                        </form>
                     </div>
                 </div>
     )

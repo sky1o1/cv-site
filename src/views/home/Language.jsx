@@ -25,7 +25,6 @@ const initialValues = {
 function Language() {
     const dispatch = useDispatch()
     const language = useSelector(state => state.language)
-    const [SkillsValue, setSkillsValue] = useState('')
     const [fields, setFields] = useState([{ value: null, skval: null }]);
 
     const handleChange = (event) => {
@@ -88,7 +87,6 @@ function Language() {
                                                         aria-labelledby="discrete-slider"
                                                         valueLabelDisplay="auto"
                                                         onBlur={formik.handleBlur}
-                                                        // value={formik.values.rating}
                                                         onChange={handleChange}
                                                         step={0.5}
                                                         marks
@@ -101,7 +99,6 @@ function Language() {
                                                         aria-labelledby="discrete-slider"
                                                         valueLabelDisplay="auto"
                                                         onBlur={formik.handleBlur}
-                                                        // value={formik.values.rating}
                                                         onChange={handleChange}
                                                         step={0.5}
                                                         marks
@@ -114,7 +111,6 @@ function Language() {
                                                         aria-labelledby="discrete-slider"
                                                         valueLabelDisplay="auto"
                                                         onBlur={formik.handleBlur}
-                                                        // value={formik.values.rating}
                                                         onChange={handleChange}
                                                         step={0.5}
                                                         marks
@@ -127,7 +123,6 @@ function Language() {
                                                         aria-labelledby="discrete-slider"
                                                         valueLabelDisplay="auto"
                                                         onBlur={formik.handleBlur}
-                                                        // value={formik.values.rating}
                                                         onChange={handleChange}
                                                         step={0.5}
                                                         marks
