@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
-import Footer from './Footer';
+import Footer from '../Footer';
+import validationSchema from './validationSchema/validationSchema';
 import {
     makeStyles,
     TextField,
@@ -12,6 +13,7 @@ import {
     InputAdornment,
     Slider,
 } from '@material-ui/core';
+import { useFormik } from 'formik';
 
 
 const useStyles = makeStyles({
@@ -24,7 +26,19 @@ const useStyles = makeStyles({
     pos: {
         marginBottom: 12,
     },
+    container: {
+        paddingLeft: 20,
+    },
+    gridList: {
+        paddingTop: 20,
+    }
 });
+
+const initialValues = {
+    service: '',
+    description: ''
+}
+
 function Services() {
     const classes = useStyles()
 
@@ -41,6 +55,11 @@ function Services() {
         values.splice(i, 1);
         setFields(values);
     }
+
+    const formik = useFormik({
+        initialValues,
+        validationSchema
+    })
     return (
         <>
         <div id="lonon-main">
@@ -51,49 +70,63 @@ function Services() {
                         <div class="col-md-12"> <span class="heading-meta style-1">What We Do</span>
                             <h2 class="lonon-heading animate-box" data-animate-effect="fadeInLeft">Services</h2> </div>
                     </div>
-                    {/* <div class="row">
-                    <div class="col-md-4">
-                        <div class="lonon-feature animate-box" data-animate-effect="fadeInLeft">
-                            <div class="lonon-icon"> <span class="et-strategy font-35px"></span> </div>
-                            <div class="lonon-text">
-                                <h3>Digital Strategy</h3>
-                                <p>Drana convalis lacinia est meet volutpat. Ut interdum lecis velilac venenatis the fringila.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div> */}
-                    {fields.map((field, idx) => {
-                        return (
-                            <>
-                            <Button variant="contained" style={{display: 'none'}} ref={wrapperRef} type="button" color="primary" onClick={() => handleAddExp()}>
+                <Grid className={classes.container} container spacing={3}>
+                    <Grid className={classes.gridList}  list xs={3}>
+                        <Button variant="contained" style={{display: 'none'}} ref={wrapperRef} type="button" color="primary" onClick={() => handleAddExp()}>
                             +
                         </Button>
                             <Card className={classes.root} variant="outlined">
                             <CardContent onClick={() => wrapperRef.current.click()} >
-                         <img src='/static/images/avatar.png'/>
+                         <img src='/static/images/plus.jpg'/>
                             </CardContent>
-                    </Card>
-                            <div key={`${field}-${idx}`}>
-                              
-                                <Grid container spacing={3}>
-                                    <Grid item
-                                        xs={4}>
+                            </Card>
+                            </Grid>
+
+                          
+                    {fields.map((field, idx) => {
+                        return (
+                           
+                            <Grid className={classes.gridList} list xs={3} key={`${field}-${idx}`}>
                                         <Card className={classes.root} variant="outlined">
                                                 <CardContent  >
-                                             <img src='/static/images/avatar.png'/>
+                                             <form onSubmit={formik.handleSubmit}>
+                                             <TextField 
+                                             name='service' 
+                                             size='small' 
+                                             label="Service" 
+                                             variant="outlined" 
+                                             error={Boolean(formik.touched.service && formik.errors.service)}
+                                             helperText={formik.touched.service && formik.errors.service}
+                                             onBlur={formik.handleBlur}
+                                             value={formik.values.service}
+                                            //  onChange={handleChange}
+                                             />
+                                             <TextField 
+                                             multiline 
+                                             size='small' 
+                                             rows={4} 
+                                             name='description' 
+                                             label="Description" 
+                                             variant="outlined" 
+                                             error={Boolean(formik.touched.description && formik.errors.description)}
+                                             helperText={formik.touched.description && formik.errors.description}
+                                             onBlur={formik.handleBlur}
+                                             value={formik.values.description}
+                                            //  onChange={handleChange}
+                                             />
+                                             </form>
                                                 </CardContent>
                                         </Card>
-                                    </Grid>
-                                </Grid>
                                 <span>
                                     <Button  variant="contained" type="button" color="secondary" onClick={() => handleRemoveExp(idx)}>
                                         X
-                                                </Button>
+                                    </Button>
                                 </span>
-                            </div>
-                            </>
+                            </Grid>
+                            
                         );
                     })}
+                    </Grid>
                 </div>
             </div>
 

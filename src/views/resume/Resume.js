@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { setProfile } from '../../store/reducer/profile';
+import { setProfile, setImage2 } from '../../store/reducer/profile';
 import validationSchema from './validationSchema/validationSchema';
 import Experience from './Experience';
 import Education from './Education';
@@ -15,7 +15,7 @@ import Footer from '../Footer';
 import { useFormik } from 'formik';
 
 const initialValues = {
-    image: '/static/images/avatar.png',
+    image2: '/static/images/avatar.png',
     dob: '',
     website: '',
     freelance: '',
@@ -69,8 +69,8 @@ function Resume() {
                             <div class="col-md-7">
                                 <div onClick={() => wrapperRef.current.click()}   >
                                     {
-                                        formik.initialValues.image &&
-                                        <img src={formik.values.image} />
+                                        formik.initialValues.image2 &&
+                                        <img src={formik.values.image2} />
                                     }
                                 </div>
 
@@ -84,8 +84,8 @@ function Resume() {
                                     onChange={(event) => {
                                         const selectedFile = event.currentTarget.files[0]
                                         const selectedUrl = URL.createObjectURL(selectedFile)
-                                        formik.setFieldValue("image", selectedUrl);
-                                        setImage(selectedFile)
+                                        formik.setFieldValue("image2", selectedUrl);
+                                        dispatch(setImage2(selectedUrl))
 
                                     }}
                                     style={{

@@ -34,14 +34,12 @@ const useStyles = makeStyles((theme) => ({
   }));
 
 const initialValues ={
-    image: '/static/images/avatar.png',
+    profileImage: '/static/images/avatar.png',
     information: '',
     phoneNumber: '',
     email: '',
     location: '',
     }  
-
-
 
 function Home() {
     const classes = useStyles();
@@ -60,9 +58,6 @@ function Home() {
           const formik = useFormik({
             initialValues,
             validationSchema,
-            onSubmit: (values, onSubmitProps) => {
-            onSubmitProps.setSubmitting(false)
-            }
           })
 
     return (
@@ -72,7 +67,7 @@ function Home() {
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-7"> 
-                    <img src="/static/images/avatar.png" class="img-fluid mb-15 animate-box fadeInLeft animated" data-animate-effect="fadeInLeft" alt=""/> 
+                    <img src={profile.profileImage} class="img-fluid mb-15 animate-box fadeInLeft animated" data-animate-effect="fadeInLeft" alt=""/> 
                     </div>
                     <div class="col-md-5 animate-box fadeInLeft animated" data-animate-effect="fadeInLeft"> <span class="heading-meta style-1">Informations</span>
                         <h3 class="lonon-about-heading">My name is {profile.fullName}</h3>
