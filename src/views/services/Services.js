@@ -1,6 +1,8 @@
 import React, { useState, useRef } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import Footer from '../Footer';
 import validationSchema from './validationSchema/validationSchema';
+import {setServices} from '../../store/reducer/services';
 import {
     makeStyles,
     TextField,
@@ -41,9 +43,21 @@ const initialValues = {
 
 function Services() {
     const classes = useStyles()
-
+    const dispatch = useDispatch()
     const wrapperRef = useRef(null)
     const [fields, setFields] = useState([{ value: null }]);
+    const formik = useFormik({
+        initialValues,
+        onSubmit: (values) => {
+            dispatch(setServices(values))
+        },
+        validationSchema
+    })
+
+    const handleSubmit = () => {
+        formik.submitForm()
+    }
+
     function handleAddExp() {
         const values = [...fields];
         values.push({ value: null });
@@ -56,10 +70,7 @@ function Services() {
         setFields(values);
     }
 
-    const formik = useFormik({
-        initialValues,
-        validationSchema
-    })
+   
     return (
         <>
         <div id="lonon-main">
@@ -82,14 +93,14 @@ function Services() {
                             </Card>
                             </Grid>
 
-                          
+                            <form>
                     {fields.map((field, idx) => {
                         return (
                            
                             <Grid className={classes.gridList} list xs={3} key={`${field}-${idx}`}>
                                         <Card className={classes.root} variant="outlined">
                                                 <CardContent  >
-                                             <form onSubmit={formik.handleSubmit}>
+                                             
                                              <TextField 
                                              name='service' 
                                              size='small' 
@@ -99,7 +110,7 @@ function Services() {
                                              helperText={formik.touched.service && formik.errors.service}
                                              onBlur={formik.handleBlur}
                                              value={formik.values.service}
-                                            //  onChange={handleChange}
+                                             onChange={formik.handleChange}
                                              />
                                              <TextField 
                                              multiline 
@@ -112,9 +123,8 @@ function Services() {
                                              helperText={formik.touched.description && formik.errors.description}
                                              onBlur={formik.handleBlur}
                                              value={formik.values.description}
-                                            //  onChange={handleChange}
+                                             onChange={formik.handleChange}
                                              />
-                                             </form>
                                                 </CardContent>
                                         </Card>
                                 <span>
@@ -122,10 +132,17 @@ function Services() {
                                         X
                                     </Button>
                                 </span>
+                                <span>
+                                    <Button  variant="contained" type="button" color="secondary" 
+                                    onClick={handleSubmit}>
+                                      Submit
+                                    </Button>
+                                </span>
                             </Grid>
                             
                         );
                     })}
+                    </form>
                     </Grid>
                 </div>
             </div>

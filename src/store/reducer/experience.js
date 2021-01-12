@@ -3,20 +3,14 @@ import { createAction, handleAction } from 'redux-actions';
 export const setExperience = createAction('SET_EXPERIENCE');
 
 const INITIAL_STATE = { 
-    
-        company: '',
-        post: '',
-        description: '',
-        startYear: '',
-        endYear: '',
-   
+        expList:[]
 }; 
 
 const experienceReducer = handleAction(
     'SET_EXPERIENCE',
-    (state, action) => {
-       return  action.payload
-    },
+    (state, action) => ({
+       expList: [...state.expList, action.payload]
+    }),
     INITIAL_STATE
 )
 

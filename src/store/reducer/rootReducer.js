@@ -6,6 +6,8 @@ import language from './language';
 import education from './education';
 import recommendation from './recommendation';
 import experience from './experience';
+import services from './services';
+import projects from './projects';
 
 
 const rootReducer = combineReducers({
@@ -15,7 +17,9 @@ const rootReducer = combineReducers({
     language,
     recommendation,
     experience,
-    education
+    education,
+    services,
+    projects
 })
 
 export default rootReducer;

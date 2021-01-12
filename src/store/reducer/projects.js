@@ -1,21 +1,16 @@
-import {createAction, handleAction} from 'redux-actions';
+import { createAction, handleAction } from 'redux-actions';
 
-export const setProject = createAction('SET_PROJECT');
+export const setProjects = createAction('SET_PROJECTS');
 
 const INITIAL_STATE = {
-    projectList: [{
-        projectName: '',
-        description: '',
-        startDate: '',
-        endDate: '',
-    }]
+    projectList: []
 }
 
 const projectReducer = handleAction(
-    'SET_PROJECT',
-    (state, action) => {
-        projectList = [state.projectList, ...action.payload]
-    },
+    'SET_PROJECTS',
+    (state, action) => ({
+        projectList : [...state.projectList, action.payload]
+    }),
     INITIAL_STATE
 )
 

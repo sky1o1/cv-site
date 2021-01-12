@@ -1,7 +1,8 @@
 import React, { useState, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { setExperience } from '../../store/reducer/experience';
-import validationSchema from './validationSchema/validationSchema';
+import validationSchema from './validationSchema/validationSchemaExp';
+import * as Yup from 'yup';
 import {
     makeStyles,
     TextField,
@@ -23,9 +24,15 @@ const initialValues = {
 
 function Experience() {
     const [fields, setFields] = useState([{ value: null}]);
-    const [exp, setExp] = useState([])
     const dispatch = useDispatch()
-    const experience = useSelector(state => state.experience)
+
+    const formik = useFormik({
+        initialValues,
+        onSubmit: (values) => {
+            dispatch(setExperience(values))
+        },
+        validationSchema
+      })
 
     function handleAddExp() {
         const values = [...fields];
@@ -33,36 +40,17 @@ function Experience() {
         setFields(values);
     }
 
+    const handleSubmit  = async () => {
+        console.log('entered')
+        await formik.submitForm()
+    }
+
     function handleRemoveExp(i) {
         const values = [...fields];
         values.splice(i, 1);
         setFields(values);
     }
-
-    function handleChange( event) {
-        const inputFieldName = event.currentTarget.name
-        const inputFieldValue = event.currentTarget.value
-        const updatedExperienceData = {...experience, [inputFieldName]: inputFieldValue}
-        // dispatch(setExperience(updatedExperienceData))
-        setExp(updatedExperienceData)
-        formik.setFieldValue(inputFieldName, inputFieldValue)
-      }
-
-    //   const handleSubmit = (event) => {
-    //       event.preventDefault()
-    //       console.log(exp)
-    //     dispatch(setExperience(exp))
-
-    //   }
-    const formik = useFormik({
-        initialValues,
-        onSubmit: (values) => {
-            // setExp(values)
-            console.log('--------------------------')
-
-        },
-        validationSchema,
-      })
+   
     return(
         <div class="lonon-lonon-timeline">
                     <div class="container-fluid">
@@ -70,7 +58,7 @@ function Experience() {
                             <div class="col-md-12"> <span class="heading-meta style-1">Resume</span>
                                 <h2 class="lonon-heading animate-box" data-animate-effect="fadeInLeft">Experience</h2> </div>
                         </div>
-                        <form onSubmit={formik.handleSubmit}>
+                        <form >
                         <div class="row">
                             <div class="col-md-12 animate-box" data-animate-effect="fadeInLeft">
                                
@@ -93,7 +81,7 @@ function Experience() {
                                                         variant="outlined"
                                                         onBlur={formik.handleBlur}
                                                         value={formik.values.startYear}
-                                                        onChange={handleChange}
+                                                        onChange={formik.handleChange}
                                                         InputLabelProps={{
                                                             shrink: true,
                                                         }}
@@ -110,7 +98,7 @@ function Experience() {
                                                         variant="outlined"
                                                         onBlur={formik.handleBlur}
                                                         value={formik.values.endYear}
-                                                        onChange={handleChange}
+                                                        onChange={formik.handleChange}
                                                         InputLabelProps={{
                                                             shrink: true,
                                                         }}
@@ -120,10 +108,10 @@ function Experience() {
                                         
                                                 
                                             <h5>
-                                            <TextField id="standard-basic" name='company' label="Company" />
+                                            <TextField id="standard-basic" onChange={formik.handleChange} name='company' label="Company" />
                                             </h5>
                                             <h4>
-                                            <TextField id="standard-basic" name='post' label="Post" />
+                                            <TextField id="standard-basic" onChange={formik.handleChange} name='post' label="Post" />
                                             </h4>
                                             <p>
                                             <TextField
@@ -132,7 +120,7 @@ function Experience() {
                                              rows={5}
                                              name='description' 
                                              label="Description" 
-                                             onChange={handleChange}
+                                             onChange={formik.handleChange}
                                              />
                                             </p>
                                         </div>
@@ -148,7 +136,8 @@ function Experience() {
                                     );
                                 })}
                                  <span>
-                                            <Button variant="contained" type="submit" color="secondary" >
+                                            <Button variant="contained" 
+                                            onClick={handleSubmit} color="secondary" >
                                                submit
                                                 </Button>
                                                 </span>   
