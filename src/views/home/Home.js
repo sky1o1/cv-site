@@ -1,7 +1,7 @@
 import React,{useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {setProfile} from '../../store/reducer/profile';
-import validationSchema from './validationSchema/validationSchema';
+import validationSchema from './validationSchema/validationSchemaHome';
 import Skills from './Skills';
 import Language from './Language';
 import { 

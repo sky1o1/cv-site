@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { setSkills } from '../../store/reducer/skills';
-import validationSchema from './validationSchema/validationSchema';
+import validationSchema from './validationSchema/validationSchemaSkills';
 import {
     makeStyles,
     TextField,
@@ -14,23 +14,30 @@ import { useFormik } from 'formik';
 
 const initialValues = {
     skill: '',
-    rating: '',
+    rating: '50',
     abilities: '',
 }
 
 function Skills(){
     const dispatch = useDispatch()
-    const skills = useSelector(state => state.skills)
-    const [SkillsValue, setSkillsValue] = useState('')
     const [fields, setFields] = useState([{ value: null, skval:null }]);
+    const formik = useFormik({
+        initialValues,
+        onSubmit: (values) => {
+          dispatch(setSkills(values))
+        },
+        // validationSchema
+    })
 
-    const handleChange = (event) => {
-        const inputFieldName = event.currenTarget.name;
-        const inputFieldValue = event.currenTarget.value;
-        const updatedSkillsValue = {...skills, [inputFieldName]: inputFieldValue}
-        dispatch(setSkills(updatedSkillsValue))
-        formik.setFieldValue(inputFieldName, inputFieldValue)
+    const handleChange = name => (event, value) => {
+        const skillVal = {[name]: value}
+        formik.setFieldValue(name, value)
     }
+
+    const handleSubmit  = async () => {
+      await formik.submitForm()
+  }
+
     function handleAdd() {
         const values = [...fields];
         values.push({ value: null });
@@ -42,11 +49,7 @@ function Skills(){
         values.splice(i, 1);
         setFields(values);
       }
-
-      const formik = useFormik({
-          initialValues,
-          validationSchema
-      })
+console.log(formik.values)
 
     return(
         <div class="lonon-skills">
@@ -58,7 +61,7 @@ function Skills(){
                 </div>
                 <div class="row">
                     <div class="col-md-5 animate-box" data-animate-effect="fadeInLeft">
-                    <form onSubmit={formik.handleSubmit} >
+                    <form >
                  
                     <TextField
                             id="outlined-multiline-static"
@@ -72,7 +75,7 @@ function Skills(){
                             helperText={formik.touched.abilities && formik.errors.abilities}
                             onBlur={formik.handleBlur}
                             value={formik.values.abilities}
-                            onChange={handleChange}
+                            onChange={formik.handleChange}
                             />
                
              </form>
@@ -94,15 +97,13 @@ function Skills(){
            helperText={formik.touched.skill && formik.errors.skill}
            onBlur={formik.handleBlur}
            value={formik.values.skill}
-           onChange={handleChange} 
+           onChange={formik.handleChange} 
            />
              <Slider
                     defaultValue={50}
-                    aria-labelledby="discrete-slider"
+                    name='rating'
                     valueLabelDisplay="auto"
-                    onBlur={formik.handleBlur}
-                    // value={formik.values.rating}
-                    onChange={handleChange}
+                    onChange={handleChange('rating')}
                     step={10}
                     marks
                     min={10}
@@ -117,6 +118,16 @@ function Skills(){
          <Button variant="contained" type="button" color="primary" onClick={() => handleAdd()}>
         +
       </Button>
+      <span>
+        <Button 
+        onClick={handleSubmit}
+        variant="contained" 
+        type="button" 
+        color="primary" 
+        >
+          Submit
+        </Button>
+      </span>
                     </div>
                 </div>
             </div>

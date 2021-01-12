@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { setEducation } from '../../store/reducer/education';
-import validationSchema from './validationSchema/validationSchema';
+import validationSchema from './validationSchema/validationSchemaEdu';
 import {
     makeStyles,
     TextField,
@@ -14,7 +14,6 @@ import { useFormik } from 'formik';
 
 
 const initialValues = {
-
     university: '',
     degree: '',
     description: '',
@@ -22,20 +21,26 @@ const initialValues = {
     endYear: '',
 }
 
+
 function Education() {
     const dispatch = useDispatch()
-    const education = useSelector(state => state.education)
     const [fieldsUni, setFieldsUni] = useState([{ value: null }]);
 
-    const handleChange = (event) => {
-        const inputFieldName = event.currentTarget.name
-        const inputFieldValue = event.currentTarget.value
-        const updatedEducationData = { ...education, [inputFieldName]: inputFieldValue }
-        dispatch(setEducation(updatedEducationData))
-        formik.setFieldValue(inputFieldName, inputFieldValue)
-    }
+    const formik = useFormik({
+        initialValues,
+        onSubmit: (values) => {
+            console.log('inSUbmit')
+            dispatch(setEducation(values))
+        },
+        validationSchema
+    })
 
-    function handleAddUni() {
+    const handleSubmit  = async () => {
+        console.log('entered')
+        await formik.submitForm()
+    }
+    
+        function handleAddUni() {
         const values = [...fieldsUni];
         values.push({ value: null });
         setFieldsUni(values);
@@ -47,10 +52,6 @@ function Education() {
         setFieldsUni(values);
     }
 
-    const formik = useFormik({
-        initialValues,
-        validationSchema
-    })
     return (
         <div class="lonon-lonon-timeline">
             <div class="container-fluid">
@@ -58,6 +59,7 @@ function Education() {
                     <div class="col-md-12"> <span class="heading-meta style-1">Resume</span>
                         <h2 class="lonon-heading animate-box" data-animate-effect="fadeInLeft">Education</h2> </div>
                 </div>
+                    <form >
                 <div class="row">
                     <div class="col-md-12 animate-box" data-animate-effect="fadeInLeft">
                         {fieldsUni.map((field, idx) => {
@@ -74,12 +76,12 @@ function Education() {
                                                         id="date"
                                                         label="Start year"
                                                         type="date"
-                                                        name='uniStartYear'
+                                                        name='startYear'
                                                         size="small"
                                                         variant="outlined"
                                                         onBlur={formik.handleBlur}
-                                                        value={formik.values.uniStartYear}
-                                                        onChange={handleChange}
+                                                        value={formik.values.startYear}
+                                                        onChange={formik.handleChange}
                                                         InputLabelProps={{
                                                             shrink: true,
                                                         }}
@@ -91,22 +93,40 @@ function Education() {
                                                         id="date"
                                                         label="End year"
                                                         type="date"
-                                                        name='uniEndYear'
+                                                        name='endYear'
                                                         size="small"
                                                         variant="outlined"
                                                         onBlur={formik.handleBlur}
-                                                        value={formik.values.uniEndYear}
-                                                        onChange={handleChange}
+                                                        value={formik.values.endYear}
+                                                        onChange={formik.handleChange}
                                                         InputLabelProps={{
                                                             shrink: true,
                                                         }}
                                                     />
                                                 </span>
                                                 <h5>
-                                                    <TextField id="standard-basic" name='university' label="University" />
+                                                    <TextField 
+                                                    id="standard-basic" 
+                                                    name='university' 
+                                                    label="University"
+                                                    size="small"
+                                                    variant="outlined"
+                                                    onBlur={formik.handleBlur}
+                                                    value={formik.values.university}
+                                                    onChange={formik.handleChange} 
+                                                    />
                                                 </h5>
                                                 <h4>
-                                                    <TextField id="standard-basic" name='degree' label="Degree" />
+                                                    <TextField 
+                                                    id="standard-basic" 
+                                                    name='degree' 
+                                                    label="Degree" 
+                                                    size="small"
+                                                    variant="outlined"
+                                                    onBlur={formik.handleBlur}
+                                                    value={formik.values.degree}
+                                                    onChange={formik.handleChange}
+                                                    />
                                                 </h4>
                                                 <p>
                                                     <TextField
@@ -115,7 +135,10 @@ function Education() {
                                                         rows={5}
                                                         name='description'
                                                         label="Description"
-                                                        onChange={handleChange}
+                                                        variant="outlined"
+                                                        onBlur={formik.handleBlur}
+                                                        value={formik.values.description}
+                                                        onChange={formik.handleChange}
                                                     />
                                                 </p>
                                             </div>
@@ -126,11 +149,17 @@ function Education() {
                                             X
                                         </Button>
                                     </span>
+                                    <span>
+                                        <Button variant="contained" color="secondary" onClick={handleSubmit} >
+                                            Submit
+                                        </Button>
+                                    </span>
                                 </div>
                             );
                         })}
                     </div>
                 </div>
+                </form>
             </div>
         </div>
     )

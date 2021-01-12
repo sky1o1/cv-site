@@ -1,5 +1,7 @@
 import React, { useState, useRef } from 'react';
+import { useDispatch } from 'react-redux';
 import Footer from '../Footer';
+import {setProjects} from '../../store/reducer/projects';
 import validationSchema from './validationSchema/validationSchema';
 import {
     makeStyles,
@@ -37,15 +39,25 @@ const useStyles = makeStyles({
 const initialValues = {
     projectName: '',
     description: '',
-    startDate: '',
-    endDate: '',
 }
 
 function Projects() {
     const classes = useStyles()
-
+    const dispatch = useDispatch()
     const wrapperRef = useRef(null)
     const [fields, setFields] = useState([{ value: null }]);
+    const formik = useFormik({
+        initialValues,
+        onSubmit: (values) => {
+            console.log('entered')
+            dispatch(setProjects(values))
+        },
+        validationSchema
+    })
+    const handleSubmit = async () => {
+        await formik.submitForm()
+    }
+
     function handleAddExp() {
         const values = [...fields];
         values.push({ value: null });
@@ -58,10 +70,7 @@ function Projects() {
         setFields(values);
     }
 
-    const formik = useFormik({
-        initialValues,
-        validationSchema
-    })
+   
     return (
         <>
         <div id="lonon-main">
@@ -84,14 +93,13 @@ function Projects() {
                             </Card>
                             </Grid>
 
-                          
+                            <form>
                     {fields.map((field, idx) => {
                         return (
                            
                             <Grid className={classes.gridList} list xs={3} key={`${field}-${idx}`}>
                                         <Card className={classes.root} variant="outlined">
                                                 <CardContent  >
-                                             <form onSubmit={formik.handleSubmit}>
                                              <TextField 
                                              size='small' 
                                              name='projectName' 
@@ -115,7 +123,6 @@ function Projects() {
                                              value={formik.values.description}
                                              onChange={formik.handleChange}
                                              />
-                                             </form>
                                                 </CardContent>
                                         </Card>
                                 <span>
@@ -123,10 +130,16 @@ function Projects() {
                                         X
                                     </Button>
                                 </span>
+                                <span>
+                                    <Button  variant="contained" type="button" color="secondary" onClick={handleSubmit}>
+                                       Submit
+                                    </Button>
+                                </span>
                             </Grid>
                             
                         );
                     })}
+                                             </form>
                     </Grid>
                 </div>
             </div>

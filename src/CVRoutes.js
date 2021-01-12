@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Resume from '../src/views/resume/Resume';
 import Home from '../src/views/home/Home';
-import Projects from '../src/views/project/projects';
+import Projects from '../src/views/project/Projects';
 import Services from '../src/views/services/Services';
 import Contact from '../src/views/Contact';
 

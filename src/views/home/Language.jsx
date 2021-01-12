@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { setLanguage } from '../../store/reducer/language';
-import validationSchema from './validationSchema/validationSchema';
+import validationSchema from './validationSchema/validationSchemaLanguage';
 import {
     makeStyles,
     TextField,
@@ -14,26 +14,37 @@ import { useFormik } from 'formik';
 
 const initialValues = {
     language: '',
-    level: '',
-    listening: '',
-    writing: '',
-    speaking: '',
-    reading: '',
+    listening: 2.5,
+    writing: 2.5,
+    speaking: 2.5,
+    reading: 2.5,
     avg: '',
 }
 
 function Language() {
     const dispatch = useDispatch()
-    const language = useSelector(state => state.language)
     const [fields, setFields] = useState([{ value: null, skval: null }]);
-
-    const handleChange = (event) => {
-        const inputFieldName = event.currenTarget.name;
-        const inputFieldValue = event.currenTarget.value;
-        const updatedLanguageValue = { ...language, [inputFieldName]: inputFieldValue }
-        dispatch(setLanguage(updatedLanguageValue))
-        formik.setFieldValue(inputFieldName, inputFieldValue)
+    const [avg, setAvg] = useState([])
+    const formik = useFormik({
+        initialValues,
+        onSubmit: (values) => {
+            console.log('values', values)
+            dispatch(setLanguage(values))
+        },
+        // validationSchema
+    })
+   
+    const handleSubmit = async () => {
+        await formik.submitForm()
     }
+      
+      const handleChange = name => (event, value) => {
+          const sliderVal = {[name]: value}
+          setAvg( {[name]: value})
+        console.log('avg',setAvg)
+          formik.setFieldValue(name, value)
+      }
+
     function handleAdd() {
         const values = [...fields];
         values.push({ value: null });
@@ -46,10 +57,7 @@ function Language() {
         setFields(values);
     }
 
-    const formik = useFormik({
-        initialValues,
-        validationSchema
-    })
+    console.log(formik.values)
 
     return (
         <div class="lonon-lonon-timeline">
@@ -58,6 +66,7 @@ function Language() {
                     <div class="col-md-12"> <span class="heading-meta style-1">Expertise</span>
                         <h2 class="lonon-heading animate-box" data-animate-effect="fadeInLeft">Language</h2> </div>
                 </div>
+                <form>
                 <div class="row">
                     <div class="col-md-12 animate-box" data-animate-effect="fadeInLeft">
                         {fields.map((field, idx) => {
@@ -79,15 +88,14 @@ function Language() {
                                                         helperText={formik.touched.language && formik.errors.language}
                                                         onBlur={formik.handleBlur}
                                                         value={formik.values.language}
-                                                        onChange={handleChange}
+                                                        onChange={formik.handleChange}
                                                     />
                                                     <h5>listening</h5>
                                                     <Slider
                                                         defaultValue={2.5}
-                                                        aria-labelledby="discrete-slider"
+                                                        name='listening'
                                                         valueLabelDisplay="auto"
-                                                        onBlur={formik.handleBlur}
-                                                        onChange={handleChange}
+                                                        onChange={handleChange('listening')}
                                                         step={0.5}
                                                         marks
                                                         min={1}
@@ -96,10 +104,9 @@ function Language() {
                                                      <h5>writing</h5>
                                                     <Slider
                                                         defaultValue={2.5}
-                                                        aria-labelledby="discrete-slider"
+                                                        name='writing'
                                                         valueLabelDisplay="auto"
-                                                        onBlur={formik.handleBlur}
-                                                        onChange={handleChange}
+                                                        onChange={handleChange('writing')}
                                                         step={0.5}
                                                         marks
                                                         min={1}
@@ -108,10 +115,9 @@ function Language() {
                                                      <h5>speaking</h5>
                                                     <Slider
                                                         defaultValue={2.5}
-                                                        aria-labelledby="discrete-slider"
+                                                        name='speaking'
                                                         valueLabelDisplay="auto"
-                                                        onBlur={formik.handleBlur}
-                                                        onChange={handleChange}
+                                                        onChange={handleChange('speaking')}
                                                         step={0.5}
                                                         marks
                                                         min={1}
@@ -120,10 +126,9 @@ function Language() {
                                                      <h5>reading</h5>
                                                     <Slider
                                                         defaultValue={2.5}
-                                                        aria-labelledby="discrete-slider"
+                                                        name='reading'
                                                         valueLabelDisplay="auto"
-                                                        onBlur={formik.handleBlur}
-                                                        onChange={handleChange}
+                                                        onChange={handleChange('reading')}
                                                         step={0.5}
                                                         marks
                                                         min={1}
@@ -138,11 +143,18 @@ function Language() {
                                             X
                                     </Button>
                                     </span>
+                                    <span>
+                                        <Button onClick={handleSubmit}
+                                        variant="contained" type="button" color="secondary">
+Submit
+                                        </Button>
+                                    </span>
                                 </div>
                             );
                         })}
                     </div>
                 </div>
+                </form>
             </div>
         </div>
     )
