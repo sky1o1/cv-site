@@ -7,13 +7,9 @@ import {
     makeStyles,
     TextField,
     Card,
-    CardActions,
     CardContent,
     Button,
     Grid,
-    Typography,
-    InputAdornment,
-    Slider,
 } from '@material-ui/core';
 
 
