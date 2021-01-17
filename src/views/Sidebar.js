@@ -3,8 +3,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import {setProfile, setProfileImage} from '../store/reducer/profile';
 import {
     makeStyles,
+    AppBar,
     TextField,
+    Toolbar,
+    IconButton,
+    Button,
+    Typography
 } from '@material-ui/core/';
+import MenuIcon from '@material-ui/icons/Menu';
 import '../new.css';
 import '../animate.css';
 import '../bootstrap.css';
@@ -55,8 +61,21 @@ function Sidebar() {
 
       
     return (
-
+        <>
+       <div>
+       <AppBar position="static">
+        <Toolbar>
+          <IconButton edge="end" className={classes.menuButton} color="inherit" aria-label="menu">
+            <MenuIcon />
+          </IconButton>
+          <Typography variant="h6" className={classes.title}>
+            News
+          </Typography>
+          <Button color="inherit">Login</Button>
+        </Toolbar>
+      </AppBar>
         <aside id="lonon-aside">
+       
             <form onSubmit={formik.handleSubmit}>
                 <section id="lonon-logo">
                     <div onClick={() => wrapperRef.current.click()}   >
@@ -123,8 +142,8 @@ function Sidebar() {
             </nav>
         </aside>
 
-
-
+        </div>
+</>
 
     )
 }

@@ -13,19 +13,23 @@ const New = () => {
         return(
             <Home/>
         )
-    }else if(roomId=='resume'){
+    }
+    else if(roomId=='resume'){
         return(
             <Resume/>
         )
-    }else if(roomId=='portfolio'){
+    }
+    else if(roomId=='portfolio'){
         return(
             <Projects/>
         )
-    }else if(roomId=='services'){
+    }
+    else if(roomId=='services'){
         return(
             <Services/>
         )
-    }else if(roomId=='contact'){
+    }
+    else if(roomId=='contact'){
         return(
             <Contact/>
         )

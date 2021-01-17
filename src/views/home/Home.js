@@ -1,6 +1,6 @@
-import React,{useState} from 'react';
+import React,{useState, useRef} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import {setProfile} from '../../store/reducer/profile';
+import {setProfile, setImage3} from '../../store/reducer/profile';
 import validationSchema from './validationSchema/validationSchemaHome';
 import Skills from './Skills';
 import Language from './Language';
@@ -35,6 +35,7 @@ const useStyles = makeStyles((theme) => ({
 
 const initialValues ={
     profileImage: '/static/images/avatar.png',
+    image3:'/static/images/avatar.png',
     information: '',
     phoneNumber: '',
     email: '',
@@ -44,6 +45,7 @@ const initialValues ={
 function Home() {
     const classes = useStyles();
     const dispatch = useDispatch();
+    const wrapperRef = useRef();
     const profile = useSelector(state => state.profile)
         
         function handleChange( event) {
@@ -66,9 +68,36 @@ function Home() {
         <div class="lonon-about">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-7"> 
+                    {/* <div class="col-md-7"> 
                     <img src={profile.profileImage} class="img-fluid mb-15 animate-box fadeInLeft animated" data-animate-effect="fadeInLeft" alt=""/> 
-                    </div>
+                    </div> */}
+                     <div class="col-md-7">
+                                <div onClick={() => wrapperRef.current.click()}   >
+                                    {
+                                        formik.initialValues.image3 &&
+                                        <img src={formik.values.image3} />
+                                    }
+                                </div>
+
+
+                                <input
+                                    fullWidth
+                                    type="file"
+                                    label="Image"
+                                    name="image"
+                                    ref={wrapperRef}
+                                    onChange={(event) => {
+                                        const selectedFile = event.currentTarget.files[0]
+                                        const selectedUrl = URL.createObjectURL(selectedFile)
+                                        formik.setFieldValue("image3", selectedUrl);
+                                        dispatch(setImage3(selectedUrl))
+
+                                    }}
+                                    style={{
+                                        display: 'none'
+                                    }}
+                                />
+                            </div>
                     <div class="col-md-5 animate-box fadeInLeft animated" data-animate-effect="fadeInLeft"> <span class="heading-meta style-1">Informations</span>
                         <h3 class="lonon-about-heading">My name is {profile.fullName}</h3>
                         

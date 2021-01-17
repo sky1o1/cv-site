@@ -1,8 +1,7 @@
-import React, { useState, useRef } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React, { useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
+import ServiceForm from './ServiceForm';
 import Footer from '../Footer';
-import validationSchema from './validationSchema/validationSchema';
-import {setServices} from '../../store/reducer/services';
 import {
     makeStyles,
     TextField,
@@ -15,11 +14,12 @@ import {
     InputAdornment,
     Slider,
 } from '@material-ui/core';
-import { useFormik } from 'formik';
 
 
 const useStyles = makeStyles({
     root: {
+        display: 'flex',
+        flexDirection: 'row-reverse',
         width: 200,
     },
     title: {
@@ -33,43 +33,28 @@ const useStyles = makeStyles({
     },
     gridList: {
         paddingTop: 20,
-    }
+    },
 });
-
-const initialValues = {
-    service: '',
-    description: ''
-}
 
 function Services() {
     const classes = useStyles()
-    const dispatch = useDispatch()
-    const wrapperRef = useRef(null)
-    const [fields, setFields] = useState([{ value: null }]);
-    const formik = useFormik({
-        initialValues,
-        onSubmit: (values) => {
-            dispatch(setServices(values))
-        },
-        validationSchema
-    })
-
-    const handleSubmit = () => {
-        formik.submitForm()
-    }
-
+    const [formList, setFormList] = useState([])
+    
     function handleAddExp() {
-        const values = [...fields];
-        values.push({ value: null });
-        setFields(values);
+       setFormList(prevFormList => ([
+           ...prevFormList, uuidv4()
+           
+        ]))
     }
 
-    function handleRemoveExp(i) {
-        const values = [...fields];
-        values.splice(i, 1);
-        setFields(values);
+    function handleRemoveExp(id) {
+        const index = formList.indexOf(id);
+        const formListClone = [...formList]
+        formListClone.splice(index, 1)
+        setFormList(formListClone)
     }
 
+    console.log(formList)
    
     return (
         <>
@@ -81,69 +66,27 @@ function Services() {
                         <div class="col-md-12"> <span class="heading-meta style-1">What We Do</span>
                             <h2 class="lonon-heading animate-box" data-animate-effect="fadeInLeft">Services</h2> </div>
                     </div>
-                <Grid className={classes.container} container spacing={3}>
-                    <Grid className={classes.gridList}  list xs={3}>
-                        <Button variant="contained" style={{display: 'none'}} ref={wrapperRef} type="button" color="primary" onClick={() => handleAddExp()}>
-                            +
+                    <Grid className={classes.container} container spacing={3}>
+                     <Grid className={classes.container} container spacing={3}>
+                    <Grid className={classes.gridList} list xs={3}>
+                <Button variant="contained" style={{ display: 'none' }} type="button" color="primary"  >
+                    +
                         </Button>
-                            <Card className={classes.root} variant="outlined">
-                            <CardContent onClick={() => wrapperRef.current.click()} >
-                         <img src='/static/images/plus.jpg'/>
-                            </CardContent>
-                            </Card>
-                            </Grid>
+                <Card onClick={handleAddExp} className={classes.root} variant="outlined">
+                    <CardContent  >
+                        <img src='/static/images/plus.jpg' />
+                    </CardContent>
+                </Card>
+            </Grid>
 
-                            <form>
-                    {fields.map((field, idx) => {
-                        return (
-                           
-                            <Grid className={classes.gridList} list xs={3} key={`${field}-${idx}`}>
-                                        <Card className={classes.root} variant="outlined">
-                                                <CardContent  >
-                                             
-                                             <TextField 
-                                             name='service' 
-                                             size='small' 
-                                             label="Service" 
-                                             variant="outlined" 
-                                             error={Boolean(formik.touched.service && formik.errors.service)}
-                                             helperText={formik.touched.service && formik.errors.service}
-                                             onBlur={formik.handleBlur}
-                                             value={formik.values.service}
-                                             onChange={formik.handleChange}
-                                             />
-                                             <TextField 
-                                             multiline 
-                                             size='small' 
-                                             rows={4} 
-                                             name='description' 
-                                             label="Description" 
-                                             variant="outlined" 
-                                             error={Boolean(formik.touched.description && formik.errors.description)}
-                                             helperText={formik.touched.description && formik.errors.description}
-                                             onBlur={formik.handleBlur}
-                                             value={formik.values.description}
-                                             onChange={formik.handleChange}
-                                             />
-                                                </CardContent>
-                                        </Card>
-                                <span>
-                                    <Button  variant="contained" type="button" color="secondary" onClick={() => handleRemoveExp(idx)}>
-                                        X
-                                    </Button>
-                                </span>
-                                <span>
-                                    <Button  variant="contained" type="button" color="secondary" 
-                                    onClick={handleSubmit}>
-                                      Submit
-                                    </Button>
-                                </span>
-                            </Grid>
-                            
-                        );
-                    })}
-                    </form>
+                   { formList.map(formId => (
+                        <ServiceForm key={formId} removeService={handleRemoveExp} id={formId} />
+                    ))}
+                    <Grid/>
+                    <Grid/>
+               
                     </Grid>
+                   </Grid>
                 </div>
             </div>
 

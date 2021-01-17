@@ -29,14 +29,12 @@ function Education() {
     const formik = useFormik({
         initialValues,
         onSubmit: (values) => {
-            console.log('inSUbmit')
             dispatch(setEducation(values))
         },
         validationSchema
     })
 
     const handleSubmit  = async () => {
-        console.log('entered')
         await formik.submitForm()
     }
     
@@ -79,8 +77,6 @@ function Education() {
                                                         name='startYear'
                                                         size="small"
                                                         variant="outlined"
-                                                        onBlur={formik.handleBlur}
-                                                        value={formik.values.startYear}
                                                         onChange={formik.handleChange}
                                                         InputLabelProps={{
                                                             shrink: true,
@@ -96,8 +92,6 @@ function Education() {
                                                         name='endYear'
                                                         size="small"
                                                         variant="outlined"
-                                                        onBlur={formik.handleBlur}
-                                                        value={formik.values.endYear}
                                                         onChange={formik.handleChange}
                                                         InputLabelProps={{
                                                             shrink: true,
@@ -111,8 +105,6 @@ function Education() {
                                                     label="University"
                                                     size="small"
                                                     variant="outlined"
-                                                    onBlur={formik.handleBlur}
-                                                    value={formik.values.university}
                                                     onChange={formik.handleChange} 
                                                     />
                                                 </h5>
@@ -123,8 +115,6 @@ function Education() {
                                                     label="Degree" 
                                                     size="small"
                                                     variant="outlined"
-                                                    onBlur={formik.handleBlur}
-                                                    value={formik.values.degree}
                                                     onChange={formik.handleChange}
                                                     />
                                                 </h4>
@@ -136,8 +126,6 @@ function Education() {
                                                         name='description'
                                                         label="Description"
                                                         variant="outlined"
-                                                        onBlur={formik.handleBlur}
-                                                        value={formik.values.description}
                                                         onChange={formik.handleChange}
                                                     />
                                                 </p>
