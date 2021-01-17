@@ -2,9 +2,12 @@ import React from 'react';
 
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';    
 import './App.css';
-import Sidebar from '../src/views/Sidebar'
-import CVRoutes from './CVRoutes'
+import Sidebar from '../src/views/Sidebar';
+import Index from '../src/views/Index';
+import CVRoutes from './CVRoutes';
 
+import HTML5Backend from 'react-dnd-html5-backend';
+import {DragDropContext} from 'react-dnd';
 function App() {
   return (
  
@@ -20,29 +23,29 @@ function App() {
           </Route>
          
           <Route path="/">
-            <h1>Welcome</h1>
+           <Index/>
           </Route>
       
       </Switch>
     </>
-  //    ):(
+     {/* ):( */}
 
-  // <>
+  {/* <>
  
-  //   <Sidebar/>
-  //   <Switch>
-  //     <Route path ="/room/:roomId">
+    <Sidebar/>
+    <Switch>
+      <Route path ="/room/:roomId">
   
-  //       </Route>
+        </Route>
        
-  //       <Route path="/">
-  //         <h1>Welcome</h1>
-  //       </Route>
+        <Route path="/">
+          <h1>Welcome</h1>
+        </Route>
     
-  //   </Switch>
+    </Switch>
  
-  //  </>
-  //    )}
+   </> */}
+     {/* )} */}
   
   </Router>
  </div>

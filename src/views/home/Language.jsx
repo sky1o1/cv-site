@@ -31,7 +31,7 @@ function Language() {
             console.log('values', values)
             dispatch(setLanguage(values))
         },
-        // validationSchema
+        validationSchema
     })
    
     const handleSubmit = async () => {
@@ -39,9 +39,7 @@ function Language() {
     }
       
       const handleChange = name => (event, value) => {
-          const sliderVal = {[name]: value}
-          setAvg( {[name]: value})
-        console.log('avg',setAvg)
+        console.log(name, value)
           formik.setFieldValue(name, value)
       }
 
@@ -146,7 +144,7 @@ function Language() {
                                     <span>
                                         <Button onClick={handleSubmit}
                                         variant="contained" type="button" color="secondary">
-Submit
+                                            Submit
                                         </Button>
                                     </span>
                                 </div>
