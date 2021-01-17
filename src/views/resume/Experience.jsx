@@ -1,55 +1,23 @@
-import React, { useState, useRef } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { setExperience } from '../../store/reducer/experience';
-import validationSchema from './validationSchema/validationSchemaExp';
-import * as Yup from 'yup';
-import {
-    makeStyles,
-    TextField,
-    InputAdornment,
-    Slider,
-    Button
-} from '@material-ui/core';
-import Footer from '../Footer';
-import { useFormik } from 'formik';
-
-
-const initialValues = {
-    company: '',
-    post: '',
-    description: '',
-    startYear: '',
-    endYear: '',
-}
+import React, { useState} from 'react';
+import { v4 as uuidv4 } from 'uuid';
+import { Button} from '@material-ui/core';
+import ExperienceForm from './forms/ExperienceForm';
 
 function Experience() {
-    const [fields, setFields] = useState([{ value: null}]);
-    const dispatch = useDispatch()
-
-    const formik = useFormik({
-        initialValues,
-        onSubmit: (values) => {
-            dispatch(setExperience(values))
-        },
-        validationSchema
-      })
-
-    function handleAddExp() {
-        const values = [...fields];
-        values.push({ value: null });
-        setFields(values);
-    }
-
-    const handleSubmit  = async () => {
-        console.log('entered')
-        await formik.submitForm()
-    }
-
-    function handleRemoveExp(i) {
-        const values = [...fields];
-        values.splice(i, 1);
-        setFields(values);
-    }
+    const [formList, setFormList] = useState([])
+ 
+    function handleAdd() {
+     setFormList(prevFormList => ([
+         ...prevFormList, uuidv4()
+         ]))
+  }
+ 
+     function handleRemove(id) {
+     const index = formList.indexOf(id);
+     const updatedFormClone = [...formList];
+     updatedFormClone.splice(index, 1)
+     setFormList(updatedFormClone)
+     }
    
     return(
         <div class="lonon-lonon-timeline">
@@ -61,86 +29,16 @@ function Experience() {
                         <form >
                         <div class="row">
                             <div class="col-md-12 animate-box" data-animate-effect="fadeInLeft">
-                               
-                                {fields.map((field, idx) => {
-                                    return (
-                                        <div key={`${field}-${idx}`}>
-                                <Button variant="contained" type="button" color="primary" onClick={() => handleAddExp()}>
+
+                                <Button variant="contained" type="button" color="primary" onClick={handleAdd}>
                                     +
                                 </Button>
-                                <ul class="lonon-timeline">
-                                    <li>
-                                        <div class="lonon-timeline-content">
-                                            <span >
-                                            <TextField
-                                                        id="date"
-                                                        label="Start year"
-                                                        type="date"
-                                                        name='startYear'
-                                                        size="small"
-                                                        variant="outlined"
-                                                        onBlur={formik.handleBlur}
-                                                        value={formik.values.startYear}
-                                                        onChange={formik.handleChange}
-                                                        InputLabelProps={{
-                                                            shrink: true,
-                                                        }}
-                                                    />
-                                        </span>
-                                        <h4>--</h4>
-                                        <span >
-                                            <TextField
-                                                        id="date"
-                                                        label="End year"
-                                                        type="date"
-                                                        name='endYear'
-                                                        size="small"
-                                                        variant="outlined"
-                                                        onBlur={formik.handleBlur}
-                                                        value={formik.values.endYear}
-                                                        onChange={formik.handleChange}
-                                                        InputLabelProps={{
-                                                            shrink: true,
-                                                        }}
-                                                    />
-                                        </span>
-                                        
-                                        
-                                                
-                                            <h5>
-                                            <TextField id="standard-basic" onChange={formik.handleChange} name='company' label="Company" />
-                                            </h5>
-                                            <h4>
-                                            <TextField id="standard-basic" onChange={formik.handleChange} name='post' label="Post" />
-                                            </h4>
-                                            <p>
-                                            <TextField
-                                             multiline 
-                                             size='small'
-                                             rows={5}
-                                             name='description' 
-                                             label="Description" 
-                                             onChange={formik.handleChange}
-                                             />
-                                            </p>
-                                        </div>
-                                    </li>
-                                </ul>
-                                <span>
-                                            <Button variant="contained" type="button" color="secondary" onClick={() => handleRemoveExp(idx)}>
-                                                X
-                                                </Button>
-                                                </span>   
+                               {
+                                   formList.map(formId => (
+                                       <ExperienceForm key={formId} id={formId} removeExp={handleRemove}  />
+                                   ))
+                               }
                                                
-                                        </div>
-                                    );
-                                })}
-                                 <span>
-                                            <Button variant="contained" 
-                                            onClick={handleSubmit} color="secondary" >
-                                               submit
-                                                </Button>
-                                                </span>   
                             </div>
                         </div>
                         </form>
