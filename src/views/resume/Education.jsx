@@ -1,12 +1,6 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import {
-    makeStyles,
-    TextField,
-    InputAdornment,
-    Slider,
-    Button
-} from '@material-ui/core';
+import { Button } from '@material-ui/core';
 import EducationForm from './forms/EducationForm';
 
 

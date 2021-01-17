@@ -68,9 +68,6 @@ function Home() {
         <div class="lonon-about">
             <div class="container-fluid">
                 <div class="row">
-                    {/* <div class="col-md-7"> 
-                    <img src={profile.profileImage} class="img-fluid mb-15 animate-box fadeInLeft animated" data-animate-effect="fadeInLeft" alt=""/> 
-                    </div> */}
                      <div class="col-md-7">
                                 <div onClick={() => wrapperRef.current.click()}   >
                                     {
