@@ -1,54 +1,25 @@
 import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { setSkills } from '../../store/reducer/skills';
-import validationSchema from './validationSchema/validationSchemaSkills';
-import {
-  makeStyles,
-  TextField,
-  InputAdornment,
-  Slider,
-  Button
-} from '@material-ui/core';
-import { useFormik } from 'formik';
+import { v4 as uuidv4 } from 'uuid';
+import SkillForm from './forms/SkillForm';
+import { Button } from '@material-ui/core';
 
-
-const initialValues = {
-  skill: '',
-  rating: '50',
-  abilities: '',
-}
 
 function Skills() {
-  const dispatch = useDispatch()
-  const [fields, setFields] = useState([{ value: null }]);
-  const formik = useFormik({
-    initialValues,
-    onSubmit: (values) => {
-      dispatch(setSkills(values))
-    },
-    validationSchema
-  })
-
-  const handleChange = name => (event, value) => {
-    formik.setFieldValue(name, value)
-    console.log(name, value)
-  }
-
-  const handleSubmit = async () => {
-    await formik.submitForm()
-  }
+  const [formList, setFormList] = useState([])
 
   function handleAdd() {
-    const values = [...fields];
-    values.push({ value: null });
-    setFields(values);
+    setFormList(prevFormList => ([
+      ...prevFormList, uuidv4()
+    ]))
   }
 
-  function handleRemove(i) {
-    const values = [...fields];
-    values.splice(i, 1);
-    setFields(values);
+  function handleRemove(id) {
+    const index = formList.indexOf(id);
+    const updatedFormClone = [...formList];
+    updatedFormClone.splice(index, 1)
+    setFormList(updatedFormClone)
   }
+
   return (
     <div class="lonon-skills">
       <div class="container-fluid">
@@ -57,76 +28,22 @@ function Skills() {
             <h2 class="lonon-heading animate-box" data-animate-effect="fadeInLeft">My Skills</h2>
           </div>
         </div>
-        <div class="row">
-          <div class="col-md-5 animate-box" data-animate-effect="fadeInLeft">
-            <form >
-
-              <TextField
-                fullWidth
-                label="Abilities"
-                multiline
-                rows={15}
-                name='abilities'
-                variant="outlined"
-                error={Boolean(formik.touched.abilities && formik.errors.abilities)}
-                helperText={formik.touched.abilities && formik.errors.abilities}
-                onChange={formik.handleChange}
-              />
-
-            </form>
-          </div>
-
-          <div class="col-md-7 animate-box" data-animate-effect="fadeInLeft">
-
-
-            {fields.map((field, idx) => {
-              return (
-                <div key={`${field}-${idx}`}>
-
-                  <TextField
-                    label="Skill"
-                    name='skill'
-                    variant="outlined"
-                    error={Boolean(formik.touched.skill && formik.errors.skill)}
-                    helperText={formik.touched.skill && formik.errors.skill}
-                    onChange={formik.handleChange}
-                  />
-                  <Slider
-                    defaultValue={50}
-                    name='rating'
-                    valueLabelDisplay="auto"
-                    onChange={handleChange('rating')}
-                    step={10}
-                    marks
-                    min={10}
-                    max={100}
-                  />
-                  <Button variant="contained" type="button" color="secondary" onClick={() => handleRemove(idx)}>
-                    X
-            </Button>
-                </div>
-              );
-            })}
-            <Button variant="contained" type="button" color="primary" onClick={() => handleAdd()}>
-              +
+        <Button variant="contained" type="button" color="primary" onClick={() => handleAdd()}>
+            +
       </Button>
-
-          </div>
+        <div class="row">
+        
+          {
+            formList.map(formId => (
+              <SkillForm key={formId} id={formId} removeSkill={handleRemove} />
+            ))
+          }
         </div>
-       
+
       </div>
-      <span>
-          <Button
-            onClick={handleSubmit}
-            variant="contained"
-            type="button"
-            color="primary"
-          >
-            Submit
-        </Button>
-        </span>
+
     </div>
-    
+
   )
 }
 
