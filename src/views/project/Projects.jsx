@@ -6,6 +6,7 @@ import validationSchema from './validationSchema/validationSchema';
 import ProjectForm from './ProjectForm';
 import HTML5Backend from 'react-dnd-html5-backend';
 import { DragSource, DndProvider } from 'react-dnd';
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import {
     makeStyles,
     TextField,
@@ -14,7 +15,6 @@ import {
     Button,
     Grid,
 } from '@material-ui/core';
-import { useFormik } from 'formik';
 
 const useStyles = makeStyles({
     root: {
@@ -40,10 +40,38 @@ function Projects() {
     const classes = useStyles()
     const [formList, setFormList] = useState([])
 
+    const finalSpaceCharacters = [
+        {
+            id: 'gary',
+            name: 'Gary Goodspeed',
+        },
+        {
+            id: 'moon',
+            name: 'Moon cake',
+        },
+        {
+            id: 'kvn',
+            name: 'Kvn robot',
+        }
+    ]
+
+    const [characters, updateCharacters] = useState(finalSpaceCharacters);
+    
     function handleAdd() {
         setFormList(prevList => ([
             ...prevList, uuidv4()
         ]))
+        
+    }
+    
+    function handleOnDragEnd(result) {
+        const items = Array.from(characters);
+        const [reorderedItem] = items.splice(result.source.index, 1);
+        items.splice(result.destination.index, 0, reorderedItem);
+
+        updateCharacters(items);
+
+        if (!result.destination) return;
     }
 
     function handleRemove(id) {
@@ -52,12 +80,9 @@ function Projects() {
         formListClone.splice(index, 1)
         setFormList(formListClone)
     }
-
-
     return (
         <>
             <div id="lonon-main">
-
                 <div class="lonon-services">
                     <div class="container-fluid">
                         <div class="row">
@@ -76,15 +101,43 @@ function Projects() {
                                 </Card>
                             </Grid>
                             {formList.map(formId => (
-                                <ProjectForm key={formId} id={formId} removeProject={handleRemove} />
+                                <ProjectForm key={formId} id={formId} indexId={formList.indexOf(formId)} removeProject={handleRemove} />
                             ))
                             }
-
                         </Grid>
+                    </div>
+                    <div>
+                        <DragDropContext onDragEnd={handleOnDragEnd}>
+                            <Droppable droppableId="characters">
+                                {(provided) => (
+                                    <ul className="characters" {...provided.droppableProps} ref={provided.innerRef}>
+                                        {characters.map(({ id, name, thumb }, index) => {
+                                            return (
+                                                <Draggable key={id} draggableId={id} index={index}>
+                                                    {(provided) => (
+                                                        <li ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
+                                                            <div className="characters-thumb">
+                                                                <img src={thumb} alt={`${name} Thumb`} />
+                                                            </div>
+                                                            <p>
+                                                                {name}
+                                                            </p>
+                                                        </li>
+                                                    )}
+                                                </Draggable>
+
+                                            );
+                                        })}
+                                        {provided.placeholder}
+                                    </ul>
+                                )}
+                            </Droppable>
+                        </DragDropContext>
                     </div>
                 </div>
                 <Footer />
             </div>
+
         </>
     )
 }

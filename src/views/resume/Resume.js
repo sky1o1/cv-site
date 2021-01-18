@@ -7,9 +7,6 @@ import Education from './Education';
 import {
     makeStyles,
     TextField,
-    InputAdornment,
-    Slider,
-    Button
 } from '@material-ui/core';
 import Footer from '../Footer';
 import { useFormik } from 'formik';
@@ -36,7 +33,6 @@ function Resume() {
     const classes = useStyles()
     const dispatch = useDispatch()
     const profile = useSelector(state => state.profile)
-    const [image, setImage] = useState(null)
     const wrapperRef = useRef(null)
 
 
