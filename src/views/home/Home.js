@@ -170,7 +170,7 @@ function Home() {
    
         
 
-        <div class="lonon-testiominal">
+        {/* <div class="lonon-testiominal">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-12"> <span class="heading-meta style-1">Recommend Me</span>
@@ -187,7 +187,7 @@ function Home() {
                     </div>
                 </div>
             </div>
-        </div>
+        </div> */}
 
         <Language/>
       

@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {setProfile, setProfileImage} from '../store/reducer/profile';
+import { createMuiTheme } from "@material-ui/core/styles"
 import {
     makeStyles,
     AppBar,
@@ -8,7 +9,10 @@ import {
     Toolbar,
     IconButton,
     Button,
-    Typography
+    Typography,
+    Switch,
+    Paper,
+    ThemeProvider
 } from '@material-ui/core/';
 import MenuIcon from '@material-ui/icons/Menu';
 import '../new.css';
@@ -17,6 +21,7 @@ import '../bootstrap.css';
 import SidebarOption from './SidebarOption';
 import * as Yup from 'yup';
 import { useFormik } from 'formik';
+import { green } from '@material-ui/core/colors';
 
 const initValues = {
     fullName: '',
@@ -39,25 +44,46 @@ function Sidebar() {
     const dispatch = useDispatch()
     const wrapperRef = useRef(null)
     const profile = useSelector(state => state.profile)
-    const [image, setImage] = useState(null)
+    const [bgColor, setBgColor] = useState(false);
+    const [theme, setTheme] = useState(true);
 
     const formik = useFormik({
         initialValues: initValues,
-        onSubmit: (values, onSubmitProps) => {
-            console.log('images in formik', values.image)
-            onSubmitProps.setSubmitting(false)
-        },
         validationSchema
     })
+
+    // const darkTheme = createMuiTheme({
+    //     pallete: {
+    //         type:  'dark', 
+    //     },
+    //     background: '#FF8E53 '
+    // })
+
+    // const lightTheme = createMuiTheme({
+    // })
+
+
     const handleChange = ( event) => {
         const inputFieldName = event.currentTarget.name
         const inputFieldValue = event.currentTarget.value
-        console.log('name', inputFieldName)
-        console.log('value', inputFieldValue)
         const updatedProfileData = {...profile, [inputFieldName]: inputFieldValue}
         dispatch(setProfile(updatedProfileData))
         formik.setFieldValue(inputFieldName, inputFieldValue)
       }
+
+      const light = {
+        palette: {
+          type: "light"
+        }
+      };
+      const dark = {
+        palette: {
+          type: "dark"
+        }
+      };
+
+      
+    const appliedTheme = createMuiTheme(theme ? light : dark);
 
       
     return (
@@ -74,8 +100,10 @@ function Sidebar() {
           <Button color="inherit">Login</Button>
         </Toolbar>
       </AppBar>
+      
+      <ThemeProvider theme={appliedTheme}>
         <aside id="lonon-aside">
-       
+           <Paper>
             <form onSubmit={formik.handleSubmit}>
                 <section id="lonon-logo">
                     <div onClick={() => wrapperRef.current.click()}   >
@@ -140,8 +168,17 @@ function Sidebar() {
                     <li><a><SidebarOption title="contact" /></a> </li>
                 </ul>
             </nav>
-        </aside>
+                <Switch 
+                checked={theme}
+                onChange={() => setTheme(!theme)}
+                />
+            </Paper>
+            
+                <h1>Test</h1>
+                <Button variant='contained' onClick={() => setTheme(!theme)} color="primary">Dark mode</Button>
 
+        </aside>
+            </ThemeProvider>
         </div>
 </>
 

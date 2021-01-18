@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import LanguageForm from './forms/LanguageForm';
 import { Button } from '@material-ui/core';
 
@@ -28,16 +29,26 @@ function Language() {
                 </div>
                 <form>
                 <div class="row">
-                    <div class="col-md-12 animate-box" data-animate-effect="fadeInLeft">
+                <DragDropContext>
+                <Droppable droppableId="language">
+                {(provided) => (
+                    <div class="col-md-12 animate-box" data-animate-effect="fadeInLeft" {...provided.droppableProps} ref={provided.innerRef}>
                                     <Button variant="contained" type="button" color="primary" onClick={handleAdd}>
                                         +
                                 </Button>
                                 {
                                        formList.map(formId => (
-                                           <LanguageForm key={formId} id={formId} removeLanguage={handleRemove} />
+                                        <Draggable key={formId} draggableId={formId} >
+                                            {(provided) => (
+                                           <LanguageForm ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}  id={formId} removeLanguage={handleRemove} />
+                                            )}
+                                           </Draggable>
                                        ))
                                    }
                                 </div>
+                )}
+                                </Droppable>
+                </DragDropContext>
                 </div>
                 </form>
             </div>

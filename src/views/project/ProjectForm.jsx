@@ -1,8 +1,9 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { useFormik } from 'formik';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import validationSchema from './validationSchema/validationSchema';
 import { setProjects } from '../../store/reducer/projects';
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import {
     makeStyles,
     TextField,
@@ -38,10 +39,10 @@ const initialValues = {
     description: '',
 }
 
-function ProjectForm({removeProject, id}) {
+function ProjectForm({ removeProject, id, indexId }) {
     const classes = useStyles()
     const dispatch = useDispatch()
-
+const project = useSelector(state => state.projects)
     const formik = useFormik({
         initialValues,
         onSubmit: (values) => {
@@ -50,51 +51,73 @@ function ProjectForm({removeProject, id}) {
         validationSchema
     })
 
+    const [characters, updateCharacters] = useState(project);
+
     const handleSubmit = () => {
         formik.submitForm()
     }
 
+    function handleOnDragEnd(result) {
+        console.log(characters)
+        const items = Array.from(characters);
+        const [reorderedItem] = characters.splice(result.source.index, 1);
+        console.log(items)
+        items.splice(result.destination.index, 0, reorderedItem);
+        updateCharacters(items);
+        if (!result.destination) return;
+    }
     return (
-        <Grid list className={classes.gridList} list xs={3}>
-            <Card className={classes.root} variant="outlined">
-                <CardContent  >
-                    <form>
-                        <TextField
-                            size='small'
-                            name='projectName'
-                            label="Project Name"
-                            variant="outlined"
-                            error={Boolean(formik.touched.projectName && formik.errors.projectName)}
-                            helperText={formik.touched.projectName && formik.errors.projectName}
-                            onChange={formik.handleChange}
-                        />
-                        <TextField
-                            multiline size='small'
-                            rows={4}
-                            name='description'
-                            label="Description"
-                            variant="outlined"
-                            error={Boolean(formik.touched.description && formik.errors.description)}
-                            helperText={formik.touched.description && formik.errors.description}
-                            onChange={formik.handleChange}
-                        />
-                    </form>
-                </CardContent>
-                <span>
-                    <Button variant="contained" type="button" color="secondary" 
-                    onClick={() => removeProject(id)}
-                    >
-                        X
-    </Button>
-                </span>
-                <span>
-                    <Button variant="contained" type="button" color="secondary" onClick={handleSubmit}>
-                        Submit
-    </Button>
-                </span>
-            </Card>
+        <DragDropContext onDragEnd={handleOnDragEnd}>
+            <Droppable droppableId="characters">
+                {(provided) => (
+                    <Grid {...provided.droppableProps} ref={provided.innerRef} list className={classes.gridList} list xs={3}>
+                        <Draggable key={id} draggableId={id} index={indexId}>
+                            {(provided) => (
+                                <Card className={classes.root} variant="outlined" ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
+                                    <CardContent  >
+                                        <form>
+                                            <TextField
+                                                size='small'
+                                                name='projectName'
+                                                label="Project Name"
+                                                variant="outlined"
+                                                error={Boolean(formik.touched.projectName && formik.errors.projectName)}
+                                                helperText={formik.touched.projectName && formik.errors.projectName}
+                                                onChange={formik.handleChange}
+                                            />
+                                            <TextField
+                                                multiline size='small'
+                                                rows={4}
+                                                name='description'
+                                                label="Description"
+                                                variant="outlined"
+                                                error={Boolean(formik.touched.description && formik.errors.description)}
+                                                helperText={formik.touched.description && formik.errors.description}
+                                                onChange={formik.handleChange}
+                                            />
+                                        </form>
+                                    </CardContent>
+                                    <span>
+                                        <Button variant="contained" type="button" color="secondary"
+                                            onClick={() => removeProject(id)}
+                                        >
+                                            X
+                </Button>
+                                    </span>
+                                    <span>
+                                        <Button variant="contained" type="button" color="secondary" onClick={handleSubmit}>
+                                            Submit
+                </Button>
+                                    </span>
+                                </Card>
+                            )}
+                        </Draggable>
+                        {provided.placeholder}
 
-        </Grid>
+                    </Grid>
+                )}
+            </Droppable>
+        </DragDropContext>
     )
 }
 
