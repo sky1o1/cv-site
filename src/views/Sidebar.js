@@ -2,8 +2,7 @@ import React, { useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setProfile, setProfileImage } from '../store/reducer/profile';
 import { setColors} from '../store/reducer/colors';
-import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
-import { blackColor, purple } from '@material-ui/core/colors';
+import clsx from 'clsx';
 import {
     makeStyles,
     AppBar,
@@ -12,10 +11,8 @@ import {
     IconButton,
     Button,
     Typography,
-    Switch,
-    Paper,
+    Grid
 } from '@material-ui/core/';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import MenuIcon from '@material-ui/icons/Menu';
 import '../new.css';
 import '../animate.css';
@@ -36,7 +33,28 @@ const validationSchema = Yup.object({
 })
 
 const useStyles = makeStyles((theme) => ({
-    root: {
+        btn: {
+        display:'flex',
+        justifyContent: 'flex-end',
+        height: '200px',
+        backgroundColor: '#000',
+    },
+    btn: {
+        height: '25px',
+        width: '25px',
+        borderRadius: '50%',
+    },
+    btn1: {
+        backgroundColor: '#555',
+    },
+    btn2: {
+        backgroundColor: '#000',
+    },
+    btn3: {
+        backgroundColor: '#fff',
+    },
+    btn4: {
+        backgroundColor: '#000080',
     },
 }))
 
@@ -45,7 +63,6 @@ function Sidebar() {
     const dispatch = useDispatch()
     const wrapperRef = useRef(null)
     const profile = useSelector(state => state.profile)
-    const [theme, setTheme] = useState(false);
 
     const formik = useFormik({
         initialValues: initValues,
@@ -101,27 +118,13 @@ function Sidebar() {
     }
 
 
-    const btnTheme = createMuiTheme({
-        palette: {
-            secondary: {
-                main: '#fff',
-            },
-        },
-      });
-
-//   const dark = createMuiTheme({
-//     palette: {
-//       type: "dark"
-//     },
-//     text: {
-//         default: "#000"
-//       }
-//   });
-
 return (
     <>
         <div>
-            <AppBar position="static">
+            <AppBar style={{
+                backgroundColor: bgColor.backColor,
+                color: bgColor.color 
+            }} position="static">
                 <Toolbar>
                     <IconButton edge="end" className={classes.menuButton} color="inherit" aria-label="menu">
                         <MenuIcon />
@@ -133,13 +136,11 @@ return (
                 </Toolbar>
             </AppBar>
 
-            {/* <MuiThemeProvider theme={theme? dark : light}> */}
             <aside id="lonon-aside"
                 style={{
                     backgroundColor: bgColor.backColor,
                 }}
             >
-                {/* <Paper> */}
                 <form onSubmit={formik.handleSubmit}>
                     <section id="lonon-logo">
                         <div onClick={() => wrapperRef.current.click()}   >
@@ -207,22 +208,16 @@ return (
                         <li><a style={{ color: bgColor.color }}><SidebarOption title="contact" /></a> </li>
                     </ul>
                 </nav>
-                {/* <Switch 
-                checked={theme}
-                onChange={() => setTheme(!theme)}
-                />
-                <h1>Test</h1> */}
-                {/* </Paper> */}
-
-                <Button variant='contained' onClick={greyColor}>Grey</Button>
-                <MuiThemeProvider theme={btnTheme}>
-                    <Button variant='contained' onClick={blackColor} >Black</Button>
-                </MuiThemeProvider>
-                <Button variant='contained' onClick={whiteColor} color="secondary">White</Button>
-                <Button variant='contained' onClick={blueColor} color="primary">Blue</Button>
-
+             
+                {/* <Button variant='contained'  className={classes.btn} style={{borderRadius: '50%'}} onClick={whiteColor} color="secondary">W</Button> */}
+                
+                <Grid container className={classes.btnDiv} >
+                <span className={ clsx(classes.btn, classes.btn1)} onClick={greyColor} />
+                <span  className={ clsx(classes.btn, classes.btn2)} onClick={blackColor} />
+                <span  className={ clsx(classes.btn, classes.btn3)} onClick={whiteColor} />
+                <span  className={ clsx(classes.btn, classes.btn4)} onClick={blueColor} />
+                </Grid>
             </aside>
-            {/* </MuiThemeProvider> */}
         </div>
     </>
 
