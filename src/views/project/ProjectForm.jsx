@@ -51,21 +51,25 @@ const project = useSelector(state => state.projects)
         validationSchema
     })
 
-    const [characters, updateCharacters] = useState(project);
+    const testData = [1,2,3,4,5]
+
+    const [characters, updateCharacters] = useState(testData);
+
+    console.log('-------------------',characters)
 
     const handleSubmit = () => {
         formik.submitForm()
     }
 
     function handleOnDragEnd(result) {
-        console.log(characters)
-        const items = Array.from(characters);
+        console.log('-------------------',result)
+        // const items = Array.from(characters);
         const [reorderedItem] = characters.splice(result.source.index, 1);
-        console.log(items)
-        items.splice(result.destination.index, 0, reorderedItem);
-        updateCharacters(items);
+        characters.splice(result.destination.index, 0, reorderedItem);
+        updateCharacters(characters);
         if (!result.destination) return;
     }
+    
     return (
         <DragDropContext onDragEnd={handleOnDragEnd}>
             <Droppable droppableId="characters">

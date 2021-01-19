@@ -8,6 +8,7 @@ import recommendation from './recommendation';
 import experience from './experience';
 import services from './services';
 import projects from './projects';
+import colors from './colors';
 
 
 const rootReducer = combineReducers({
@@ -19,7 +20,8 @@ const rootReducer = combineReducers({
     experience,
     education,
     services,
-    projects
+    projects,
+    colors
 })
 
 export default rootReducer;

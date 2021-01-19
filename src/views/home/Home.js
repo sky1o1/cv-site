@@ -9,7 +9,8 @@ import {
     TextField,
     InputAdornment,
     Slider,
-    Button
+    Button,
+    Paper
  } from '@material-ui/core';
  import EmailOutlinedIcon from '@material-ui/icons/EmailOutlined';
  import PhoneIphoneOutlinedIcon from '@material-ui/icons/PhoneIphoneOutlined';
@@ -97,7 +98,7 @@ function Home() {
                             </div>
                     <div class="col-md-5 animate-box fadeInLeft animated" data-animate-effect="fadeInLeft"> <span class="heading-meta style-1">Informations</span>
                         <h3 class="lonon-about-heading">My name is {profile.fullName}</h3>
-                        
+                        <Paper>
                         <form onSubmit={formik.handleSubmit} >
                         <TextField
                             id="outlined-multiline-static"
@@ -114,6 +115,7 @@ function Home() {
                             onChange={handleChange}
                             />
                         </form>
+                        </Paper>
 
                         <div className="cardvisit">
                             <h3> {profile.fullName}</h3>
