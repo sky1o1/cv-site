@@ -61,10 +61,10 @@ function Projects() {
         setFormList(prevList => ([
             ...prevList, uuidv4()
         ]))
-        
     }
     
     function handleOnDragEnd(result) {
+        console.log('-=-=-=-=-==-', result)
         const items = Array.from(characters);
         const [reorderedItem] = items.splice(result.source.index, 1);
         items.splice(result.destination.index, 0, reorderedItem);
@@ -102,6 +102,7 @@ function Projects() {
                             </Grid>
                             {formList.map(formId => (
                                 <ProjectForm key={formId} id={formId} indexId={formList.indexOf(formId)} removeProject={handleRemove} />
+                                
                             ))
                             }
                         </Grid>
@@ -134,6 +135,7 @@ function Projects() {
                             </Droppable>
                         </DragDropContext>
                     </div>
+                  
                 </div>
                 <Footer />
             </div>
