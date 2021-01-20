@@ -39,7 +39,7 @@ const initialValues = {
     description: '',
 }
 
-function ProjectForm({ removeProject, id, indexId }) {
+function ProjectForm({ removeProject, id, indexId, list }) {
     const classes = useStyles()
     const dispatch = useDispatch()
 const project = useSelector(state => state.projects)
@@ -50,23 +50,18 @@ const project = useSelector(state => state.projects)
         },
         validationSchema
     })
-
-    const testData = [1,2,3,4,5]
-
-    const [characters, updateCharacters] = useState(testData);
-
-    console.log('-------------------',characters)
+    const [characters, updateCharacters] = useState(list);
 
     const handleSubmit = () => {
         formik.submitForm()
     }
 
     function handleOnDragEnd(result) {
-        console.log('-------------------',result)
-        // const items = Array.from(characters);
-        const [reorderedItem] = characters.splice(result.source.index, 1);
-        characters.splice(result.destination.index, 0, reorderedItem);
-        updateCharacters(characters);
+        const items = Array.from(characters);
+        console.log(items)
+        const [reorderedItem] = items.splice(result.source.index, 1);
+        items.splice(result.destination.index, 0, reorderedItem);
+        updateCharacters(items);
         if (!result.destination) return;
     }
     

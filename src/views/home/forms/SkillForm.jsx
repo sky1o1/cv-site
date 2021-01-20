@@ -6,7 +6,8 @@ import {setSkills} from '../../../store/reducer/skills';
 import {
     TextField,
     Slider,
-    Button
+    Button,
+    Grid
 } from '@material-ui/core';
 
 const initialValues = {
@@ -38,33 +39,19 @@ function SkillForm({id, removeSkill}) {
 
     return (
         <>
-             <div class="col-md-5 animate-box" data-animate-effect="fadeInLeft">
-            <form >
-
-              <TextField
-                fullWidth
-                label="Abilities"
-                multiline
-                rows={15}
-                name='abilities'
-                variant="outlined"
-                error={Boolean(formik.touched.abilities && formik.errors.abilities)}
-                helperText={formik.touched.abilities && formik.errors.abilities}
-                onChange={formik.handleChange}
-              />
-
-            </form>
-          </div>
-
-          <div class="col-md-7 animate-box" data-animate-effect="fadeInLeft">
+          <Grid container >
+                <Grid item xs={3}>
                   <TextField
+                    multiline
                     label="Skill"
                     name='skill'
-                    variant="outlined"
                     error={Boolean(formik.touched.skill && formik.errors.skill)}
                     helperText={formik.touched.skill && formik.errors.skill}
                     onChange={formik.handleChange}
                   />
+                  </Grid>
+                  
+                  <Grid item xs={8}>
                   <Slider
                     defaultValue={50}
                     name='rating'
@@ -75,11 +62,17 @@ function SkillForm({id, removeSkill}) {
                     min={10}
                     max={100}
                   />
-                  <Button variant="contained" type="button" color="secondary" onClick={() => removeSkill(id)}>
-                    X
-            </Button>
-            
-      <span>
+                  </Grid>
+
+                  <Grid item xs={2}>
+                    <Button variant="contained" type="button" color="secondary" onClick={() => removeSkill(id)}>
+                      X
+                    </Button>
+                  </Grid>
+               
+          </Grid>
+                  
+      {/* <span>
         <Button
           onClick={handleSubmit}
           variant="contained"
@@ -88,8 +81,7 @@ function SkillForm({id, removeSkill}) {
         >
           Submit
         </Button>
-      </span>
-          </div>
+      </span> */}
         </>
     )
 }

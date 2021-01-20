@@ -66,6 +66,7 @@ function Projects() {
     function handleOnDragEnd(result) {
         console.log('-=-=-=-=-==-', result)
         const items = Array.from(characters);
+        console.log('-=-=-=-=-==-', items)
         const [reorderedItem] = items.splice(result.source.index, 1);
         items.splice(result.destination.index, 0, reorderedItem);
 
@@ -80,6 +81,8 @@ function Projects() {
         formListClone.splice(index, 1)
         setFormList(formListClone)
     }
+
+    console.log('formlist', formList)
     return (
         <>
             <div id="lonon-main">
@@ -101,13 +104,12 @@ function Projects() {
                                 </Card>
                             </Grid>
                             {formList.map(formId => (
-                                <ProjectForm key={formId} id={formId} indexId={formList.indexOf(formId)} removeProject={handleRemove} />
-                                
+                                <ProjectForm list={formList} key={formId} id={formId} indexId={formList.indexOf(formId)} removeProject={handleRemove} />
                             ))
                             }
                         </Grid>
                     </div>
-                    <div>
+                    {/* <div>
                         <DragDropContext onDragEnd={handleOnDragEnd}>
                             <Droppable droppableId="characters">
                                 {(provided) => (
@@ -134,7 +136,7 @@ function Projects() {
                                 )}
                             </Droppable>
                         </DragDropContext>
-                    </div>
+                    </div> */}
                   
                 </div>
                 <Footer />
