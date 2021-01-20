@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import SkillForm from './forms/SkillForm';
-import { Button } from '@material-ui/core';
+import { Button, TextField } from '@material-ui/core';
 
 
 function Skills() {
@@ -32,12 +32,31 @@ function Skills() {
             +
       </Button>
         <div class="row">
-        
+        <div class="col-md-5 animate-box" data-animate-effect="fadeInLeft">
+            <form >
+
+              <TextField
+                fullWidth
+                label="Ability description"
+                multiline
+                rows={10}
+                name='abilities'
+                variant="outlined"
+                // error={Boolean(formik.touched.abilities && formik.errors.abilities)}
+                // helperText={formik.touched.abilities && formik.errors.abilities}
+                // onChange={formik.handleChange}
+              />
+
+            </form>
+          </div>
+          <div class="col-md-7 animate-box" data-animate-effect="fadeInLeft">
           {
             formList.map(formId => (
               <SkillForm key={formId} id={formId} removeSkill={handleRemove} />
             ))
           }
+          </div>
+         
         </div>
 
       </div>
