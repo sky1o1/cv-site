@@ -74,7 +74,6 @@ function Home() {
                                     }
                                 </div>
 
-
                                 <input
                                     fullWidth
                                     type="file"

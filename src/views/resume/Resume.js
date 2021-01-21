@@ -62,8 +62,8 @@ function Resume() {
 
                         </div>
                         <div class="row">
-                            <div class="col-md-7">
-                                <div onClick={() => wrapperRef.current.click()}   >
+                            <div class="col-md-6">
+                                <div className="ImageBox" onClick={() => wrapperRef.current.click()}   >
                                     {
                                         formik.initialValues.image2 &&
                                         <img src={formik.values.image2} />
@@ -89,7 +89,7 @@ function Resume() {
                                     }}
                                 />
                             </div>
-                            <div class="col-md-5 animate-box fadeInLeft animated" data-animate-effect="fadeInLeft"> <span class="heading-meta style-1">Resume</span>
+                            <div class="col-md-6 animate-box fadeInLeft animated" data-animate-effect="fadeInLeft"> <span class="heading-meta style-1">Resume</span>
                                 <h3 class="lonon-about-heading">I'm a {profile.profession}</h3>
                                 <p>
                                     {profile.information}
@@ -101,7 +101,7 @@ function Resume() {
                                                 <p>
                                                     <TextField
                                                         id="date"
-                                                        label="Birthday"
+                                                        placeholder="Birthday"
                                                         type="date"
                                                         name='dob'
                                                         size="small"
@@ -116,9 +116,8 @@ function Resume() {
                                                 </p>
                                                 <p>
                                                     <TextField
-                                                        id="standard-size-normal"
-                                                        fullWidth
-                                                        label="Website"
+                                                    multiline
+                                                        placeholder="Website"
                                                         name='website'
                                                         size="small"
                                                         error={Boolean(formik.touched.website && formik.errors.website)}
@@ -131,8 +130,8 @@ function Resume() {
                                                 </p>
                                                 <p>
                                                     <TextField
-                                                        id="standard-size-normal"
-                                                        label="Skype"
+                                                    multiline
+                                                        placeholder="Skype"
                                                         name='skype'
                                                         size="small"
                                                         variant="outlined"
@@ -144,9 +143,9 @@ function Resume() {
                                                     />
                                                 </p>
                                                 <TextField
-                                                        id="standard-size-normal"
                                                         fullWidth
-                                                        label="Twitter"
+                                                        multiline
+                                                        placeholder="Twitter"
                                                         name='twitter'
                                                         size="small"
                                                         error={Boolean(formik.touched.twitter && formik.errors.twitter)}
@@ -162,8 +161,8 @@ function Resume() {
                                             <div class="col-md-6">
                                                 <p>
                                                     <TextField
-                                                        id="standard-size-normal"
-                                                        label="Facebook"
+                                                    multiline
+                                                        placeholder="Facebook"
                                                         name='facebook'
                                                         size="small"
                                                         variant="outlined"
@@ -176,8 +175,8 @@ function Resume() {
                                                 </p>
                                                 <p>
                                                     <TextField
-                                                        id="standard-size-normal"
-                                                        label="Freelance"
+                                                    multiline
+                                                        placeholder="Freelance"
                                                         name='freelance'
                                                         size="small"
                                                         variant="outlined"
@@ -190,8 +189,8 @@ function Resume() {
                                                 </p>
                                                 <p>
                                                     <TextField
-                                                        id="standard-size-normal"
-                                                        label="Linkedin"
+                                                    multiline
+                                                        placeholder="Linkedin"
                                                         name='linkedin'
                                                         size="small"
                                                         variant="outlined"

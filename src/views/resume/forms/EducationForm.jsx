@@ -7,6 +7,8 @@ import {
     TextField,
     Button
 } from '@material-ui/core';
+import IconButton from '@material-ui/core/IconButton';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 
 const initialValues = {
@@ -50,9 +52,7 @@ function EducationForm({id, removeEdu}) {
                                     shrink: true,
                                 }}
                             />
-                        </span>
                         <h4>--</h4>
-                        <span >
                             <TextField
                                 id="date"
                                 label="End year"
@@ -68,7 +68,7 @@ function EducationForm({id, removeEdu}) {
                         </span>
                         <h5>
                             <TextField
-                                id="standard-basic"
+                            multiline
                                 name='university'
                                 label="University"
                                 size="small"
@@ -78,7 +78,7 @@ function EducationForm({id, removeEdu}) {
                         </h5>
                         <h4>
                             <TextField
-                                id="standard-basic"
+                            multiline
                                 name='degree'
                                 label="Degree"
                                 size="small"
@@ -101,9 +101,9 @@ function EducationForm({id, removeEdu}) {
                 </li>
             </ul>
             <span>
-                <Button variant="contained" type="button" color="secondary" onClick={() => removeEdu(id)}>
-                    X
-        </Button>
+            <IconButton aria-label="delete" >
+                    <DeleteIcon fontSize="small" onClick={() => removeEdu(id)} />
+                </IconButton>
             </span>
             <span>
                 <Button variant="contained" color="secondary" onClick={handleSubmit} >
