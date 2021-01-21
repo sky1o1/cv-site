@@ -2,10 +2,17 @@ import React, { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import SkillForm from './forms/SkillForm';
 import { Button, TextField } from '@material-ui/core';
+import { useFormik } from 'formik';
 
 
 function Skills() {
   const [formList, setFormList] = useState([])
+  // const formik = useFormik({
+  //   initialValues,
+  //   onSubmit: (values) => {
+
+  //   }
+  // })
 
   function handleAdd() {
     setFormList(prevFormList => ([
@@ -28,11 +35,9 @@ function Skills() {
             <h2 class="lonon-heading animate-box" data-animate-effect="fadeInLeft">My Skills</h2>
           </div>
         </div>
-        <Button variant="contained" type="button" color="primary" onClick={() => handleAdd()}>
-            +
-      </Button>
+       
         <div class="row">
-        <div class="col-md-5 animate-box" data-animate-effect="fadeInLeft">
+        <div class="col-md-4 animate-box" data-animate-effect="fadeInLeft">
             <form >
 
               <TextField
@@ -49,16 +54,18 @@ function Skills() {
 
             </form>
           </div>
-          <div class="col-md-7 animate-box" data-animate-effect="fadeInLeft">
+          <div class="col-md-8 animate-box" data-animate-effect="fadeInLeft">
           {
             formList.map(formId => (
               <SkillForm key={formId} id={formId} removeSkill={handleRemove} />
             ))
           }
+          <Button style={{flexDirection: "row-reverse"}} variant="contained" type="button" color="primary" onClick={() => handleAdd()}>
+              +
+          </Button>
           </div>
          
         </div>
-
       </div>
 
     </div>

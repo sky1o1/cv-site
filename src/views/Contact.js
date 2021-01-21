@@ -6,7 +6,7 @@ const Contact = () => {
        
         <div class="lonon-contact">
             <div class="container-fluid">
-                <div class="row">
+                {/* <div class="row">
                     <div class="col-md-12"> <span class="heading-meta style-1">Location</span>
                         <h2 class="lonon-heading animate-box" data-animate-effect="fadeInLeft">Contact Us</h2> </div>
                 </div>
@@ -17,7 +17,7 @@ const Contact = () => {
                             <div id="contactMap"></div>
                         </div>
                     </div>
-                </div>
+                </div> */}
                 <div class="row">
                     
                     <div class="col-md-6 mb-30 animate-box" data-animate-effect="fadeInLeft">

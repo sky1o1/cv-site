@@ -2,76 +2,99 @@ import React from 'react';
 import { useFormik } from 'formik';
 import { useDispatch } from 'react-redux';
 import validationSchema from '../validationSchema/validationSchemaSkills';
-import {setSkills} from '../../../store/reducer/skills';
+import { setSkills } from '../../../store/reducer/skills';
 import {
-    TextField,
-    Slider,
-    Button,
-    Grid
+  TextField,
+  Slider,
+  makeStyles,
+  Grid
 } from '@material-ui/core';
+import IconButton from '@material-ui/core/IconButton';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 const initialValues = {
-    skill: '',
-    rating: '50',
-    abilities: '',
+  skill: '',
+  rating: '50',
+  abilities: '',
+}
+
+const useStyles = makeStyles((theme) => ({
+  sliderTrack: {
+    height: 4,
+  },
+  track: {
+    height: 8,
+    borderRadius: 4
+  },
+  rail: {
+    height: 8,
+    borderRadius: 4
+  },
+  textBox: {
+    width: 'auto',
+  }
+}));
+
+function SkillForm({ id, removeSkill }) {
+  const dispatch = useDispatch()
+const classes = useStyles()
+  const formik = useFormik({
+    initialValues,
+    onSubmit: (values) => {
+      dispatch(setSkills(values))
+    },
+    validationSchema
+  })
+
+  const handleSubmit = async () => {
+    await formik.submitForm()
   }
 
+  const handleChange = name => (event, value) => {
+    console.log(name, value)
+    formik.setFieldValue(name, value)
+  }
 
-function SkillForm({id, removeSkill}) {
-    const dispatch = useDispatch()
+  return (
+    <>
+      <Grid  container >
+        <Grid item xs>
+          <TextField
+          className={classes.textBox}
+            multiline
+            size='small'
+            placeholder="Skill name"
+            name='skill'
+            variant="outlined"
+            error={Boolean(formik.touched.skill && formik.errors.skill)}
+            helperText={formik.touched.skill && formik.errors.skill}
+            onChange={formik.handleChange}
+          />
+        </Grid>
 
-    const formik = useFormik({
-        initialValues,
-        onSubmit: (values) => {
-            dispatch(setSkills(values))
-        },
-        validationSchema
-    })
+        <Grid style={{paddingInline: 20}} item xs={8}>
+          <Slider
+            classes={{ container: classes.slider, track: classes.sliderTrack }}
+            defaultValue={50}
+            style={{justifyContent:'center',alignItems:'center'}}
+            name='rating'
+            valueLabelDisplay="auto"
+            onChange={handleChange('rating')}
+            step={10}
+            marks
+            min={10}
+            max={100}
+          />
+        </Grid>
 
-    const handleSubmit = async () => {
-        await formik.submitForm()
-    }
+        <Grid item xs>
+        <IconButton aria-label="delete" >
+          <DeleteIcon fontSize="small" />
+        </IconButton>
+        </Grid>
 
-    const handleChange = name => (event, value) => {
-        console.log(name, value)
-          formik.setFieldValue(name, value)
-      }
+      </Grid>
 
-    return (
-        <>
-          <Grid container >
-                <Grid item xs={3}>
-                  <TextField
-                    multiline
-                    label="Skill"
-                    name='skill'
-                    error={Boolean(formik.touched.skill && formik.errors.skill)}
-                    helperText={formik.touched.skill && formik.errors.skill}
-                    onChange={formik.handleChange}
-                  />
-                  </Grid>
-                  
-                  <Grid item xs={8}>
-                  <Slider
-                    defaultValue={50}
-                    name='rating'
-                    valueLabelDisplay="auto"
-                    onChange={handleChange('rating')}
-                    step={10}
-                    marks
-                    min={10}
-                    max={100}
-                  />
-                  </Grid>
-
-                  <Grid item xs={2}>
-                    <Button variant="contained" type="button" color="secondary" onClick={() => removeSkill(id)}>
-                      X
-                    </Button>
-                  </Grid>
-               
-          </Grid>
-                  
       {/* <span>
         <Button
           onClick={handleSubmit}
@@ -82,8 +105,8 @@ function SkillForm({id, removeSkill}) {
           Submit
         </Button>
       </span> */}
-        </>
-    )
+    </>
+  )
 }
 
 export default SkillForm;
