@@ -88,7 +88,7 @@ const classes = useStyles()
         </Grid>
 
         <Grid item xs>
-        <IconButton aria-label="delete" >
+        <IconButton aria-label="delete" onClick={() => removeSkill(id)} >
           <DeleteIcon fontSize="small" />
         </IconButton>
         </Grid>

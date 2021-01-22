@@ -4,10 +4,18 @@ import { setProfile, setImage2 } from '../../store/reducer/profile';
 import validationSchema from './validationSchema/validationSchema';
 import Experience from './Experience';
 import Education from './Education';
+import SocialMedia from './SocialMedia'
 import {
     makeStyles,
     TextField,
+    Card,
+    CardContent,
+    IconButton,
+    Button,
+    DialogTitle,
+    Dialog
 } from '@material-ui/core';
+import PersonIcon from '@material-ui/icons/Person';
 import Footer from '../Footer';
 import { useFormik } from 'formik';
 
@@ -35,21 +43,20 @@ function Resume() {
     const profile = useSelector(state => state.profile)
     const wrapperRef = useRef(null)
 
-
-    function handleChange( event) {
+    function handleChange(event) {
         const inputFieldName = event.currentTarget.name
         const inputFieldValue = event.currentTarget.value
-        const updatedProfileData = {...profile, [inputFieldName]: inputFieldValue}
+        const updatedProfileData = { ...profile, [inputFieldName]: inputFieldValue }
         dispatch(setProfile(updatedProfileData))
         formik.setFieldValue(inputFieldName, inputFieldValue)
-      }
+    }
 
     const formik = useFormik({
         initialValues,
         validationSchema
     })
 
-   
+
     return (
         <>
             <div id="lonon-main">
@@ -82,7 +89,6 @@ function Resume() {
                                         const selectedUrl = URL.createObjectURL(selectedFile)
                                         formik.setFieldValue("image2", selectedUrl);
                                         dispatch(setImage2(selectedUrl))
-
                                     }}
                                     style={{
                                         display: 'none'
@@ -114,7 +120,9 @@ function Resume() {
                                                         }}
                                                     />
                                                 </p>
-                                                <p>
+                                              
+                                                    <SocialMedia/>
+                                                {/* <p>
                                                     <TextField
                                                     multiline
                                                         placeholder="Website"
@@ -154,12 +162,15 @@ function Resume() {
                                                         value={formik.values.twitter}
                                                         onChange={handleChange}
                                                         variant="outlined"
-                                                    />
+                                                    /> */}
 
                                             </div>
 
                                             <div class="col-md-6">
-                                                <p>
+                                                <Card>
+                                                    <h1>test</h1>
+                                                </Card>
+                                                {/* <p>
                                                     <TextField
                                                     multiline
                                                         placeholder="Facebook"
@@ -200,7 +211,7 @@ function Resume() {
                                                         value={formik.values.linkedin}
                                                         onChange={handleChange}
                                                     />
-                                                </p>
+                                                </p> */}
                                             </div>
                                         </div>
                                     </form>
@@ -210,11 +221,11 @@ function Resume() {
                     </div>
                 </div>
 
-               
-                <Experience/>
-                <Education/>
 
-              
+                <Experience />
+                <Education />
+
+
 
                 <div class="lonon-skills">
                     <div class="container-fluid">
