@@ -2,9 +2,9 @@ import React, { useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setProfile, setProfileImage } from '../store/reducer/profile';
 import { setColors} from '../store/reducer/colors';
+import {useStyles, greyColor, blackColor, whiteColor, blueColor} from './styles/SidebarStyle';
 import clsx from 'clsx';
 import {
-    makeStyles,
     AppBar,
     TextField,
     Toolbar,
@@ -32,39 +32,6 @@ const validationSchema = Yup.object({
     profession: Yup.string().required('Profession is required'),
 })
 
-const useStyles = makeStyles((theme) => ({
-    btnDiv: {
-        display:'flex',
-        justifyContent: 'center',
-    },
-    btn: {
-        borderRadius: '50%',
-        height: '18px',
-        width: '18px',
-        border: '2px solid white',
-        marginRight:10,
-        // boxShadow: "5px 5px 15px 1px #fff"
-    },
-    btn1: {
-        backgroundColor: '#555',
-     
-    },
-    btn2: {
-        backgroundColor: '#212121',
-    },
-    btn3: {
-        backgroundColor: '#fff',
-    },
-    btn4: {
-        backgroundColor: '#000080',
-    },
-    root: {
-        '&$disabled $notchedOutline': {
-           borderColor: 'orange'
-        }
-     },
-}))
-
 function Sidebar() {
     const classes = useStyles()
     const dispatch = useDispatch()
@@ -76,7 +43,11 @@ function Sidebar() {
         validationSchema
     })
 
-
+    const [bgColor, setBgColor] = useState({
+        backColor: '#000',
+        color: '#fff'
+    })
+    
     const handleChange = (event) => {
         const inputFieldName = event.currentTarget.name
         const inputFieldValue = event.currentTarget.value
@@ -84,46 +55,40 @@ function Sidebar() {
         dispatch(setProfile(updatedProfileData))
         formik.setFieldValue(inputFieldName, inputFieldValue)
     }
-    const [bgColor, setBgColor] = useState({
-        backColor: '#000',
-        color: 'white'
-    })
+   
 
-    const greyColor = () => {
-        console.log('grey called')
+     const greyColor = () => {
         setBgColor(prevData => (
             { ...prevData, backColor: '#555', color: '#fff' }
         ))
         const updatedColor = { ...bgColor,  backColor: '#555', color: '#fff'}
         dispatch(setColors(updatedColor))
     }
-
-    const blackColor = () => {
-        console.log('black called')
+    
+     const blackColor = () => {
         setBgColor(prevData => (
             { ...prevData, backColor: '#000', color: '#fff' }
         ))
         const updatedColor = { ...bgColor,  backColor: '#000', color: '#fff'}
         dispatch(setColors(updatedColor))
     }
-
-    const whiteColor = () => {
-        console.log('white called')
+    
+     const whiteColor = () => {
         setBgColor(prevData => (
-            { ...prevData, backColor: '#fff', color: '#707070' }
+            { ...prevData, backColor: '#fff', color: '#000' }
         ))
-        const updatedColor = { ...bgColor,  backColor: '#fff', color: '#707070' }
+        const updatedColor = { ...bgColor,  backColor: '#fff', color: '#000' }
         dispatch(setColors(updatedColor))
     }
-    const blueColor = () => {
-        console.log('white called')
+    
+     const blueColor = () => {
         setBgColor(prevData => (
             { ...prevData, backColor: '#000080', color: '#fff' }
         ))
         const updatedColor = { ...bgColor, backColor: '#000080', color: '#fff'}
         dispatch(setColors(updatedColor))
     }
-
+    
 
 return (
     <>
@@ -167,7 +132,6 @@ return (
                                 const selectedFile = event.currentTarget.files[0]
                                 const selectedUrl = URL.createObjectURL(selectedFile)
                                 formik.setFieldValue("profileImage", selectedUrl);
-                                // console.log(selectedFile)
                                 dispatch(setProfileImage(selectedUrl))
                             }}
                             style={{
@@ -204,36 +168,6 @@ return (
                             onChange={handleChange}
                         />
                         </div>
-                    
-                        {/* <TextField
-                            // className="textfield"
-                            fullWidth
-                            name='fullName'
-                            // label="Full name"
-                            id="standard-multiline-flexible"
-                            inputProps={{ style: { color: bgColor.color } }}
-                            InputLabelProps={{ style: { color: bgColor.color } }}
-                            error={Boolean(formik.touched.fullName && formik.errors.fullName)}
-                            helperText={formik.touched.fullName && formik.errors.fullName}
-                            onBlur={formik.handleBlur}
-                            value={formik.values.fullName}
-                            onChange={handleChange}
-                            
-                        /> */}
-                        {/* <TextField
-                            className="textfield"
-                            id="standard-basic"
-                            fullWidth
-                            name='profession'
-                            label="Profession"
-                            inputProps={{ style: { color: bgColor.color } }}
-                            InputLabelProps={{ style: { color: bgColor.color } }}
-                            error={Boolean(formik.touched.profession && formik.errors.profession)}
-                            helperText={formik.touched.profession && formik.errors.profession}
-                            onBlur={formik.handleBlur}
-                            value={formik.values.profession}
-                            onChange={handleChange}
-                        /> */}
                 </form>
                 <nav id="lonon-main-menu">
                     <ul>
@@ -241,7 +175,6 @@ return (
                         <li><a style={{ color: bgColor.color }}><SidebarOption title="resume" /></a></li>
                         <li><a style={{ color: bgColor.color }}><SidebarOption title="portfolio" /></a> </li>
                         <li><a style={{ color: bgColor.color }}><SidebarOption title="services" /></a></li>
-                        {/* <li><a style={{ color: bgColor.color }}><SidebarOption title="blog" /></a></li> */}
                         <li><a style={{ color: bgColor.color }}><SidebarOption title="contact" /></a> </li>
                     </ul>
                 </nav>

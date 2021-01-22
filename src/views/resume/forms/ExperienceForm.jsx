@@ -111,7 +111,7 @@ function ExperienceForm({ id, removeExp }) {
                 </li>
             </ul>
             <span>
-                <IconButton aria-label="delete" >
+                <IconButton  >
                     <DeleteIcon fontSize="small" onClick={() => removeExp(id)} />
                 </IconButton>
             </span>

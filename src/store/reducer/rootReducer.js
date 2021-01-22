@@ -9,6 +9,7 @@ import experience from './experience';
 import services from './services';
 import projects from './projects';
 import colors from './colors';
+import links from './links';
 
 
 const rootReducer = combineReducers({
@@ -21,7 +22,8 @@ const rootReducer = combineReducers({
     education,
     services,
     projects,
-    colors
+    colors,
+    links
 })
 
 export default rootReducer;
