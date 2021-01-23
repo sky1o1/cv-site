@@ -7,7 +7,8 @@ function Footer() {
         <>
             <div
                 style={{
-                    backgroundColor: colors.backColor
+                    backgroundColor: colors.bgColor,
+                    border: '1px solid black' 
                 }}
                 id="lonon-footer2">
                 <div class="lonon-narrow-content">
