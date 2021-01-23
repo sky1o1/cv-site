@@ -1,8 +1,8 @@
-import React, { useState, useRef } from 'react';
+import React, { useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setProfile, setProfileImage } from '../store/reducer/profile';
-import { setColors} from '../store/reducer/colors';
-import {useStyles, greyColor, blackColor, whiteColor, blueColor} from './styles/SidebarStyle';
+import {useStyles} from './styles/SidebarStyle';
+import useTheme from './hooks/useTheme';
 import clsx from 'clsx';
 import {
     AppBar,
@@ -37,17 +37,13 @@ function Sidebar() {
     const dispatch = useDispatch()
     const wrapperRef = useRef(null)
     const profile = useSelector(state => state.profile)
-
+    const [bgColor1, textColor1, updatedColor] = useTheme('greyColor')
+    console.log('test color', bgColor1)
     const formik = useFormik({
         initialValues: initValues,
         validationSchema
     })
 
-    const [bgColor, setBgColor] = useState({
-        backColor: '#000',
-        color: '#fff'
-    })
-    
     const handleChange = (event) => {
         const inputFieldName = event.currentTarget.name
         const inputFieldValue = event.currentTarget.value
@@ -56,39 +52,8 @@ function Sidebar() {
         formik.setFieldValue(inputFieldName, inputFieldValue)
     }
    
-
-     const greyColor = () => {
-        setBgColor(prevData => (
-            { ...prevData, backColor: '#555', color: '#fff' }
-        ))
-        const updatedColor = { ...bgColor,  backColor: '#555', color: '#fff'}
-        dispatch(setColors(updatedColor))
-    }
     
-     const blackColor = () => {
-        setBgColor(prevData => (
-            { ...prevData, backColor: '#000', color: '#fff' }
-        ))
-        const updatedColor = { ...bgColor,  backColor: '#000', color: '#fff'}
-        dispatch(setColors(updatedColor))
-    }
-    
-     const whiteColor = () => {
-        setBgColor(prevData => (
-            { ...prevData, backColor: '#fff', color: '#000' }
-        ))
-        const updatedColor = { ...bgColor,  backColor: '#fff', color: '#000' }
-        dispatch(setColors(updatedColor))
-    }
-    
-     const blueColor = () => {
-        setBgColor(prevData => (
-            { ...prevData, backColor: '#000080', color: '#fff' }
-        ))
-        const updatedColor = { ...bgColor, backColor: '#000080', color: '#fff'}
-        dispatch(setColors(updatedColor))
-    }
-    
+   
 
 return (
     <>
@@ -110,7 +75,7 @@ return (
 
             <aside id="lonon-aside"
                 style={{
-                    backgroundColor: bgColor.backColor,
+                    backgroundColor: bgColor1,
                 }}
             >
                 <form onSubmit={formik.handleSubmit}>
@@ -144,7 +109,7 @@ return (
                             rowsMax={4}
                             name='fullName'
                             inputProps={{ disableUnderline: true }}
-                            inputProps={{ style: { color: bgColor.color,fontSize:20,fontWeight:700,textAlign:'center'} }}
+                            inputProps={{ style: { color: textColor1,fontSize:20,fontWeight:700,textAlign:'center'} }}
                             error={Boolean(formik.touched.fullName && formik.errors.fullName)}
                             helperText={formik.touched.fullName && formik.errors.fullName}
                             onBlur={formik.handleBlur}
@@ -159,8 +124,8 @@ return (
                             multiline
                             rowsMax={2}
                             name='profession'
-                            inputProps={{ style: { color: bgColor.color ,fontSize:13 ,textAlign:'center'} }}
-                            InputLabelProps={{ style: { color: bgColor.color,} }}
+                            inputProps={{ style: { color: textColor1 ,fontSize:13 ,textAlign:'center'} }}
+                            InputLabelProps={{ style: { color: textColor1,} }}
                             error={Boolean(formik.touched.profession && formik.errors.profession)}
                             helperText={formik.touched.profession && formik.errors.profession}
                             onBlur={formik.handleBlur}
@@ -171,19 +136,19 @@ return (
                 </form>
                 <nav id="lonon-main-menu">
                     <ul>
-                        <li><a style={{ color: bgColor.color }}><SidebarOption title="home" /></a></li>
-                        <li><a style={{ color: bgColor.color }}><SidebarOption title="resume" /></a></li>
-                        <li><a style={{ color: bgColor.color }}><SidebarOption title="portfolio" /></a> </li>
-                        <li><a style={{ color: bgColor.color }}><SidebarOption title="services" /></a></li>
-                        <li><a style={{ color: bgColor.color }}><SidebarOption title="contact" /></a> </li>
+                        <li><a style={{ color: textColor1 }}><SidebarOption title="home" /></a></li>
+                        <li><a style={{ color: textColor1 }}><SidebarOption title="resume" /></a></li>
+                        <li><a style={{ color: textColor1 }}><SidebarOption title="portfolio" /></a> </li>
+                        <li><a style={{ color: textColor1 }}><SidebarOption title="services" /></a></li>
+                        <li><a style={{ color: textColor1 }}><SidebarOption title="contact" /></a> </li>
                     </ul>
                 </nav>
                 <div class="lonon-footer">
                 <Grid container className={classes.btnDiv} >
-                <span className={ clsx(classes.btn, classes.btn1)} onClick={greyColor} />
-                <span  className={ clsx(classes.btn, classes.btn2)} onClick={blackColor} />
-                <span  className={ clsx(classes.btn, classes.btn3)} onClick={whiteColor} />
-                <span  className={ clsx(classes.btn, classes.btn4)} onClick={blueColor} />
+                <span className={ clsx(classes.btn, classes.btn1)} onClick={() => updatedColor('greyColor')} />
+                <span  className={ clsx(classes.btn, classes.btn2)} onClick={() => updatedColor('blackColor')} />
+                <span  className={ clsx(classes.btn, classes.btn3)} onClick={() => updatedColor('whiteColor')} />
+                <span  className={ clsx(classes.btn, classes.btn4)} onClick={() => updatedColor('blueColor')} />
                 </Grid>
                 </div>
                

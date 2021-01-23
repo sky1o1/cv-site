@@ -1,6 +1,6 @@
-import React, { useState} from 'react';
-import {useSelector, useDispatch} from 'react-redux';
-import {setFacebook, setInstagram, setLinkedin, setGithub} from '../../store/reducer/links';
+import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { setActiveLink } from '../../store/reducer/links';
 import '../../new.css'
 import {
     makeStyles,
@@ -21,23 +21,14 @@ import LinkedInIcon from '@material-ui/icons/LinkedIn';
 import GitHubIcon from '@material-ui/icons/GitHub';
 
 
-function SocialMedia(){
+function SocialMedia() {
     // const classes = useStyles()
     const dispatch = useDispatch()
-    const links = useSelector(state => state.links)
+    const links = useSelector(state => state.links.activeLinks)
     const profile = useSelector(state => state.profile)
     const [open, setOpen] = useState(false);
 
-    const borderProp = {
-        borderColor: 'red',
-        borderRadius: '10px', 
-        borderStyle: 'solid'
-    }
-    const borderDisable = {
-        borderColor: 'none', 
-        borderStyle: 'none'
-    }
-    
+
     const handleClickOpen = () => {
         setOpen(true);
     };
@@ -46,81 +37,81 @@ function SocialMedia(){
         setOpen(false);
     };
 
-    console.log('links',links)
+    console.log('links', links)
 
-    return(
+    return (
         <>
-        <div>
-             <Button
-             onClick={handleClickOpen}
-                variant="contained"
-                color="secondary"
-                startIcon={<PersonIcon />}
+            <div>
+                <Button
+                    onClick={handleClickOpen}
+                    variant="contained"
+                    color="secondary"
+                    startIcon={<PersonIcon />}
                 >
-                Social Media
+                    Social Media
             </Button>
-        <Dialog
-            open={open}
-            onClose={handleClose}
-            aria-labelledby="alert-dialog-title"
-            aria-describedby="alert-dialog-description"
-        >
-            <DialogTitle id="alert-dialog-title">Link Social Media Accounts</DialogTitle>
-            <div >
-                <img  />
-            </div>
+                <Dialog
+                    open={open}
+                    onClose={handleClose}
+                    aria-labelledby="alert-dialog-title"
+                    aria-describedby="alert-dialog-description"
+                >
+                    <DialogTitle id="alert-dialog-title">Link Social Media Accounts</DialogTitle>
+                    <div >
+                        <img />
+                    </div>
 
-            <DialogContent>
-                <DialogContentText id="alert-dialog-description">
-                    <Grid container style={{ justifyContent: 'space-around'}}>
-                        <Grid list >
-                        <FacebookIcon id='icon'
-                          style={ links.facebook? borderProp
-                          : 
-                          borderDisable }
-                           onClick={() =>  dispatch(setFacebook(!(links.facebook)))} 
-                            fontSize='large'/>
-                        </Grid>
+                    <DialogContent>
+                        <DialogContentText id="alert-dialog-description">
+                            <Grid container style={{ justifyContent: 'space-around' }}>
+                                {/* <Grid list >
+                                    <FacebookIcon id='icon'
+                                        className={` ${links.facebook ? "socialMediaActiveLink" : ""}`}
+                                        onClick={() => dispatch(setFacebook(!(links.facebook)))}
+                                        fontSize='large' />
+                                </Grid> */}
 
-                        <Grid list >
+                                {/* <Grid list >
                         <InstagramIcon 
-                          style={ links.instagram? borderProp
-                          : 
-                          borderDisable }
+                          className={` ${links.instagram ? "socialMediaActiveLink" : ""}`}
                           onClick={() => dispatch(setInstagram(!(links.instagram)))} 
                          fontSize='large'/>
-                        </Grid>
+                        </Grid> */}
+                                <div className={` ${links && links.includes('instagram') ? "socialMediaActiveLink" : ""}`}
+                                    onClick={() => {
+                                        dispatch(setActiveLink('instagram'))
+                                    }}
+                                 fontSize='large'
+                                >
+                                    <p>instagram</p>
+                                </div>
 
-                        <Grid list >
-                        <LinkedInIcon
-                        style={ links.linkedin? borderProp
-                        : 
-                        borderDisable } 
-                         onClick={() =>  dispatch(setLinkedin(!(links.linkedin)))} 
-                         fontSize='large'/>
-                        </Grid>
+                                {/* <Grid list >
+                                    <LinkedInIcon
+                                        className={` ${links.linkedin ? "socialMediaActiveLink" : ""}`}
+                                        onClick={() => dispatch(setLinkedin(!(links.linkedin)))}
+                                        fontSize='large' />
+                                </Grid>
 
-                        <Grid list >
-                        <GitHubIcon 
-                        style={ links.github? borderProp
-                        : 
-                        borderDisable } 
-                         onClick={() => dispatch(setGithub(!(links.github)))} 
-                         fontSize='large'
-                         />
-                        </Grid>
+                                <Grid list >
+                                    <GitHubIcon
+                                        className={` ${links.github ? "socialMediaActiveLink" : ""}`}
+                                        onClick={() => dispatch(setGithub(!(links.github)))}
+                                        fontSize='large'
+                                    />
+                                </Grid> */}
 
-                   </Grid>
-                </DialogContentText>
-            </DialogContent>
-            <DialogActions>
-                <Button onClick={handleClose} color="primary" autoFocus>
-                    Done
+                            </Grid>
+                        </DialogContentText>
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={handleClose} color="primary" autoFocus>
+                            Done
                 </Button>
-            </DialogActions>
-        </Dialog>
-    </div>
-    </>
+                    </DialogActions>
+                </Dialog>
+            </div>
+        </>
     )
 }
 

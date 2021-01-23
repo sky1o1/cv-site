@@ -37,3 +37,10 @@
     transform: rotate(360deg);
   }
 }
+
+/* social media styling */
+
+.socialMediaActiveLink{
+  border: 1px solid red;
+  border-radius: 10px ;
+}
