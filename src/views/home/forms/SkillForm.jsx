@@ -7,7 +7,7 @@ import {
   TextField,
   Slider,
   makeStyles,
-  Grid
+  Grid,
 } from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -88,7 +88,7 @@ const classes = useStyles()
         </Grid>
 
         <Grid item xs>
-        <IconButton aria-label="delete" onClick={() => removeSkill(id)} >
+        <IconButton onClick={() => removeSkill(id)} >
           <DeleteIcon fontSize="small" />
         </IconButton>
         </Grid>

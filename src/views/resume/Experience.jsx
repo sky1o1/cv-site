@@ -4,7 +4,7 @@ import { Button} from '@material-ui/core';
 import ExperienceForm from './forms/ExperienceForm';
 
 function Experience() {
-    const [formList, setFormList] = useState([])
+    const [formList, setFormList] = useState([1])
  
     function handleAdd() {
      setFormList(prevFormList => ([

@@ -42,7 +42,7 @@ const initialValues = {
 function ProjectForm({ removeProject, id, indexId, list }) {
     const classes = useStyles()
     const dispatch = useDispatch()
-const project = useSelector(state => state.projects)
+    const project = useSelector(state => state.projects)
     const formik = useFormik({
         initialValues,
         onSubmit: (values) => {
@@ -50,8 +50,8 @@ const project = useSelector(state => state.projects)
         },
         validationSchema
     })
-    const [characters, updateCharacters] = useState(list);
-
+    const [characters, setCharacters] = useState(list);
+    console.log('lists', characters)
     const handleSubmit = () => {
         formik.submitForm()
     }
@@ -61,7 +61,7 @@ const project = useSelector(state => state.projects)
         console.log(items)
         const [reorderedItem] = items.splice(result.source.index, 1);
         items.splice(result.destination.index, 0, reorderedItem);
-        updateCharacters(items);
+        setCharacters(items);
         if (!result.destination) return;
     }
     

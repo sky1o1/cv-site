@@ -5,7 +5,7 @@ import EducationForm from './forms/EducationForm';
 
 
 function Education() {
-   const [formList, setFormList] = useState([])
+   const [formList, setFormList] = useState([1])
 
    function handleAdd() {
     setFormList(prevFormList => ([

@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { setActiveLink } from '../../store/reducer/links';
+import React, { useState} from 'react';
+import {useSelector, useDispatch} from 'react-redux';
+import {setFacebook, setInstagram, setLinkedin, setGithub, setTwitter} from '../../store/reducer/links';
 import '../../new.css'
 import {
     makeStyles,
@@ -19,16 +19,26 @@ import FacebookIcon from '@material-ui/icons/Facebook';
 import InstagramIcon from '@material-ui/icons/Instagram';
 import LinkedInIcon from '@material-ui/icons/LinkedIn';
 import GitHubIcon from '@material-ui/icons/GitHub';
+import TwitterIcon from '@material-ui/icons/Twitter';
 
 
-function SocialMedia() {
-    // const classes = useStyles()
+const useStyles = makeStyles((theme) => ({
+    gridContainer: {
+        justifyContent: 'space-around'
+    },
+    dialogBox: {
+        width: '200px'
+    }
+}))
+
+function SocialMedia(){
+    const classes = useStyles()
     const dispatch = useDispatch()
-    const links = useSelector(state => state.links.activeLinks)
+    const links = useSelector(state => state.links)
     const profile = useSelector(state => state.profile)
     const [open, setOpen] = useState(false);
 
-
+     
     const handleClickOpen = () => {
         setOpen(true);
     };
@@ -37,81 +47,104 @@ function SocialMedia() {
         setOpen(false);
     };
 
-    console.log('links', links)
+    console.log('links',profile)
 
-    return (
+    return(
         <>
-            <div>
-                <Button
-                    onClick={handleClickOpen}
-                    variant="contained"
-                    color="secondary"
-                    startIcon={<PersonIcon />}
+        <div>
+             <Button
+             onClick={handleClickOpen}
+                variant="contained"
+                color="secondary"
+                startIcon={<PersonIcon />}
                 >
-                    Social Media
+                Social Media
             </Button>
-                <Dialog
-                    open={open}
-                    onClose={handleClose}
-                    aria-labelledby="alert-dialog-title"
-                    aria-describedby="alert-dialog-description"
-                >
-                    <DialogTitle id="alert-dialog-title">Link Social Media Accounts</DialogTitle>
-                    <div >
-                        <img />
-                    </div>
+        <Dialog
+            open={open}
+            onClose={handleClose}
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description"
+            className={classes.dialogBox}
+        >
+            <DialogTitle id="alert-dialog-title">Link Social Media Accounts</DialogTitle>
+            <div >
+                <img  />
+            </div>
 
-                    <DialogContent>
-                        <DialogContentText id="alert-dialog-description">
-                            <Grid container style={{ justifyContent: 'space-around' }}>
-                                {/* <Grid list >
-                                    <FacebookIcon id='icon'
-                                        className={` ${links.facebook ? "socialMediaActiveLink" : ""}`}
-                                        onClick={() => dispatch(setFacebook(!(links.facebook)))}
-                                        fontSize='large' />
-                                </Grid> */}
+            <DialogContent>
+                <DialogContentText>
+                    <Grid container className={classes.gridContainer}>
+                        <Grid list >
+                        <FacebookIcon id='icon'
+                          className={`${links.facebook ? "socialMediaActiveLink" : ""}`}
+                           onClick={() =>  dispatch(setFacebook(!(links.facebook)))} 
+                            fontSize='large'/>
+                        </Grid>
 
-                                {/* <Grid list >
+                        <Grid list >
                         <InstagramIcon 
-                          className={` ${links.instagram ? "socialMediaActiveLink" : ""}`}
+                         className={`${links.instagram ? "socialMediaActiveLink" : ""}`}
                           onClick={() => dispatch(setInstagram(!(links.instagram)))} 
                          fontSize='large'/>
-                        </Grid> */}
-                                <div className={` ${links && links.includes('instagram') ? "socialMediaActiveLink" : ""}`}
-                                    onClick={() => {
-                                        dispatch(setActiveLink('instagram'))
-                                    }}
-                                 fontSize='large'
-                                >
-                                    <p>instagram</p>
-                                </div>
+                        </Grid>
 
-                                {/* <Grid list >
-                                    <LinkedInIcon
-                                        className={` ${links.linkedin ? "socialMediaActiveLink" : ""}`}
-                                        onClick={() => dispatch(setLinkedin(!(links.linkedin)))}
-                                        fontSize='large' />
-                                </Grid>
+                        <Grid list >
+                        <LinkedInIcon
+                        className={`${links.linkedin ? "socialMediaActiveLink" : ""}`}
+                         onClick={() =>  dispatch(setLinkedin(!(links.linkedin)))} 
+                         fontSize='large'/>
+                        </Grid>
 
-                                <Grid list >
-                                    <GitHubIcon
-                                        className={` ${links.github ? "socialMediaActiveLink" : ""}`}
-                                        onClick={() => dispatch(setGithub(!(links.github)))}
-                                        fontSize='large'
-                                    />
-                                </Grid> */}
+                        <Grid list >
+                        <GitHubIcon 
+                        className={`${links.github ? "socialMediaActiveLink" : ""}`}
+                         onClick={() =>  dispatch(setGithub(!(links.github)))}
+                         fontSize='large'
+                         />
+                        </Grid>
+                      </Grid>
 
-                            </Grid>
-                        </DialogContentText>
-                    </DialogContent>
-                    <DialogActions>
-                        <Button onClick={handleClose} color="primary" autoFocus>
-                            Done
+                      <Grid container className={classes.gridContainer}>
+                      <Grid list >
+                        <TwitterIcon 
+                        className={`${links.twitter ? "socialMediaActiveLink" : ""}`}
+                         onClick={() =>  dispatch(setTwitter(!(links.twitter)))}
+                         fontSize='large'
+                         />
+                        </Grid>
+                        <Grid list >
+                        <TwitterIcon 
+                        className={`${links.twitter ? "socialMediaActiveLink" : ""}`}
+                         onClick={() =>  dispatch(setTwitter(!(links.twitter)))}
+                         fontSize='large'
+                         />
+                        </Grid>
+                        <Grid list >
+                        <TwitterIcon 
+                        className={`${links.twitter ? "socialMediaActiveLink" : ""}`}
+                         onClick={() =>  dispatch(setTwitter(!(links.twitter)))}
+                         fontSize='large'
+                         />
+                        </Grid>
+                        <Grid list >
+                        <TwitterIcon 
+                        className={`${links.twitter ? "socialMediaActiveLink" : ""}`}
+                         onClick={() =>  dispatch(setTwitter(!(links.twitter)))}
+                         fontSize='large'
+                         />
+                        </Grid>
+                      </Grid>
+                </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+                <Button onClick={handleClose} color="primary" autoFocus>
+                    Done
                 </Button>
-                    </DialogActions>
-                </Dialog>
-            </div>
-        </>
+            </DialogActions>
+        </Dialog>
+    </div>
+    </>
     )
 }
 
