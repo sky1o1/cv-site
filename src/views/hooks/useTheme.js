@@ -5,19 +5,23 @@ import { setColors} from '../../store/reducer/colors';
 const THEME_COLOR = {
     greyColor: {
         bgColor:'#555',
-        color: '#fff'
+        color: '#fff',
+        headColor: '#555'
     },
     blackColor: {
         bgColor:'#000',
-        color: '#fff'
+        color: '#fff',
+        headColor: '#000'
     },
     whiteColor: {
         bgColor:'#fff',
-        color: '#000'
+        color: '#000',
+        headColor: '#000'
     },
     blueColor: {
         bgColor:'#255',
-        color: '#000'
+        color: '#000',
+        headColor: '#255'
     }
 }
  const useTheme = (color) => {
@@ -34,6 +38,7 @@ const THEME_COLOR = {
     return [
          themeColor.bgColor,
          themeColor.color,
+         themeColor.headColor,
         updateColor
     ]
 }

@@ -38,9 +38,14 @@ function Sidebar() {
     const wrapperRef = useRef(null)
     const profile = useSelector(state => state.profile)
     const [bgColor1, textColor1, updatedColor] = useTheme('greyColor')
-    console.log('test color', bgColor1)
     const formik = useFormik({
         initialValues: initValues,
+        onChange: (event) => {
+            const selectedFile = event.currentTarget.files[0]
+            const selectedUrl = URL.createObjectURL(selectedFile)
+            formik.setFieldValue("profileImage", selectedUrl);
+            dispatch(setProfileImage(selectedUrl))
+        },
         validationSchema
     })
 
@@ -93,12 +98,7 @@ return (
                             label="Image"
                             name="profileImage"
                             ref={wrapperRef}
-                            onChange={(event) => {
-                                const selectedFile = event.currentTarget.files[0]
-                                const selectedUrl = URL.createObjectURL(selectedFile)
-                                formik.setFieldValue("profileImage", selectedUrl);
-                                dispatch(setProfileImage(selectedUrl))
-                            }}
+                            onChange={formik.onChange}
                             style={{
                                 display: 'none'
                             }}
@@ -147,7 +147,7 @@ return (
                 <Grid container className={classes.btnDiv} >
                 <span className={ clsx(classes.btn, classes.btn1)} onClick={() => updatedColor('greyColor')} />
                 <span  className={ clsx(classes.btn, classes.btn2)} onClick={() => updatedColor('blackColor')} />
-                <span  className={ clsx(classes.btn, classes.btn3)} onClick={() => updatedColor('whiteColor')} />
+                <span  className={ clsx(classes.btn, classes.btn3, classes.btn33)} onClick={() => updatedColor('whiteColor')} />
                 <span  className={ clsx(classes.btn, classes.btn4)} onClick={() => updatedColor('blueColor')} />
                 </Grid>
                 </div>

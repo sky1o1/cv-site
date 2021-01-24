@@ -130,6 +130,9 @@ function Home() {
                                                   fullWidth
                                                   multiline
                                                   name='phoneNumber'
+                                                  error={Boolean(formik.touched.phoneNumber && formik.errors.phoneNumber)}
+                                                  helperText={formik.touched.phoneNumber && formik.errors.phoneNumber}
+                                                  onBlur={formik.handleBlur}
                                                   onChange={handleChange} />
                                             </Grid>
                                         </Grid>
@@ -145,6 +148,9 @@ function Home() {
                                                   fullWidth
                                                   multiline
                                                   name='email'
+                                                  error={Boolean(formik.touched.email && formik.errors.email)}
+                                                  helperText={formik.touched.email && formik.errors.email}
+                                                  onBlur={formik.handleBlur}
                                                   onChange={handleChange} />
                                             </Grid>
                                         </Grid>
@@ -160,6 +166,9 @@ function Home() {
                                                  inputProps={{ style: { fontSize:13} }}
                                                  fullWidth
                                                  multiline
+                                                 error={Boolean(formik.touched.location && formik.errors.location)}
+                                                 helperText={formik.touched.location && formik.errors.location}
+                                                 onBlur={formik.handleBlur}
                                                  onChange={handleChange}  />
                                             </Grid>
                                         </Grid>

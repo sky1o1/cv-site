@@ -6,7 +6,7 @@ import { useFormik } from 'formik';
 
 
 function Skills() {
-  const [formList, setFormList] = useState([])
+  const [formList, setFormList] = useState([1])
   // const formik = useFormik({
   //   initialValues,
   //   onSubmit: (values) => {
@@ -42,7 +42,7 @@ function Skills() {
 
               <TextField
                 fullWidth
-                label="Ability description"
+                placeholder="Ability description"
                 multiline
                 rows={10}
                 name='abilities'
@@ -60,7 +60,7 @@ function Skills() {
               <SkillForm key={formId} id={formId} removeSkill={handleRemove} />
             ))
           }
-          <Button style={{flexDirection: "row-reverse"}} variant="contained" type="button" color="primary" onClick={() => handleAdd()}>
+          <Button style={{flexDirection: "row-reverse", marginTop: '10px'}} variant="contained" type="button" color="primary" onClick={() => handleAdd()}>
               +
           </Button>
           </div>
