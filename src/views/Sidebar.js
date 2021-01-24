@@ -37,7 +37,7 @@ function Sidebar() {
     const dispatch = useDispatch()
     const wrapperRef = useRef(null)
     const profile = useSelector(state => state.profile)
-    const [bgColor1, textColor1, updatedColor] = useTheme('greyColor')
+    const [bgColor1, textColor1, headColor,updateColor] = useTheme('greyColor')
     const formik = useFormik({
         initialValues: initValues,
         onChange: (event) => {
@@ -145,10 +145,10 @@ return (
                 </nav>
                 <div class="lonon-footer">
                 <Grid container className={classes.btnDiv} >
-                <span className={ clsx(classes.btn, classes.btn1)} onClick={() => updatedColor('greyColor')} />
-                <span  className={ clsx(classes.btn, classes.btn2)} onClick={() => updatedColor('blackColor')} />
-                <span  className={ clsx(classes.btn, classes.btn3, classes.btn33)} onClick={() => updatedColor('whiteColor')} />
-                <span  className={ clsx(classes.btn, classes.btn4)} onClick={() => updatedColor('blueColor')} />
+                <span className={ clsx(classes.btn, classes.btn1)} onClick={() => updateColor('greyColor')} />
+                <span  className={ clsx(classes.btn, classes.btn2)} onClick={() => updateColor('blackColor')} />
+                <span  className={ clsx(classes.btn, classes.btn3, classes.btn33)} onClick={() => updateColor('whiteColor')} />
+                <span  className={ clsx(classes.btn, classes.btn4)} onClick={() => updateColor('blueColor')} />
                 </Grid>
                 </div>
                

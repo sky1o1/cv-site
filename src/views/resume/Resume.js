@@ -72,8 +72,8 @@ function Resume() {
                 <div class="lonon-about">
                     <div class="container-fluid">
                         <div class="row">
-                            <div class="col-md-12"> <span class="heading-meta style-1">Resume</span>
-                                <h2 style={{color: colors.color}} class="lonon-heading animate-box" data-animate-effect="fadeInLeft">About Me</h2> </div>
+                            <div class="col-md-12"> <span style={{color: colors.headColor}} class="heading-meta style-1">Resume</span>
+                                <h2 style={{color: colors.headColor}} class="lonon-heading animate-box" data-animate-effect="fadeInLeft">About Me</h2> </div>
 
                         </div>
                         <div class="row">
@@ -103,8 +103,8 @@ function Resume() {
                                     }}
                                 />
                             </div>
-                            <div class="col-md-6 animate-box fadeInLeft animated" data-animate-effect="fadeInLeft"> <span class="heading-meta style-1">Resume</span>
-                                <h3 class="lonon-about-heading">I'm a {profile.profession}</h3>
+                            <div class="col-md-6 animate-box fadeInLeft animated" data-animate-effect="fadeInLeft"> <span style={{color: colors.headColor}} class="heading-meta style-1">Resume</span>
+                                <h3 style={{color: colors.headColor}} class="lonon-about-heading">I'm a {profile.profession}</h3>
                                 <p>
                                     {profile.information}
                                 </p>
@@ -194,7 +194,7 @@ function Resume() {
                                                 </Card>
 
 
-                                                <SocialMedia />
+                                                <SocialMedia color={colors} />
 
 
 
@@ -208,45 +208,9 @@ function Resume() {
                 </div>
 
 
-                <Experience />
-                <Education />
-
-
-
-                <div class="lonon-skills">
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-md-12"> <span class="heading-meta style-1">Abilities</span>
-                                <h2 class="lonon-heading animate-box" data-animate-effect="fadeInLeft">My Skills</h2> </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-5 animate-box" data-animate-effect="fadeInLeft">
-                                <p>Skills convallis lacinia est et volutpat. Ut interdum lecis velit, ac venenatis odio fringilla ut. Mauris tincidunt diame nisi mollis rhoncus. Nam non ante consequatir, malesuada dui euismod, pharetra mi.</p>
-                                <p>Sed auctor, dui sed bibendum feugiat, felis lorem pulvinar mauris vel porttitor risu nunc et risus. Aenean vehicula dictum magna non venenatis.</p>
-                            </div>
-                            <div class="col-md-7 animate-box" data-animate-effect="fadeInLeft">
-                                <p class="bar-title">JavaScript<span class="percent align-right">90%</span></p>
-                                <div class="bar">
-                                    <div class="bar-fill bar-fill-developer start"></div>
-                                </div>
-                                <p class="bar-title">PHP<span class="percent align-right">80%</span></p>
-                                <div class="bar">
-                                    <div class="bar-fill bar-fill-photoshop start"></div>
-                                </div>
-                                <p class="bar-title">HTML / CSS<span class="percent align-right">95%</span></p>
-                                <div class="bar">
-                                    <div class="bar-fill bar-fill-webdesign start"></div>
-                                </div>
-                                <p class="bar-title">jQuery<span class="percent align-right">85%</span></p>
-                                <div class="bar">
-                                    <div class="bar-fill bar-fill-socialmedia start"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <Footer />
+                <Experience color={colors} />
+                <Education color={colors} />
+                <Footer color={colors} />
             </div>
         </>
     )
