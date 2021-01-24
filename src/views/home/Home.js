@@ -45,6 +45,7 @@ function Home() {
     const dispatch = useDispatch();
     const wrapperRef = useRef();
     const profile = useSelector(state => state.profile)
+    const colors = useSelector(state => state.colors)
 
     function handleChange(event) {
         const inputFieldName = event.currentTarget.name
@@ -91,8 +92,8 @@ function Home() {
                                     }}
                                 />
                             </div>
-                            <div class="col-md-6 animate-box fadeInLeft animated" data-animate-effect="fadeInLeft"> <span class="heading-meta style-1">Informations</span>
-                                <h3 class="lonon-about-heading">I'm {profile.fullName}</h3>
+                            <div class="col-md-6 animate-box fadeInLeft animated" data-animate-effect="fadeInLeft"> <span style={{color: colors.headColor}} class="heading-meta style-1">Informations</span>
+                                <h3 style={{color: colors.headColor}} class="lonon-about-heading">I'm {profile.fullName}</h3>
 
                                 <form onSubmit={formik.handleSubmit} >
                                     <TextField
@@ -113,8 +114,8 @@ function Home() {
 
                                 
                                 <div className="cardvisit">
-                                    <h3> {profile.fullName}</h3>
-                                    <p>{profile.profession}</p>
+                                    <h3 style={{color: colors.headColor}}> {profile.fullName}</h3>
+                                    <p style={{color: colors.headColor}}>{profile.profession}</p>
                                     <div class="divider-line"></div>
                                     <div >
 
@@ -179,9 +180,9 @@ function Home() {
                     </div>
                 </div>
                 <div class="divider1"></div>
-                <Skills />
+                <Skills color={colors}/>
                 <div class="divider1"></div>
-                <Language />
+                <Language color={colors} />
 
 
             </form>

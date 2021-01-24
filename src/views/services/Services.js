@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
 import ServiceForm from './ServiceForm';
 import Footer from '../Footer';
@@ -39,6 +40,7 @@ const useStyles = makeStyles({
 function Services() {
     const classes = useStyles()
     const [formList, setFormList] = useState([])
+    const colors = useSelector(state => state.colors)
     
     function handleAddExp() {
        setFormList(prevFormList => ([
@@ -62,8 +64,8 @@ function Services() {
             <div class="lonon-services">
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="col-md-12"> <span class="heading-meta style-1">What We Do</span>
-                            <h2 class="lonon-heading animate-box" data-animate-effect="fadeInLeft">Services</h2> </div>
+                        <div class="col-md-12"> <span style={{color: colors.headColor}} class="heading-meta style-1">What We Do</span>
+                            <h2 class="lonon-heading animate-box" style={{color: colors.headColor}} data-animate-effect="fadeInLeft">Services</h2> </div>
                     </div>
                     <Grid className={classes.container} container spacing={3}>
                      <Grid className={classes.container} container spacing={3}>
