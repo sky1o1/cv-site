@@ -37,6 +37,16 @@ const useStyles = makeStyles({
     }
 });
 
+
+const reorder = (list, startIndex, endIndex) => {
+    const result = Array.from(list);
+    const [removed] = result.splice(startIndex, 1);
+    result.splice(endIndex, 0, removed);
+
+    return result;
+};
+
+
 function Projects() {
     const classes = useStyles()
     const [formList, setFormList] = useState([])
@@ -58,13 +68,13 @@ function Projects() {
     ]
 
     const [characters, updateCharacters] = useState(finalSpaceCharacters);
-    
+
     function handleAdd() {
         setFormList(prevList => ([
             ...prevList, uuidv4()
         ]))
     }
-    
+
     function handleOnDragEnd(result) {
         console.log('-=-=-=-=-==-', result)
         const items = Array.from(characters);
@@ -83,17 +93,32 @@ function Projects() {
         formListClone.splice(index, 1)
         setFormList(formListClone)
     }
+    function onDragEnd(result) {
+        console.log('run')
+        if (!result.destination) {
+            return;
+        }
 
-    console.log('formlist', formList)
+        const items = reorder(
+            formList,
+            result.source.index,
+            result.destination.index
+        );
+
+        setFormList(items);
+        console.log(items)
+    }
+
     return (
         <>
             <div id="lonon-main">
                 <div class="lonon-services">
                     <div class="container-fluid">
                         <div class="row">
-                            <div class="col-md-12"> <span style={{color: colors.headColor}} class="heading-meta style-1">Take a Look at</span>
-                                <h2 class="lonon-heading animate-box" style={{color: colors.headColor}} data-animate-effect="fadeInLeft">My Projects</h2> </div>
+                            <div class="col-md-12"> <span style={{ color: colors.headColor }} class="heading-meta style-1">Take a Look at</span>
+                                <h2 class="lonon-heading animate-box" style={{ color: colors.headColor }} data-animate-effect="fadeInLeft">My Projects</h2> </div>
                         </div>
+
                         <Grid className={classes.container} container spacing={3}>
                             <Grid list className={classes.gridList} xs={3}>
                                 <Button variant="contained" style={{ display: 'none' }} type="button" color="primary" >
@@ -105,13 +130,37 @@ function Projects() {
                                     </CardContent>
                                 </Card>
                             </Grid>
-                            {formList.map(formId => (
-                                <ProjectForm list={formList} key={formId} id={formId} indexId={formList.indexOf(formId)} removeProject={handleRemove} />
-                            ))
-                            }
+                            <DragDropContext onDragEnd={onDragEnd}>
+                                <Droppable droppableId="characters" >
+                                    {(provided) => (
+                                        <Grid {...provided.droppableProps} ref={provided.innerRef} list className={classes.gridList} list xs={3}>
+                                            {formList.map((formId, index) => (
+                                                <Draggable key={formId} draggableId={formId} index={index}>
+                                                    {(provided) => (
+                                                        <div
+                                                            ref={provided.innerRef}
+                                                            {...provided.draggableProps}
+                                                            {...provided.dragHandleProps}
+                                                            // style={getItemStyle(
+                                                            //     snapshot.isDragging,
+                                                            //     provided.draggableProps.style
+                                                            // )}
+                                                            >
+                                                        <ProjectForm removeProject={handleRemove} />
+                                                        </div>  
+                                            )}
+                                                </Draggable>
+                                    ))
+                                            }
+
+                                            {provided.placeholder}
+                                        </Grid>
+                                    )}
+                                </Droppable>
+                            </DragDropContext>
                         </Grid>
-                    </div>
-                    {/* <div>
+                </div>
+                {/* <div>
                         <DragDropContext onDragEnd={handleOnDragEnd}>
                             <Droppable droppableId="characters">
                                 {(provided) => (
@@ -139,10 +188,10 @@ function Projects() {
                             </Droppable>
                         </DragDropContext>
                     </div> */}
-                  
-                </div>
-                <Footer />
+
             </div>
+            <Footer />
+        </div>
 
         </>
     )
