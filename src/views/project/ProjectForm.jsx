@@ -39,7 +39,15 @@ const initialValues = {
     description: '',
 }
 
-function ProjectForm({ removeProject, id, indexId, list }) {
+// const reorder = (list, startIndex, endIndex) => {
+//     const result = Array.from(list);
+//     const [removed] = result.splice(startIndex, 1);
+//     result.splice(endIndex, 0, removed);
+  
+//     return result;
+//   };
+
+function ProjectForm({ removeProject,id}) {
     const classes = useStyles()
     const dispatch = useDispatch()
     const project = useSelector(state => state.projects)
@@ -50,29 +58,16 @@ function ProjectForm({ removeProject, id, indexId, list }) {
         },
         validationSchema
     })
-    const [characters, setCharacters] = useState(list);
-    console.log('lists', characters)
     const handleSubmit = () => {
         formik.submitForm()
     }
 
-    function handleOnDragEnd(result) {
-        const items = Array.from(characters);
-        console.log(items)
-        const [reorderedItem] = items.splice(result.source.index, 1);
-        items.splice(result.destination.index, 0, reorderedItem);
-        setCharacters(items);
-        if (!result.destination) return;
-    }
     
     return (
-        <DragDropContext onDragEnd={handleOnDragEnd}>
-            <Droppable droppableId="characters">
-                {(provided) => (
-                    <Grid {...provided.droppableProps} ref={provided.innerRef} list className={classes.gridList} list xs={3}>
-                        <Draggable key={id} draggableId={id} index={indexId}>
-                            {(provided) => (
-                                <Card className={classes.root} variant="outlined" ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
+       
+                    // <Grid {...provided.droppableProps} ref={provided.innerRef} list className={classes.gridList} list xs={3}>
+                      
+                                <Card className={classes.root} variant="outlined" >
                                     <CardContent  >
                                         <form>
                                             <TextField
@@ -109,14 +104,8 @@ function ProjectForm({ removeProject, id, indexId, list }) {
                 </Button>
                                     </span>
                                 </Card>
-                            )}
-                        </Draggable>
-                        {provided.placeholder}
 
-                    </Grid>
-                )}
-            </Droppable>
-        </DragDropContext>
+                    // </Grid>
     )
 }
 
