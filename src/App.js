@@ -4,12 +4,14 @@ import './App.css';
 import Sidebar from '../src/views/Sidebar';
 import Index from '../src/views/Index';
 import CVRoutes from './CVRoutes';
+import ScrollToTop from '../src/services/ScrollToTop';
 function App() {
   return (
  
     <div id="lonon-page"> <a href="#" class="js-lonon-nav-toggle lonon-nav-toggle"><i></i></a>
 
     <Router>
+      <ScrollToTop/>
     <>
       <Sidebar/>
       <Switch>
