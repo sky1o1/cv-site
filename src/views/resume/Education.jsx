@@ -4,7 +4,7 @@ import { Button } from '@material-ui/core';
 import EducationForm from './forms/EducationForm';
 
 
-function Education({color}) {
+function Education({color, greyG, blackG, whiteG, blueG}) {
    const [formList, setFormList] = useState([1])
 
    function handleAdd() {
@@ -24,8 +24,8 @@ console.log('colorssss',color)
         <div class="lonon-lonon-timeline">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-12" > <span style={{color: color.headColor}} class="heading-meta style-1">Resume</span>
-                        <h2 class="lonon-heading animate-box" style={{color: color.headColor}} data-animate-effect="fadeInLeft">Education</h2> </div>
+                    <div class="col-md-12" > <span className={`${greyG} ${blackG} ${whiteG} ${blueG} heading-meta style-1` } >Resume</span>
+                        <h2 class="lonon-heading animate-box" className={`${greyG} ${blackG} ${whiteG} ${blueG} heading-meta style-1` } data-animate-effect="fadeInLeft">Education</h2> </div>
                 </div>
                 <div class="row">
                     <div class="col-md-12 animate-box" data-animate-effect="fadeInLeft">

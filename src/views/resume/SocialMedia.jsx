@@ -37,7 +37,6 @@ function SocialMedia(){
     const links = useSelector(state => state.links)
     const profile = useSelector(state => state.profile)
     const [open, setOpen] = useState(false);
-
      
     const handleClickOpen = () => {
         setOpen(true);

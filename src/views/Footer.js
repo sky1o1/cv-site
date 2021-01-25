@@ -1,7 +1,7 @@
 import React from 'react';
 import {useSelector} from 'react-redux'
 
-function Footer() {
+function Footer(color, greyG, blackG, whiteG, blueG) {
     const colors = useSelector(state => state.colors)
     return (
         <>

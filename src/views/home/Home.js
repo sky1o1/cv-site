@@ -29,6 +29,13 @@ const useStyles = makeStyles((theme) => ({
     cardvisit: {
         opacity: 0.5,
     },
+    grad: {
+        background: '#20002c',
+        background: '-webkit-linear-gradient(to right, #cbb4d4, #20002c)',
+        backgroundImage: 'linear-gradient(to right, #cbb4d4, #20002c)',
+        backgroundClip: 'text',
+        WebkitTextFillColor: 'transparent'
+    }
 }));
 
 const initialValues = {
@@ -46,7 +53,10 @@ function Home() {
     const wrapperRef = useRef();
     const profile = useSelector(state => state.profile)
     const colors = useSelector(state => state.colors)
-console.log('colors', colors)
+    const greyGradient = colors.bgColor =='#555' ? 'greyGrad' : '';
+    const blackGradient = colors.bgColor =='#000' ? 'blackGrad' : '';
+    const whiteGradient = colors.bgColor =='#fff' ? 'whiteGrad' : '';
+    const blueGradient = colors.bgColor =='#0000ff' ? 'blueGrad' : '';
     function handleChange(event) {
         const inputFieldName = event.currentTarget.name
         const inputFieldValue = event.currentTarget.value
@@ -94,9 +104,10 @@ console.log('colors', colors)
                                     }}
                                 />
                             </div>
-                            <div class="col-md-6 animate-box fadeInLeft animated" data-animate-effect="fadeInLeft"> 
-                            <span style={{color: colors.headColor}} class="heading-meta style-1">Informations</span>
-                                <h3 style={{color: colors.headColor}} class="lonon-about-heading">I'm {profile.fullName}</h3>
+                            <div class="col-md-6 animate-box fadeInLeft animated" data-animate-effect="fadeInLeft">
+                                <span className={`${greyGradient} ${blackGradient} ${whiteGradient} ${blueGradient}`} class="heading-meta style-1">Informations</span>
+                                {/* <h3 class="lonon-about-heading">I'm {profile.fullName}</h3> */}
+                                <h3 className={`${greyGradient} ${blackGradient} ${whiteGradient} ${blueGradient}`}>I'm {profile.fullName}</h3>
 
                                 <form onSubmit={formik.handleSubmit} >
                                     <TextField
@@ -115,74 +126,74 @@ console.log('colors', colors)
                                     />
                                 </form>
 
-                                
+
                                 <div
-                                className="cardvisit"
-                                style={{
-                                    backgroundColor: colors.bgColor,
-                                }}
+                                    className="cardvisit"
+                                    style={{
+                                        backgroundColor: colors.bgColor,
+                                    }}
                                 >
-                                    <h3 style={{color: colors.textColor}}> {profile.fullName}</h3>
-                                    <p style={{color: colors.textColor}}>{profile.profession}</p>
-                                    <div 
-                                style={{
-                                    backgroundColor: colors.backColor
-                                }} class="divider-line"></div>
+                                    <h3 style={{ color: colors.textColor }}> {profile.fullName}</h3>
+                                    <p style={{ color: colors.textColor }}>{profile.profession}</p>
+                                    <div
+                                        style={{
+                                            backgroundColor: colors.backColor
+                                        }} class="divider-line"></div>
                                     <div >
 
-                                        <Grid  container spacing={1} alignItems="flex-end">
+                                        <Grid container spacing={1} alignItems="flex-end">
                                             <Grid item>
-                                            <PhoneIphoneOutlinedIcon fontSize="small" />
-                                                
+                                                <PhoneIphoneOutlinedIcon fontSize="small" />
+
                                             </Grid>
                                             <Grid item xs>
-                                                <TextField 
-                                                  placeholder="Phone Number"
-                                                  inputProps={{ style: { fontSize:13, color: colors.textColor} } }
-                                                  fullWidth
-                                                  multiline
-                                                  name='phoneNumber'
-                                                  error={Boolean(formik.touched.phoneNumber && formik.errors.phoneNumber)}
-                                                  helperText={formik.touched.phoneNumber && formik.errors.phoneNumber}
-                                                  InputLabelProps={{ style: { color: 'red'} }}
-                                                  onBlur={formik.handleBlur}
-                                                  onChange={handleChange} />
+                                                <TextField
+                                                    placeholder="Phone Number"
+                                                    inputProps={{ style: { fontSize: 13, color: colors.textColor } }}
+                                                    fullWidth
+                                                    multiline
+                                                    name='phoneNumber'
+                                                    error={Boolean(formik.touched.phoneNumber && formik.errors.phoneNumber)}
+                                                    helperText={formik.touched.phoneNumber && formik.errors.phoneNumber}
+                                                    InputLabelProps={{ style: { color: 'red' } }}
+                                                    onBlur={formik.handleBlur}
+                                                    onChange={handleChange} />
                                             </Grid>
                                         </Grid>
                                         <Grid container spacing={1} alignItems="flex-end">
                                             <Grid item >
-                                            <EmailOutlinedIcon fontSize="small" />
-                                                
+                                                <EmailOutlinedIcon fontSize="small" />
+
                                             </Grid>
                                             <Grid item xs>
-                                                <TextField 
-                                                  placeholder="Email Address"
-                                                  inputProps={{ style: { fontSize:13, color: colors.textColor}} }
-                                                  fullWidth
-                                                  multiline
-                                                  name='email'
-                                                  error={Boolean(formik.touched.email && formik.errors.email)}
-                                                  helperText={formik.touched.email && formik.errors.email}
-                                                  onBlur={formik.handleBlur}
-                                                  onChange={handleChange} />
+                                                <TextField
+                                                    placeholder="Email Address"
+                                                    inputProps={{ style: { fontSize: 13, color: colors.textColor } }}
+                                                    fullWidth
+                                                    multiline
+                                                    name='email'
+                                                    error={Boolean(formik.touched.email && formik.errors.email)}
+                                                    helperText={formik.touched.email && formik.errors.email}
+                                                    onBlur={formik.handleBlur}
+                                                    onChange={handleChange} />
                                             </Grid>
                                         </Grid>
                                         <Grid container spacing={1} alignItems="flex-end">
                                             <Grid item >
-                                            <LocationOnOutlinedIcon fontSize="small"   />
-                                                
+                                                <LocationOnOutlinedIcon fontSize="small" />
+
                                             </Grid>
                                             <Grid item xs>
-                                                <TextField 
-                                                 placeholder="Location"
-                                                 name='location'
-                                                 inputProps={{ style: { fontSize:13, color: colors.textColor}} }
-                                                 fullWidth
-                                                 multiline
-                                                 error={Boolean(formik.touched.location && formik.errors.location)}
-                                                 helperText={formik.touched.location && formik.errors.location}
-                                                 onBlur={formik.handleBlur}
-                                                 onChange={handleChange}  />
+                                                <TextField
+                                                    placeholder="Location"
+                                                    name='location'
+                                                    inputProps={{ style: { fontSize: 13, color: colors.textColor } }}
+                                                    fullWidth
+                                                    multiline
+                                                    error={Boolean(formik.touched.location && formik.errors.location)}
+                                                    helperText={formik.touched.location && formik.errors.location}
+                                                    onBlur={formik.handleBlur}
+                                                    onChange={handleChange} />
                                             </Grid>
                                         </Grid>
                                     </div>
@@ -192,11 +203,9 @@ console.log('colors', colors)
                     </div>
                 </div>
                 <div class="divider1"></div>
-                <Skills color={colors}/>
+                <Skills color={colors} greyG={greyGradient} blackG={blackGradient} whiteG={whiteGradient} blueG={blueGradient} />
                 <div class="divider1"></div>
-                <Language color={colors} />
-
-
+                <Language color={colors} greyG={greyGradient} blackG={blackGradient} whiteG={whiteGradient} blueG={blueGradient} />
             </form>
             <Footer />
         </div>
