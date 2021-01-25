@@ -21,7 +21,6 @@ import {
     DialogTitle,
     Dialog
 } from '@material-ui/core';
-import PersonIcon from '@material-ui/icons/Person';
 import Footer from '../Footer';
 import { useFormik } from 'formik';
 
@@ -78,7 +77,13 @@ function Resume() {
                         </div>
                         <div class="row">
                             <div class="col-md-6">
-                                <div className="ImageBox" onClick={() => wrapperRef.current.click()}   >
+                                <div 
+                                className="ImageBox"  
+                                onClick={() => wrapperRef.current.click()} 
+                                error={Boolean(formik.touched.image2 && formik.errors.image2)}
+                                helperText={formik.touched.image2 && formik.errors.image2}
+
+                                >
                                     {
                                         formik.initialValues.image2 &&
                                         <img src={formik.values.image2} />
@@ -98,6 +103,7 @@ function Resume() {
                                         formik.setFieldValue("image2", selectedUrl);
                                         dispatch(setImage2(selectedUrl))
                                     }}
+                                    error={Boolean(formik.touched.profileImage && formik.errors.profileImage)}
                                     style={{
                                         display: 'none'
                                     }}

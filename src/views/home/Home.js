@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
         margin: theme.spacing(1),
     },
     cardvisit: {
-        opacity: 0.7
+        opacity: 0.5,
     },
 }));
 
@@ -46,7 +46,7 @@ function Home() {
     const wrapperRef = useRef();
     const profile = useSelector(state => state.profile)
     const colors = useSelector(state => state.colors)
-
+console.log('colors', colors)
     function handleChange(event) {
         const inputFieldName = event.currentTarget.name
         const inputFieldValue = event.currentTarget.value
@@ -80,6 +80,8 @@ function Home() {
                                     type="file"
                                     label="Image"
                                     name="image"
+                                    error={Boolean(formik.touched.image3 && formik.errors.image3)}
+                                    helperText={formik.touched.image3 && formik.errors.image3}
                                     ref={wrapperRef}
                                     onChange={(event) => {
                                         const selectedFile = event.currentTarget.files[0]
@@ -92,7 +94,8 @@ function Home() {
                                     }}
                                 />
                             </div>
-                            <div class="col-md-6 animate-box fadeInLeft animated" data-animate-effect="fadeInLeft"> <span style={{color: colors.headColor}} class="heading-meta style-1">Informations</span>
+                            <div class="col-md-6 animate-box fadeInLeft animated" data-animate-effect="fadeInLeft"> 
+                            <span style={{color: colors.headColor}} class="heading-meta style-1">Informations</span>
                                 <h3 style={{color: colors.headColor}} class="lonon-about-heading">I'm {profile.fullName}</h3>
 
                                 <form onSubmit={formik.handleSubmit} >
@@ -113,13 +116,21 @@ function Home() {
                                 </form>
 
                                 
-                                <div className="cardvisit">
-                                    <h3 style={{color: colors.headColor}}> {profile.fullName}</h3>
-                                    <p style={{color: colors.headColor}}>{profile.profession}</p>
-                                    <div class="divider-line"></div>
+                                <div
+                                className="cardvisit"
+                                style={{
+                                    backgroundColor: colors.bgColor,
+                                }}
+                                >
+                                    <h3 style={{color: colors.textColor}}> {profile.fullName}</h3>
+                                    <p style={{color: colors.textColor}}>{profile.profession}</p>
+                                    <div 
+                                style={{
+                                    backgroundColor: colors.backColor
+                                }} class="divider-line"></div>
                                     <div >
 
-                                        <Grid container spacing={1} alignItems="flex-end">
+                                        <Grid  container spacing={1} alignItems="flex-end">
                                             <Grid item>
                                             <PhoneIphoneOutlinedIcon fontSize="small" />
                                                 
@@ -127,12 +138,13 @@ function Home() {
                                             <Grid item xs>
                                                 <TextField 
                                                   placeholder="Phone Number"
-                                                  inputProps={{ style: { fontSize:13} }}
+                                                  inputProps={{ style: { fontSize:13, color: colors.textColor} } }
                                                   fullWidth
                                                   multiline
                                                   name='phoneNumber'
                                                   error={Boolean(formik.touched.phoneNumber && formik.errors.phoneNumber)}
                                                   helperText={formik.touched.phoneNumber && formik.errors.phoneNumber}
+                                                  InputLabelProps={{ style: { color: 'red'} }}
                                                   onBlur={formik.handleBlur}
                                                   onChange={handleChange} />
                                             </Grid>
@@ -145,7 +157,7 @@ function Home() {
                                             <Grid item xs>
                                                 <TextField 
                                                   placeholder="Email Address"
-                                                  inputProps={{ style: { fontSize:13} }}
+                                                  inputProps={{ style: { fontSize:13, color: colors.textColor}} }
                                                   fullWidth
                                                   multiline
                                                   name='email'
@@ -164,7 +176,7 @@ function Home() {
                                                 <TextField 
                                                  placeholder="Location"
                                                  name='location'
-                                                 inputProps={{ style: { fontSize:13} }}
+                                                 inputProps={{ style: { fontSize:13, color: colors.textColor}} }
                                                  fullWidth
                                                  multiline
                                                  error={Boolean(formik.touched.location && formik.errors.location)}

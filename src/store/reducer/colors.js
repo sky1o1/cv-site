@@ -5,7 +5,8 @@ export const setColors = createAction('SET_COLORS');
 const INITIAL_VALUES = {
     backColor: '',
     textColor: '',
-    headColor: ''
+    headColor: '',
+    textColor: '',
 }
 
 const colorsReducer = handleAction(

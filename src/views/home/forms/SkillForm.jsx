@@ -101,6 +101,7 @@ const classes = useStyles()
           variant="contained"
           type="button"
           color="primary"
+          disabled={!formik.isValid || formik.isSubmitting}
         >
           Submit
         </Button>

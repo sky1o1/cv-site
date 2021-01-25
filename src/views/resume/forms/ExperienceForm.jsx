@@ -116,7 +116,12 @@ function ExperienceForm({ id, removeExp }) {
                 </IconButton>
             </span>
             <span>
-                <Button variant="contained" color="secondary" onClick={handleSubmit} >
+                <Button 
+                variant="contained" 
+                color="secondary" 
+                onClick={handleSubmit} 
+                disabled={!formik.isValid || formik.isSubmitting}
+                >
                     Submit
         </Button>
             </span>
