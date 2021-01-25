@@ -5,7 +5,7 @@ import { Button, TextField } from '@material-ui/core';
 import { useFormik } from 'formik';
 
 
-function Skills({color}) {
+function Skills({color, greyG, blackG, whiteG, blueG}) {
   const [formList, setFormList] = useState([1])
   // const formik = useFormik({
   //   initialValues,
@@ -31,8 +31,8 @@ function Skills({color}) {
     <div class="lonon-skills">
       <div class="container-fluid">
         <div class="row">
-          <div class="col-md-12"> <span style={{color: color.headColor}} class="heading-meta style-1">Abilities</span>
-            <h2 class="lonon-heading animate-box" style={{color: color.headColor}} data-animate-effect="fadeInLeft">My Skills</h2>
+          <div class="col-md-12"> <span className={`${greyG} ${blackG} ${whiteG} ${blueG} heading-meta style-1` } >Abilities</span>
+            <h2 class="lonon-heading animate-box" className={`${greyG} ${blackG} ${whiteG} ${blueG} heading-meta style-1` } data-animate-effect="fadeInLeft">My Skills</h2>
           </div>
         </div>
        

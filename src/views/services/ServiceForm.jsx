@@ -24,7 +24,7 @@ const initialValues = {
 const useStyles = makeStyles({
     root: {
         display: 'flex',
-        flexDirection: 'row-reverse',
+        flexDirection: 'reverse',
         width: 200,
     },
     title: {
@@ -41,7 +41,7 @@ const useStyles = makeStyles({
     },
 });
 
-function ServiceForm({removeService, id}) {
+function ServiceForm({removeService, id, index}) {
     const classes = useStyles()
     const dispatch = useDispatch()
 
@@ -57,10 +57,10 @@ function ServiceForm({removeService, id}) {
         formik.submitForm()
     }
 
+    console.log('index', index)
 
     return (
-
-                    <Grid className={classes.gridList} list xs={3}>
+        <>
                         <Card className={classes.root} variant="outlined" >
                             <CardContent  >
                                 <form>
@@ -103,7 +103,7 @@ function ServiceForm({removeService, id}) {
                                 Submit
                             </Button>
                         </span>
-                    </Grid>
+                        </>
 
     )
 }

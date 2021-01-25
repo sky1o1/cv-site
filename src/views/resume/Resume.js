@@ -50,6 +50,11 @@ function Resume() {
     const colors = useSelector(state => state.colors)
     const wrapperRef = useRef(null)
 
+    const greyGradient = colors.bgColor =='#555' ? 'greyGrad' : '';
+    const blackGradient = colors.bgColor =='#000' ? 'blackGrad' : '';
+    const whiteGradient = colors.bgColor =='#fff' ? 'whiteGrad' : '';
+    const blueGradient = colors.bgColor =='#0000ff' ? 'blueGrad' : '';
+
     function handleChange(event) {
         console.log(event)
         const inputFieldName = event.currentTarget.name
@@ -71,8 +76,8 @@ function Resume() {
                 <div class="lonon-about">
                     <div class="container-fluid">
                         <div class="row">
-                            <div class="col-md-12"> <span style={{color: colors.headColor}} class="heading-meta style-1">Resume</span>
-                                <h2 style={{color: colors.headColor}} class="lonon-heading animate-box" data-animate-effect="fadeInLeft">About Me</h2> </div>
+                            <div class="col-md-12"> <span className={`${greyGradient} ${blackGradient} ${whiteGradient} ${blueGradient} heading-meta style-1`}>Resume</span>
+                                <h2 className={`${greyGradient} ${blackGradient} ${whiteGradient} ${blueGradient}`} class="lonon-heading animate-box" data-animate-effect="fadeInLeft">About Me</h2> </div>
 
                         </div>
                         <div class="row">
@@ -109,8 +114,8 @@ function Resume() {
                                     }}
                                 />
                             </div>
-                            <div class="col-md-6 animate-box fadeInLeft animated" data-animate-effect="fadeInLeft"> <span style={{color: colors.headColor}} class="heading-meta style-1">Resume</span>
-                                <h3 style={{color: colors.headColor}} class="lonon-about-heading">I'm a {profile.profession}</h3>
+                            <div class="col-md-6 animate-box fadeInLeft animated" data-animate-effect="fadeInLeft"> <span className={`${greyGradient} ${blackGradient} ${whiteGradient} ${blueGradient} heading-meta style-1`}>Resume</span>
+                                <h3 className={`${greyGradient} ${blackGradient} ${whiteGradient} ${blueGradient}`} class="lonon-about-heading">I'm a {profile.profession}</h3>
                                 <p>
                                     {profile.information}
                                 </p>
@@ -200,7 +205,7 @@ function Resume() {
                                                 </Card>
 
 
-                                                <SocialMedia color={colors} />
+                                                <SocialMedia color={colors} greyG={greyGradient} blackG={blackGradient} whiteG={whiteGradient} blueG={blueGradient} />
 
 
 
@@ -214,9 +219,9 @@ function Resume() {
                 </div>
 
 
-                <Experience color={colors} />
-                <Education color={colors} />
-                <Footer color={colors} />
+                <Experience color={colors} greyG={greyGradient} blackG={blackGradient} whiteG={whiteGradient} blueG={blueGradient} />
+                <Education color={colors} greyG={greyGradient} blackG={blackGradient} whiteG={whiteGradient} blueG={blueGradient} />
+                <Footer color={colors} greyG={greyGradient} blackG={blackGradient} whiteG={whiteGradient} blueG={blueGradient} />
             </div>
         </>
     )

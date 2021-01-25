@@ -22,7 +22,7 @@ const THEME_COLOR = {
         textColor: '#000',
     },
     blueColor: {
-        bgColor:'#255',
+        bgColor:'#0000ff',
         color: '#000',
         headColor: '#255',
         textColor: '#fff',
