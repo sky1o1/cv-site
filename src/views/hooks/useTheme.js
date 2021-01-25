@@ -6,22 +6,26 @@ const THEME_COLOR = {
     greyColor: {
         bgColor:'#555',
         color: '#fff',
-        headColor: '#555'
+        headColor: '#555',
+        textColor: '#fff'
     },
     blackColor: {
         bgColor:'#000',
         color: '#fff',
-        headColor: '#000'
+        headColor: '#000',
+        textColor: '#fff',
     },
     whiteColor: {
         bgColor:'#fff',
         color: '#000',
-        headColor: '#000'
+        headColor: '#000',
+        textColor: '#000',
     },
     blueColor: {
         bgColor:'#255',
         color: '#000',
-        headColor: '#255'
+        headColor: '#255',
+        textColor: '#fff',
     }
 }
  const useTheme = (color) => {
@@ -39,6 +43,7 @@ const THEME_COLOR = {
          themeColor.bgColor,
          themeColor.color,
          themeColor.headColor,
+         themeColor.textColor,
         updateColor
     ]
 }

@@ -134,10 +134,15 @@ function LanguageForm({ id, removeLanguage }) {
                 </IconButton>
             </span>
             <span>
-                <Button onClick={handleSubmit}
-                    variant="contained" type="button" color="secondary">
+                <Button 
+                onClick={handleSubmit}
+                variant="contained" 
+                type="button" 
+                color="secondary"
+                disabled={!formik.isValid || formik.isSubmitting}
+                >
                     Submit
-                                        </Button>
+                 </Button>
             </span>
         </>
     )

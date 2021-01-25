@@ -30,6 +30,7 @@ const initValues = {
 const validationSchema = Yup.object({
     fullName: Yup.string().required('Name is required'),
     profession: Yup.string().required('Profession is required'),
+    profileImage: Yup.mixed().required("A file is required"),
 })
 
 function Sidebar() {
@@ -37,7 +38,7 @@ function Sidebar() {
     const dispatch = useDispatch()
     const wrapperRef = useRef(null)
     const profile = useSelector(state => state.profile)
-    const [bgColor1, textColor1, headColor,updateColor] = useTheme('greyColor')
+    const [bgColor1, textColor1, headColor,textColor2, updateColor] = useTheme('greyColor')
     const formik = useFormik({
         initialValues: initValues,
         onChange: (event) => {
@@ -85,7 +86,12 @@ return (
             >
                 <form onSubmit={formik.handleSubmit}>
                     <section id="lonon-logo" style={{cursor:'pointer',marginBottom:2}}>
-                        <div onClick={() => wrapperRef.current.click()}   >
+                        <div 
+                        onClick={() => wrapperRef.current.click()}  
+                        
+                        error={Boolean(formik.touched.profileImage && formik.errors.profileImage)}
+                        helperText={formik.touched.profileImage && formik.errors.profileImage}
+                         >
                             {
                                 formik.initialValues.profileImage &&
                                 <img src={formik.values.profileImage} />
@@ -95,10 +101,14 @@ return (
                     <input
                             fullWidth
                             type="file"
-                            label="Image"
                             name="profileImage"
                             ref={wrapperRef}
-                            onChange={formik.onChange}
+                            onChange={(event) => {
+                                const selectedFile = event.currentTarget.files[0]
+                                const selectedUrl = URL.createObjectURL(selectedFile)
+                                formik.setFieldValue("profileImage", selectedUrl);
+                                dispatch(setProfileImage(selectedUrl))
+                            }}
                             style={{
                                 display: 'none'
                             }}
@@ -109,7 +119,7 @@ return (
                             rowsMax={4}
                             name='fullName'
                             inputProps={{ disableUnderline: true }}
-                            inputProps={{ style: { color: textColor1,fontSize:20,fontWeight:700,textAlign:'center'} }}
+                            inputProps={{ style: { color: textColor2,fontSize:20,fontWeight:700,textAlign:'center'} }}
                             error={Boolean(formik.touched.fullName && formik.errors.fullName)}
                             helperText={formik.touched.fullName && formik.errors.fullName}
                             onBlur={formik.handleBlur}
@@ -124,7 +134,7 @@ return (
                             multiline
                             rowsMax={2}
                             name='profession'
-                            inputProps={{ style: { color: textColor1 ,fontSize:13 ,textAlign:'center'} }}
+                            inputProps={{ style: { color: textColor2 ,fontSize:13 ,textAlign:'center'} }}
                             InputLabelProps={{ style: { color: textColor1,} }}
                             error={Boolean(formik.touched.profession && formik.errors.profession)}
                             helperText={formik.touched.profession && formik.errors.profession}
@@ -136,11 +146,11 @@ return (
                 </form>
                 <nav id="lonon-main-menu">
                     <ul>
-                        <li><a style={{ color: textColor1 }}><SidebarOption title="home" /></a></li>
-                        <li><a style={{ color: textColor1 }}><SidebarOption title="resume" /></a></li>
-                        <li><a style={{ color: textColor1 }}><SidebarOption title="portfolio" /></a> </li>
-                        <li><a style={{ color: textColor1 }}><SidebarOption title="services" /></a></li>
-                        <li><a style={{ color: textColor1 }}><SidebarOption title="contact" /></a> </li>
+                        <li><a style={{ color: textColor2 }}><SidebarOption title="home" /></a></li>
+                        <li><a style={{ color: textColor2 }}><SidebarOption title="resume" /></a></li>
+                        <li><a style={{ color: textColor2 }}><SidebarOption title="portfolio" /></a> </li>
+                        <li><a style={{ color: textColor2 }}><SidebarOption title="services" /></a></li>
+                        <li><a style={{ color: textColor2 }}><SidebarOption title="contact" /></a> </li>
                     </ul>
                 </nav>
                 <div class="lonon-footer">

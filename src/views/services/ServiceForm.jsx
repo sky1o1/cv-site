@@ -93,7 +93,13 @@ function ServiceForm({removeService, id}) {
                              </Button>
                         </span>
                         <span>
-                            <Button variant="contained" type="button" color="secondary" onClick={handleSubmit} >
+                            <Button 
+                            variant="contained" 
+                            type="button" 
+                            color="secondary" 
+                            onClick={handleSubmit} 
+                            disabled={!formik.isValid || formik.isSubmitting}
+                            >
                                 Submit
                             </Button>
                         </span>

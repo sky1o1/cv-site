@@ -3,7 +3,6 @@ import { useFormik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
 import validationSchema from './validationSchema/validationSchema';
 import { setProjects } from '../../store/reducer/projects';
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import {
     makeStyles,
     TextField,
@@ -39,13 +38,6 @@ const initialValues = {
     description: '',
 }
 
-// const reorder = (list, startIndex, endIndex) => {
-//     const result = Array.from(list);
-//     const [removed] = result.splice(startIndex, 1);
-//     result.splice(endIndex, 0, removed);
-  
-//     return result;
-//   };
 
 function ProjectForm({ removeProject,id}) {
     const classes = useStyles()
@@ -62,12 +54,8 @@ function ProjectForm({ removeProject,id}) {
         formik.submitForm()
     }
 
-    
     return (
-       
-                    // <Grid {...provided.droppableProps} ref={provided.innerRef} list className={classes.gridList} list xs={3}>
-                      
-                                <Card className={classes.root} variant="outlined" >
+              <Card className={classes.root} variant="outlined" >
                                     <CardContent  >
                                         <form>
                                             <TextField
@@ -99,13 +87,17 @@ function ProjectForm({ removeProject,id}) {
                 </Button>
                                     </span>
                                     <span>
-                                        <Button variant="contained" type="button" color="secondary" onClick={handleSubmit}>
+                                        <Button 
+                                        variant="contained" 
+                                        type="button" 
+                                        color="secondary" 
+                                        onClick={handleSubmit}
+                                        disabled={!formik.isValid || formik.isSubmitting}
+                                        >
                                             Submit
                 </Button>
                                     </span>
                                 </Card>
-
-                    // </Grid>
     )
 }
 
