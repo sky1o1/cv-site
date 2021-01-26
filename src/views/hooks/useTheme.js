@@ -24,7 +24,7 @@ const THEME_COLOR = {
     blueColor: {
         bgColor:'#0000ff',
         color: '#000',
-        headColor: '#255',
+        headColor: '#0000ff',
         textColor: '#fff',
     }
 }
@@ -35,7 +35,7 @@ const THEME_COLOR = {
     )
 
     const updateColor = (color) => {
-        const  colorValue =THEME_COLOR[color];
+        const colorValue = THEME_COLOR[color];
         setThemeColor(colorValue)
     }
     dispatch(setColors(themeColor))

@@ -73,16 +73,18 @@ function Resume() {
         <>
             <div id="lonon-main">
 
-                <div class="lonon-about">
+               
+            <div class="lonon-about">
                     <div class="container-fluid">
                         <div class="row">
-                            <div class="col-md-12"> <span className={`${greyGradient} ${blackGradient} ${whiteGradient} ${blueGradient} heading-meta style-1`}>Resume</span>
-                                <h2 className={`${greyGradient} ${blackGradient} ${whiteGradient} ${blueGradient}`} class="lonon-heading animate-box" data-animate-effect="fadeInLeft">About Me</h2> </div>
+                            <div class="col-md-12"> <span style={{color: colors.headColor}} class="heading-meta style-1">Resume</span>
+                                <h2 style={{color: colors.headColor}} class="lonon-heading animate-box" data-animate-effect="fadeInLeft">About Me</h2> </div>
 
                         </div>
                         <div class="row">
                             <div class="col-md-6">
                                 <div 
+                                style={{cursor:'pointer',marginBottom:2}}
                                 className="ImageBox"  
                                 onClick={() => wrapperRef.current.click()} 
                                 error={Boolean(formik.touched.image2 && formik.errors.image2)}
@@ -114,8 +116,8 @@ function Resume() {
                                     }}
                                 />
                             </div>
-                            <div class="col-md-6 animate-box fadeInLeft animated" data-animate-effect="fadeInLeft"> <span className={`${greyGradient} ${blackGradient} ${whiteGradient} ${blueGradient} heading-meta style-1`}>Resume</span>
-                                <h3 className={`${greyGradient} ${blackGradient} ${whiteGradient} ${blueGradient}`} class="lonon-about-heading">I'm a {profile.profession}</h3>
+                            <div class="col-md-6 animate-box fadeInLeft animated" data-animate-effect="fadeInLeft"> <span style={{color: colors.headColor}} class="heading-meta style-1">Resume</span>
+                                <h3 style={{color: colors.headColor}} class="lonon-about-heading">I'm a {profile.profession}</h3>
                                 <p>
                                     {profile.information}
                                 </p>

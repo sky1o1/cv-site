@@ -50,6 +50,11 @@ function Sidebar() {
         validationSchema
     })
 
+    const greyGradient = bgColor1 =='#555' ? `${classes.greyGrad}` : '';
+    const blackGradient = bgColor1 =='#000' ? `${classes.blackGrad}` : '';
+    const whiteGradient = bgColor1 =='#fff' ? `${classes.whiteGrad}` : '';
+    const blueGradient = bgColor1 =='#0000ff' ? `${classes.blueGrad}` : '';
+
     const handleChange = (event) => {
         const inputFieldName = event.currentTarget.name
         const inputFieldValue = event.currentTarget.value
@@ -79,10 +84,12 @@ return (
                 </Toolbar>
             </AppBar> */}
 
-            <aside id="lonon-aside"
-                style={{
-                    backgroundColor: bgColor1,
-                }}
+            <aside
+            id='lonon-aside'
+            className={`${greyGradient} ${blackGradient} ${whiteGradient} ${blueGradient} `} 
+            style={{
+                backgroundColor: bgColor1,
+            }}
             >
                 <form onSubmit={formik.handleSubmit}>
                     <section id="lonon-logo" style={{cursor:'pointer',marginBottom:2}}>
