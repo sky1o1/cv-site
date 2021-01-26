@@ -5,6 +5,8 @@ import Footer from '../Footer';
 import { setProjects } from '../../store/reducer/projects';
 import validationSchema from './validationSchema/validationSchema';
 import ProjectForm from './ProjectForm';
+import HTML5Backend from 'react-dnd-html5-backend';
+import { DragSource, DndProvider } from 'react-dnd';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import {
     makeStyles,
@@ -49,22 +51,48 @@ function Projects() {
     const classes = useStyles()
     const [formList, setFormList] = useState([])
     const colors = useSelector(state => state.colors)
-    const greyGradient = colors.bgColor =='#555' ? 'greyGrad' : '';
-    const blackGradient = colors.bgColor =='#000' ? 'blackGrad' : '';
-    const whiteGradient = colors.bgColor =='#fff' ? 'whiteGrad' : '';
-    const blueGradient = colors.bgColor =='#0000ff' ? 'blueGrad' : '';
+
+    const finalSpaceCharacters = [
+        {
+            id: 'gary',
+            name: 'Gary Goodspeed',
+        },
+        {
+            id: 'moon',
+            name: 'Moon cake',
+        },
+        {
+            id: 'kvn',
+            name: 'Kvn robot',
+        }
+    ]
+
+    const [characters, updateCharacters] = useState(finalSpaceCharacters);
+
     function handleAdd() {
         setFormList(prevList => ([
             ...prevList, uuidv4()
         ]))
     }
+
+    function handleOnDragEnd(result) {
+        console.log('-=-=-=-=-==-', result)
+        const items = Array.from(characters);
+        console.log('-=-=-=-=-==-', items)
+        const [reorderedItem] = items.splice(result.source.index, 1);
+        items.splice(result.destination.index, 0, reorderedItem);
+
+        updateCharacters(items);
+
+        if (!result.destination) return;
+    }
+
     function handleRemove(id) {
         const index = formList.indexOf(id);
         const formListClone = [...formList]
         formListClone.splice(index, 1)
         setFormList(formListClone)
     }
-
     function onDragEnd(result) {
         console.log('run')
         if (!result.destination) {
@@ -78,6 +106,7 @@ function Projects() {
         );
 
         setFormList(items);
+        console.log(items)
     }
 
     return (
@@ -86,8 +115,8 @@ function Projects() {
                 <div class="lonon-services">
                     <div class="container-fluid">
                         <div class="row">
-                            <div class="col-md-12"> <span className={`${greyGradient} ${blackGradient} ${whiteGradient} ${blueGradient} heading-meta style-1`} >Take a Look at</span>
-                                <h2 class="lonon-heading animate-box" className={`${greyGradient} ${blackGradient} ${whiteGradient} ${blueGradient}`} data-animate-effect="fadeInLeft">My Projects</h2> </div>
+                            <div class="col-md-12"> <span style={{ color: colors.headColor }} class="heading-meta style-1">Take a Look at</span>
+                                <h2 class="lonon-heading animate-box" style={{ color: colors.headColor }} data-animate-effect="fadeInLeft">My Projects</h2> </div>
                         </div>
 
                         <Grid className={classes.container} container spacing={3}>
@@ -135,5 +164,4 @@ function Projects() {
         </>
     )
 }
-
 export default Projects;
