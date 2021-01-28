@@ -2,11 +2,7 @@ import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
 import Footer from '../Footer';
-import { setProjects } from '../../store/reducer/projects';
-import validationSchema from './validationSchema/validationSchema';
 import ProjectForm from './ProjectForm';
-import HTML5Backend from 'react-dnd-html5-backend';
-import { DragSource, DndProvider } from 'react-dnd';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import {
     makeStyles,
@@ -52,39 +48,10 @@ function Projects() {
     const [formList, setFormList] = useState([])
     const colors = useSelector(state => state.colors)
 
-    const finalSpaceCharacters = [
-        {
-            id: 'gary',
-            name: 'Gary Goodspeed',
-        },
-        {
-            id: 'moon',
-            name: 'Moon cake',
-        },
-        {
-            id: 'kvn',
-            name: 'Kvn robot',
-        }
-    ]
-
-    const [characters, updateCharacters] = useState(finalSpaceCharacters);
-
     function handleAdd() {
         setFormList(prevList => ([
             ...prevList, uuidv4()
         ]))
-    }
-
-    function handleOnDragEnd(result) {
-        console.log('-=-=-=-=-==-', result)
-        const items = Array.from(characters);
-        console.log('-=-=-=-=-==-', items)
-        const [reorderedItem] = items.splice(result.source.index, 1);
-        items.splice(result.destination.index, 0, reorderedItem);
-
-        updateCharacters(items);
-
-        if (!result.destination) return;
     }
 
     function handleRemove(id) {

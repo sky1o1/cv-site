@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
 import ServiceForm from './ServiceForm';
@@ -50,11 +50,11 @@ const reorder = (list, startIndex, endIndex) => {
 function Services() {
     const classes = useStyles()
     const [formList, setFormList] = useState([])
+    const [dragging, setDragging] = useState(false)
     const colors = useSelector(state => state.colors)
-    const greyGradient = colors.bgColor =='#555' ? 'greyGrad' : '';
-    const blackGradient = colors.bgColor =='#000' ? 'blackGrad' : '';
-    const whiteGradient = colors.bgColor =='#fff' ? 'whiteGrad' : '';
-    const blueGradient = colors.bgColor =='#0000ff' ? 'blueGrad' : '';
+    const dragItem = useRef()
+    const dragNode = useRef()
+
     function handleAddExp() {
         setFormList(prevFormList => ([
             ...prevFormList, uuidv4()
@@ -66,6 +66,34 @@ function Services() {
         const formListClone = [...formList]
         formListClone.splice(index, 1)
         setFormList(formListClone)
+    }
+
+    const handleDragStart = (event, params) => {
+        dragItem.current = params;
+        dragNode.current = event.currentTarget;
+        dragNode.current.addEventListener('dragend', handleDragEnd)
+        setTimeout(() => {
+            setDragging(true)
+        })
+    }
+
+    const handleDragEnd = (event, params) => {
+        setDragging(false)
+        dragNode.current.removeEventListener('dragend', handleDragEnd);
+        dragItem.current = null;
+        dragNode.current = null;
+    }
+
+    const handleDragEnter = (event, params) => {
+        const currentItem = dragItem.current;
+        if(event.currentTarget !== dragNode.current){
+            setFormList(oldList => {
+                let newList = JSON.parse(JSON.stringify(oldList));
+                newList[params.index].items.splice(params.index, 0, newList[currentItem.index].items.splice(currentItem.index, 1)[0])
+                dragItem.current = params
+                return newList
+            })
+        }
     }
 
     function onDragEnd(result) {
@@ -138,6 +166,23 @@ function Services() {
 
                 <Footer />
             </div>
+        {/* <div className='drag-n-drop'>
+        {formList.map((formId, index) => (
+          
+        
+            <div
+             draggable
+             onDragStart={(event) => {handleDragStart(event, index)}} 
+            onDragEnter={dragging? (event) => {handleDragEnter(event, index)}:null}
+             className='dnd-group'
+             >
+            <ServiceForm key={formId} index={index} removeService={handleRemoveExp} id={formId} />
+              
+            </div>
+               ))
+            }
+        </div> */}
+             
         </>
     )
 }

@@ -38,7 +38,7 @@ function Sidebar() {
     const dispatch = useDispatch()
     const wrapperRef = useRef(null)
     const profile = useSelector(state => state.profile)
-    const [bgColor1, textColor1, headColor,textColor2, updateColor] = useTheme('greyColor')
+    const [bgColor1, textColor1, headColor, textColor2, updateColor] = useTheme('greyColor')
     const formik = useFormik({
         initialValues: initValues,
         onChange: (event) => {
@@ -86,7 +86,7 @@ return (
 
             <aside
             id='lonon-aside'
-            className={`${greyGradient} ${blackGradient} ${whiteGradient} ${blueGradient} `} 
+            className={`${greyGradient} ${blackGradient} ${whiteGradient} ${blueGradient}`}  
             style={{
                 backgroundColor: bgColor1,
             }}
@@ -158,6 +158,7 @@ return (
                         <li><a style={{ color: textColor2 }}><SidebarOption title="portfolio" /></a> </li>
                         <li><a style={{ color: textColor2 }}><SidebarOption title="services" /></a></li>
                         <li><a style={{ color: textColor2 }}><SidebarOption title="contact" /></a> </li>
+                        <li><a style={{ color: textColor2 }}><SidebarOption title="login" /></a> </li>
                     </ul>
                 </nav>
                 <div class="lonon-footer">

@@ -4,6 +4,7 @@ import Home from '../src/views/home/Home';
 import Projects from '../src/views/project/Projects';
 import Services from '../src/views/services/Services';
 import Contact from '../src/views/Contact';
+import Login from '../src/views/auth/Login';
 
 import { useParams } from "react-router-dom";
 
@@ -32,6 +33,11 @@ const New = () => {
     else if(roomId=='contact'){
         return(
             <Contact/>
+        )
+    }
+    else if(roomId=='login'){
+        return(
+            <Login/>
         )
     }
     

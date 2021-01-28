@@ -44,3 +44,36 @@
   border: 3px solid red;
   border-radius: 10px ;
 }
+
+/* drag and drop */
+
+.drag-n-drop {
+  padding-left: 500px;
+  display: grid;
+  width: 100%;
+  height: 100%;
+  grid-template-columns: repeat(auto-fill, 300px);
+  align-items: stretch;
+}
+
+.dnd-group {
+  background-color: black;
+  border-radius: 5px;
+}
+
+.dnd-item {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  background-color: bisque;
+  color: black;
+  min-height: 150px;
+}
+
+.dnd-item * {
+  margin: 0;
+}
+
+.dnd-item:not(:last-of-type) {
+  margin-bottom: 5rem;
+}
