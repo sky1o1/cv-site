@@ -1,5 +1,6 @@
 import React, {  useEffect } from 'react';
 import firebase from 'firebase';
+import {auth} from '../../services/firebase/config';
 import * as firebaseui from 'firebaseui';
 import 'firebaseui/dist/firebaseui.css';
 import { makeStyles, Card} from '@material-ui/core';
@@ -28,7 +29,7 @@ const Login = () => {
       ui.start('#firebaseui-auth-container', uiConfig)
     } 
     else {
-      const ui = new firebaseui.auth.AuthUI(firebase.auth())
+      const ui = new firebaseui.auth.AuthUI(auth)
       ui.start('#firebaseui-auth-container', uiConfig)
     }
   }, [])
