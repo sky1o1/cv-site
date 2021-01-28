@@ -1,21 +1,15 @@
 import React from 'react';
 import {useSelector} from 'react-redux';
-import useGradStyles from './styles/GradientStyle';
 
 function Footer() {
     const colors = useSelector(state => state.colors)
-    const classes = useGradStyles();
-
-    const greyGradient = colors.bgColor =='#555' ? `${classes.greyGrad}` : '';
-    const blackGradient = colors.bgColor =='#000' ? `${classes.blackGrad}` : '';
-    const whiteGradient = colors.bgColor =='#fff' ? `${classes.whiteGrad}` : '';
-    const blueGradient = colors.bgColor =='#0000ff' ? `${classes.blueGrad}` : '';
+    console.log(colors)
     
     return (
         <>
             <div
                 style={{
-                    backgroundColor: colors.bgColor,
+                    background: colors.gradColor.background,
                     border: '1px solid black' 
                 }}
                 id="lonon-footer2">
