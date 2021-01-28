@@ -1,8 +1,16 @@
 import React from 'react';
-import {useSelector} from 'react-redux'
+import {useSelector} from 'react-redux';
+import useGradStyles from './styles/GradientStyle';
 
-function Footer(color, greyG, blackG, whiteG, blueG) {
+function Footer() {
     const colors = useSelector(state => state.colors)
+    const classes = useGradStyles();
+
+    const greyGradient = colors.bgColor =='#555' ? `${classes.greyGrad}` : '';
+    const blackGradient = colors.bgColor =='#000' ? `${classes.blackGrad}` : '';
+    const whiteGradient = colors.bgColor =='#fff' ? `${classes.whiteGrad}` : '';
+    const blueGradient = colors.bgColor =='#0000ff' ? `${classes.blueGrad}` : '';
+    
     return (
         <>
             <div

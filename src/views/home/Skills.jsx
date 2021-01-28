@@ -1,18 +1,27 @@
 import React, { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
+import { useDispatch } from 'react-redux';
 import SkillForm from './forms/SkillForm';
 import { Button, TextField } from '@material-ui/core';
+import {setAbilities} from '../../store/reducer/skills';
+import validationSchema from './validationSchema/validationSchemaSkills';
 import { useFormik } from 'formik';
 
 
+const initialValues = {
+  abilities: '',
+}
+
 function Skills({color}) {
   const [formList, setFormList] = useState([1])
-  // const formik = useFormik({
-  //   initialValues,
-  //   onSubmit: (values) => {
-
-  //   }
-  // })
+  const dispatch = useDispatch()
+  const formik = useFormik({
+    initialValues,
+    onSubmit: (values) => {
+      dispatch(setAbilities(values))
+    },
+    validationSchema
+  })
 
   function handleAdd() {
     setFormList(prevFormList => ([
@@ -47,9 +56,9 @@ function Skills({color}) {
                 rows={10}
                 name='abilities'
                 variant="outlined"
-                // error={Boolean(formik.touched.abilities && formik.errors.abilities)}
-                // helperText={formik.touched.abilities && formik.errors.abilities}
-                // onChange={formik.handleChange}
+                error={Boolean(formik.touched.abilities && formik.errors.abilities)}
+                helperText={formik.touched.abilities && formik.errors.abilities}
+                onChange={formik.handleChange}
               />
 
             </form>

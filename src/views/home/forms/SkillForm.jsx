@@ -31,7 +31,9 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: 4
   },
   textBox: {
-    width: 'auto',
+    flex: 1, 
+    margin: '0 20px 0 0', 
+    color: 'white'
   }
 }));
 
@@ -60,10 +62,10 @@ const classes = useStyles()
       <Grid  container >
         <Grid item xs>
           <TextField
-          className={classes.textBox}
+            className={classes.textBox}
             multiline
             size='small'
-            placeholder="Skill name"
+            placeholder="Skill"
             name='skill'
             variant="outlined"
             error={Boolean(formik.touched.skill && formik.errors.skill)}
