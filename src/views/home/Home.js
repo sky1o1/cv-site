@@ -6,7 +6,6 @@ import {useStyles} from '../styles/HomeStyle';
 import Skills from './Skills';
 import Language from './Language';
 import {
-    makeStyles,
     TextField,
     Grid
 } from '@material-ui/core';
