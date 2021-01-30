@@ -154,7 +154,7 @@ function Home() {
                                         </Grid>
                                         <Grid container spacing={1} alignItems="flex-end">
                                             <Grid item >
-                                            <LocationOnOutlinedIcon fontSize="small"   />
+                                            <LocationOnOutlinedIcon fontSize="small"  />
                                                 
                                             </Grid>
                                             <Grid item xs>
