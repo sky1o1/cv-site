@@ -43,8 +43,8 @@ const THEME_COLOR = {
         textColor: '#fff',
         gradColor: {
             background: '#373B44',
-            background: '-webkit-linear-gradient(to right, #0000ff, #373B44)',
-            background: 'linear-gradient(to right, #0000ff, #373B44)',
+            background: '-webkit-linear-gradient(to right top, #032481, #053090, #073da0, #0749af, #0556bf)',
+            background: 'linear-gradient(to right top, #032481, #053090, #073da0, #0749af, #0556bf)',
         }
     }
 }

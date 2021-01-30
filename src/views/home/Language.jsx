@@ -33,9 +33,7 @@ function Language({color}) {
                 <Droppable droppableId="language">
                 {(provided) => (
                     <div class="col-md-12 animate-box" data-animate-effect="fadeInLeft" {...provided.droppableProps} ref={provided.innerRef}>
-                                    <Button variant="contained" type="button" color="primary" onClick={handleAdd}>
-                                        +
-                                </Button>
+                               
                                 {
                                        formList.map(formId => (
                                         <Draggable key={formId} draggableId={formId} >
@@ -45,6 +43,9 @@ function Language({color}) {
                                            </Draggable>
                                        ))
                                    }
+                                        <Button variant="contained" type="button" color="primary" onClick={handleAdd}>
+                                        +
+                                </Button>
                                 </div>
                 )}
                                 </Droppable>

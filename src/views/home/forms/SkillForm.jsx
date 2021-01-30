@@ -11,6 +11,9 @@ import {
 } from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
+import DeleteOutlineRoundedIcon from '@material-ui/icons/DeleteOutlineRounded';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import Tooltip from '@material-ui/core/Tooltip';
 
 const initialValues = {
   skill: '',
@@ -18,28 +21,40 @@ const initialValues = {
   abilities: '',
 }
 
-const useStyles = makeStyles((theme) => ({
-  sliderTrack: {
-    height: 4,
+// const useStyles = makeStyles((theme) => ({
+//   sliderTrack: {
+//     height: 4,
+//   },
+//   track: {
+//     height: 8,
+//     borderRadius: 4
+//   },
+//   rail: {
+//     height: 8,
+//     borderRadius: 4
+//   },
+//   textBox: {
+//     width: 'auto',
+//   },
+  
+// }));
+const useClasses = makeStyles(theme => ({
+  iconContainer: {
+      "&:hover $icon": {
+          color: 'black',
+          transition : '1s',
+       },
   },
-  track: {
-    height: 8,
-    borderRadius: 4
-  },
-  rail: {
-    height: 8,
-    borderRadius: 4
-  },
-  textBox: {
-    flex: 1, 
-    margin: '0 20px 0 0', 
-    color: 'white'
+  icon: {
+      color: 'grey',
   }
-}));
+}))
+
+
 
 function SkillForm({ id, removeSkill }) {
   const dispatch = useDispatch()
-const classes = useStyles()
+  const classes = useClasses()
   const formik = useFormik({
     initialValues,
     onSubmit: (values) => {
@@ -59,8 +74,8 @@ const classes = useStyles()
 
   return (
     <>
-      <Grid  container >
-        <Grid item xs>
+      <Grid  container  spacing={1} >
+        <Grid item xs={12} sm >
           <TextField
             className={classes.textBox}
             multiline
@@ -72,13 +87,14 @@ const classes = useStyles()
             helperText={formik.touched.skill && formik.errors.skill}
             onChange={formik.handleChange}
           />
+        
         </Grid>
 
-        <Grid style={{paddingInline: 20}} item xs={8}>
+        <Grid container className="sliderGrid" item xs={10} sm={8} alignItems="center"justify="center">
+    
           <Slider
             classes={{ container: classes.slider, track: classes.sliderTrack }}
-            defaultValue={50}
-            style={{justifyContent:'center',alignItems:'center'}}
+            defaultValue={80}
             name='rating'
             valueLabelDisplay="auto"
             onChange={handleChange('rating')}
@@ -86,17 +102,23 @@ const classes = useStyles()
             marks
             min={10}
             max={100}
+         
           />
+  
         </Grid>
 
-        <Grid item xs>
-        <IconButton onClick={() => removeSkill(id)} >
-          <DeleteIcon fontSize="small" />
+        <Grid item xs={2} sm={1}>
+        <Tooltip title="Delete" placement="right-start">
+        <IconButton  
+            classes={{
+                root: classes.iconContainer
+            }} 
+            onClick={() => removeSkill(id)} >
+          <DeleteOutlineRoundedIcon style={{ fontSize: 18}} className={classes.icon} />
         </IconButton>
+        </Tooltip>
         </Grid>
-
       </Grid>
-
       {/* <span>
         <Button
           onClick={handleSubmit}

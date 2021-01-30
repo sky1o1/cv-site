@@ -1,150 +1,165 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import { useFormik } from 'formik';
 import { useDispatch } from 'react-redux';
 import validationSchema from '../validationSchema/validationSchemaLanguage';
 import { setLanguage } from '../../../store/reducer/language';
 import {
+    makeStyles,
     TextField,
-    Slider,
-    Button,
-    makeStyles
+    FormControl,
+    Select,
+    InputLabel,
+    MenuItem,
+    Input,
+    Grid
 } from '@material-ui/core';
+import Autocomplete from '@material-ui/lab/Autocomplete';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
 
 const initialValues = {
     language: '',
-    listening: 2.5,
-    writing: 2.5,
-    speaking: 2.5,
-    reading: 2.5,
-    avg: '',
+    listening: '',
+    writing: '',
+    speaking: '',
+    reading: ''
 }
 
 const useStyles = makeStyles((theme) => ({
-    sliderTrack: {
-        height: 4,
+    formControl: {
+        margin: theme.spacing(1),
+        minWidth: 120,
     },
-    track: {
-        height: 8,
-        borderRadius: 4
+    selectEmpty: {
+        marginTop: theme.spacing(2),
     },
-    rail: {
-        height: 8,
-        borderRadius: 4
+    iconContainer: {
+        "&:hover $icon": {
+            color: 'black',
+            transition: '1s',
+        },
     },
-    textBox: {
-        width: 'auto',
+    icon: {
+        color: 'grey',
+    },
+    autofield: {
+        padding: 20
     }
 }));
 
 function LanguageForm({ id, removeLanguage }) {
+    const classes = useStyles();
     const dispatch = useDispatch()
-    const classes = useStyles()
+
     const formik = useFormik({
         initialValues,
         onSubmit: (values) => {
+            console.log(values)
             dispatch(setLanguage(values))
         },
         validationSchema
     })
+
+    const rating = [
+        { title: 'Beginner' },
+        { title: 'Intermediate' },
+        { title: 'Expert' },
+    ];
 
     const handleSubmit = async () => {
         await formik.submitForm()
     }
 
     const handleChange = name => (event, value) => {
-        console.log(name, value)
-        formik.setFieldValue(name, value)
+        formik.setFieldValue(name, value.title)
     }
-
+    console.log(formik.values)
     return (
-        <>
-            <ul class="lonon-timeline">
+
+        <div class="row">
+            <ul class="lonon-timeline " style={{ width: '100%' }}>
                 <li>
                     <div class="lonon-timeline-content">
-                        <span >
+                        <form>
                             <TextField
-                                multiline
                                 placeholder="Language"
+                                multiline
+                                rowsMax={2}
                                 name='language'
-                                size="small"
-                                variant="outlined"
+                                className="lonon-timeline-date"
+                                inputProps={{ style: { color: '#fff', fontSize: 13, fontWeight: '500' } }}
+                                InputLabelProps={{ style: { color: '#fff', } }}
                                 error={Boolean(formik.touched.language && formik.errors.language)}
                                 helperText={formik.touched.language && formik.errors.language}
                                 onBlur={formik.handleBlur}
-                                value={formik.values.language}
-                                onChange={formik.handleChange}
                             />
-                            <h5>listening</h5>
-                            <Slider
-                                defaultValue={2.5}
-                                classes={{ container: classes.slider, track: classes.sliderTrack }}
-                                name='listening'
-                                valueLabelDisplay="auto"
-                                onChange={handleChange('listening')}
-                                step={0.5}
-                                marks
-                                min={1}
-                                max={5}
-                            />
-                            <h5>writing</h5>
-                            <Slider
-                                defaultValue={2.5}
-                                classes={{ container: classes.slider, track: classes.sliderTrack }}
-                                name='writing'
-                                valueLabelDisplay="auto"
-                                onChange={handleChange('writing')}
-                                step={0.5}
-                                marks
-                                min={1}
-                                max={5}
-                            />
-                            <h5>speaking</h5>
-                            <Slider
-                                defaultValue={2.5}
-                                classes={{ container: classes.slider, track: classes.sliderTrack }}
-                                name='speaking'
-                                valueLabelDisplay="auto"
-                                onChange={handleChange('speaking')}
-                                step={0.5}
-                                marks
-                                min={1}
-                                max={5}
-                            />
-                            <h5>reading</h5>
-                            <Slider
-                                defaultValue={2.5}
-                                classes={{ container: classes.slider, track: classes.sliderTrack }}
-                                name='reading'
-                                valueLabelDisplay="auto"
-                                onChange={handleChange('reading')}
-                                step={0.5}
-                                marks
-                                min={1}
-                                max={5}
-                            />
-                        </span>
+                            <Grid container>
+                                <Grid list xs={3}>
+                                <Autocomplete
+                                    className={classes.autofield}
+                                    options={rating}
+                                    size="small"
+                                    getOptionLabel={(option) => option.title}
+                                    style={{ width: 200 }}
+                                    onChange={handleChange('listening')}
+                                    renderInput={(params) => <TextField {...params} label="Listening" variant="outlined" />}
+                                />
+                                </Grid>
+
+                                <Grid list xs={3}>
+                                <Autocomplete
+                                    className={classes.autofield}
+                                    size="small"
+                                    options={rating}
+                                    getOptionLabel={(option) => option.title}
+                                    style={{ width: 200 }}
+                                    onChange={handleChange('writing')}
+                                    renderInput={(params) => <TextField {...params} label="Writing" variant="outlined" />}
+                                />
+                                </Grid>
+
+                                <Grid list xs={3}>
+                                <Autocomplete
+                                    className={classes.autofield}
+                                    options={rating}
+                                    size="small"
+                                    getOptionLabel={(option) => option.title}
+                                    style={{ width: 200 }}
+                                    onChange={handleChange('speaking')}
+                                    renderInput={(params) => <TextField {...params} label="Speaking" variant="outlined" />}
+                                />
+                                </Grid>
+
+                                <Grid list xs={3}>
+                                <Autocomplete
+                                    className={classes.autofield}
+                                    options={rating}
+                                    size="small"
+                                    getOptionLabel={(option) => option.title}
+                                    style={{ width: 200 }}
+                                    onChange={handleChange('reading')}
+                                    renderInput={(params) => <TextField {...params} label="Reading" variant="outlined" />}
+                                />
+                                </Grid>
+                                <Grid list xs={3}>
+                                    <IconButton className={classes.iconContainer}>
+                                        <DeleteIcon fontSize="small" className={classes.icon} onClick={() => removeLanguage(id)} />
+                                    </IconButton>
+                                </Grid>
+                            </Grid>
+                        </form>
+
                     </div>
+
                 </li>
+
             </ul>
-            <span>
-                <IconButton aria-label="delete" >
-                    <DeleteIcon fontSize="small" onClick={() => removeLanguage(id)} />
-                </IconButton>
-            </span>
-            <span>
-                <Button 
-                onClick={handleSubmit}
-                variant="contained" 
-                type="button" 
-                color="secondary"
-                disabled={!formik.isValid || formik.isSubmitting}
-                >
-                    Submit
-                 </Button>
-            </span>
-        </>
+            {/* <div class="row">
+                    <div class="col-md-12"> <span className={`${greyG} ${blackG} ${whiteG} ${blueG} heading-meta style-1` } >Expertise</span>
+                        <h2 class="lonon-heading animate-box" className={`${greyG} ${blackG} ${whiteG} ${blueG} heading-meta style-1` } data-animate-effect="fadeInLeft">Language</h2> </div>
+                </div>  */}
+        </div>
     )
 }
 
