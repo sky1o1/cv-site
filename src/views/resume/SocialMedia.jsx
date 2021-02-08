@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
         justifyContent: 'space-around'
     },
     dialogBox: {
-        width: '200px'
+        width: '1000px'
     }
 }))
 
@@ -51,7 +51,7 @@ function SocialMedia(){
     return(
         <>
         <div>
-             <Button
+            <Button
              onClick={handleClickOpen}
                 variant="contained"
                 color="secondary"
@@ -64,7 +64,9 @@ function SocialMedia(){
             onClose={handleClose}
             aria-labelledby="alert-dialog-title"
             aria-describedby="alert-dialog-description"
-            className={classes.dialogBox}
+            // className={classes.dialogBox}
+            fullWidth='true'
+            maxWidth='sm'
         >
             <DialogTitle id="alert-dialog-title">Link Social Media Accounts</DialogTitle>
             <div >
@@ -112,7 +114,7 @@ function SocialMedia(){
                          fontSize='large'
                          />
                         </Grid>
-                        <Grid list >
+                        {/* <Grid list >
                         <TwitterIcon 
                         className={`${links.twitter ? "socialMediaActiveLink" : ""}`}
                          onClick={() =>  dispatch(setTwitter(!(links.twitter)))}
@@ -132,7 +134,7 @@ function SocialMedia(){
                          onClick={() =>  dispatch(setTwitter(!(links.twitter)))}
                          fontSize='large'
                          />
-                        </Grid>
+                        </Grid> */}
                       </Grid>
                 </DialogContentText>
             </DialogContent>

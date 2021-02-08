@@ -1,14 +1,17 @@
 import React from 'react';
 import { useFormik } from 'formik';
 import { useDispatch } from 'react-redux';
-import validationSchema from '../validationSchema/validationSchema';
+import validationSchema from '../validationSchema/validationSchemaExp';
 import { setExperience } from '../../../store/reducer/experience';
 import {
     TextField,
-    Button
+    Button,
+    Grid,
+    makeStyles
 } from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
-import DeleteIcon from '@material-ui/icons/Delete';
+import DeleteOutlineRoundedIcon from '@material-ui/icons/DeleteOutlineRounded';
+import Tooltip from '@material-ui/core/Tooltip';
 
 
 const initialValues = {
@@ -19,11 +22,37 @@ const initialValues = {
     endYear: '',
 }
 
+const useClasses = makeStyles(theme => ({
+    iconContainer: {
+        "&:hover $icon": {
+            color: 'black',
+            transition: '1s',
+        },
+    },
+    icon: {
+        color: 'grey',
+    },
+    error: {
+        color: 'red',
+        textAlign: 'start',
+        fontSize: '13px',
+      },
+      expGrid: {
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'space-evenly',
+          gridGap: '15px'
+      },
+      btnGrid: {
+          display: 'flex',
+          flexDirection: 'row',
+      }
+}))
 
 
 function ExperienceForm({ id, removeExp }) {
     const dispatch = useDispatch()
-
+    const classes = useClasses()
     const formik = useFormik({
         initialValues,
         onSubmit: (values) => {
@@ -40,8 +69,10 @@ function ExperienceForm({ id, removeExp }) {
             <ul class="lonon-timeline">
                 <li>
                     <div class="lonon-timeline-content">
-                        <span >
+                        <Grid container className={classes.expGrid}>
+                            <Grid list>
                             <TextField
+                                style={{paddingRight: 15}}
                                 id="date"
                                 label="Start year"
                                 type="date"
@@ -55,9 +86,6 @@ function ExperienceForm({ id, removeExp }) {
                                     shrink: true,
                                 }}
                             />
-                        </span>
-                        <h4>--</h4>
-                        <span >
                             <TextField
                                 id="date"
                                 label="End year"
@@ -72,11 +100,9 @@ function ExperienceForm({ id, removeExp }) {
                                     shrink: true,
                                 }}
                             />
-                        </span>
+                            </Grid>
 
-
-
-                        <h5>
+                            <Grid list>
                             <TextField
                                 multiline
                                 onChange={formik.handleChange}
@@ -84,19 +110,26 @@ function ExperienceForm({ id, removeExp }) {
                                 placeholder="Company"
                                 size="small"
                                 variant="outlined"
+                                error={Boolean(formik.touched.company && formik.errors.company)}
+                                helperText={formik.touched.company && formik.errors.company}
+                                onBlur={formik.handleBlur}
                             />
-                        </h5>
-                        <h4>
-                            <TextField
-                                multiline
-                                onChange={formik.handleChange}
-                                name='post'
-                                placeholder="Post"
-                                size="small"
-                                variant="outlined"
-                            />
-                        </h4>
-                        <p>
+                            </Grid>
+                            <Grid list>
+                                <TextField
+                                    multiline
+                                    onChange={formik.handleChange}
+                                    name='post'
+                                    placeholder="Post"
+                                    size="small"
+                                    variant="outlined"
+                                    error={Boolean(formik.touched.post && formik.errors.post)}
+                                    helperText={formik.touched.post && formik.errors.post}
+                                    onBlur={formik.handleBlur}
+                                />
+                            </Grid>
+
+                            <Grid list>
                             <TextField
                                 multiline
                                 size="small"
@@ -105,22 +138,34 @@ function ExperienceForm({ id, removeExp }) {
                                 name='description'
                                 placeholder="Description"
                                 onChange={formik.handleChange}
+                                error={Boolean(formik.touched.description && formik.errors.description)}
+                                helperText={formik.touched.description && formik.errors.description}
+                                onBlur={formik.handleBlur}
                             />
-                        </p>
+                           
+
+                            </Grid>
+                        </Grid>
                     </div>
                 </li>
             </ul>
             <span>
-                <IconButton  >
-                    <DeleteIcon fontSize="small" onClick={() => removeExp(id)} />
-                </IconButton>
+                <Tooltip title="Delete" placement="right-start">
+                    <IconButton
+                        classes={{
+                            root: classes.iconContainer
+                        }}
+                        onClick={() => removeExp(id)} >
+                        <DeleteOutlineRoundedIcon style={{ fontSize: 18 }} className={classes.icon} />
+                    </IconButton>
+                </Tooltip>
             </span>
             <span>
-                <Button 
-                variant="contained" 
-                color="secondary" 
-                onClick={handleSubmit} 
-                disabled={!formik.isValid || formik.isSubmitting}
+                <Button
+                    variant="contained"
+                    color="secondary"
+                    onClick={handleSubmit}
+                    disabled={!formik.isValid || formik.isSubmitting}
                 >
                     Submit
         </Button>

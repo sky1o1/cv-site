@@ -33,9 +33,8 @@ function Language({color}) {
                 <Droppable droppableId="language">
                 {(provided) => (
                     <div class="col-md-12 animate-box" data-animate-effect="fadeInLeft" {...provided.droppableProps} ref={provided.innerRef}>
-                               
-                                {
-                                       formList.map(formId => (
+                               {
+                                    formList.map(formId => (
                                         <Draggable key={formId} draggableId={formId} >
                                             {(provided) => (
                                            <LanguageForm ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}  id={formId} removeLanguage={handleRemove} />

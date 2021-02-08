@@ -10,9 +10,7 @@ import {
   Grid,
 } from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
-import DeleteIcon from '@material-ui/icons/Delete';
 import DeleteOutlineRoundedIcon from '@material-ui/icons/DeleteOutlineRounded';
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import Tooltip from '@material-ui/core/Tooltip';
 
 const initialValues = {
@@ -20,24 +18,6 @@ const initialValues = {
   rating: '50',
   abilities: '',
 }
-
-// const useStyles = makeStyles((theme) => ({
-//   sliderTrack: {
-//     height: 4,
-//   },
-//   track: {
-//     height: 8,
-//     borderRadius: 4
-//   },
-//   rail: {
-//     height: 8,
-//     borderRadius: 4
-//   },
-//   textBox: {
-//     width: 'auto',
-//   },
-  
-// }));
 const useClasses = makeStyles(theme => ({
   iconContainer: {
       "&:hover $icon": {
@@ -77,7 +57,6 @@ function SkillForm({ id, removeSkill }) {
       <Grid  container  spacing={1} >
         <Grid item xs={12} sm >
           <TextField
-            className={classes.textBox}
             multiline
             size='small'
             placeholder="Skill"
@@ -93,7 +72,6 @@ function SkillForm({ id, removeSkill }) {
         <Grid container className="sliderGrid" item xs={10} sm={8} alignItems="center"justify="center">
     
           <Slider
-            classes={{ container: classes.slider, track: classes.sliderTrack }}
             defaultValue={80}
             name='rating'
             valueLabelDisplay="auto"

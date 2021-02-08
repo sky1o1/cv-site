@@ -47,7 +47,7 @@ const reorder = (list, startIndex, endIndex) => {
     return result;
 };
 
-function ServiceTest() {
+function Services() {
     const classes = useStyles()
     const [formList, setFormList] = useState([])
     const [dragging, setDragging] = useState(false)
@@ -106,7 +106,7 @@ function ServiceTest() {
             formList,
             result.source.index,
             result.destination.index
-        );
+        );      
 
         setFormList(items);
     }
@@ -133,12 +133,30 @@ function ServiceTest() {
                                     </CardContent>
                                 </Card>
                             </Grid>
-                                        <Grid  xs={3}>
+                            <DragDropContext onDragEnd={onDragEnd}>
+                                <Droppable droppableId="characters" direction='horizontal'>
+                                    {(provided) => (
+                                        <Grid {...provided.droppableProps} ref={provided.innerRef} list className={classes.gridList} xs={3}>
                                             {formList.map((formId, index) => (
+                                                <Draggable key={formId} draggableId={formId} index={index}>
+                                                    {(provided) => (
+                                                        <div
+                                                            ref={provided.innerRef}
+                                                            {...provided.draggableProps}
+                                                            {...provided.dragHandleProps}
+                                                        >
                                                             <ServiceForm key={formId} index={index} removeService={handleRemoveExp} id={formId} />
-                                            ))}
+                                                        </div>
+                                                    )}
+                                                </Draggable>
+                                            ))
+                                            }
 
+                                            {provided.placeholder}
                                         </Grid>
+                                    )}
+                                </Droppable>
+                            </DragDropContext>
                             <Grid />
                             <Grid />
                         </Grid>
@@ -148,9 +166,25 @@ function ServiceTest() {
 
                 <Footer />
             </div>
+        {/* <div className='drag-n-drop'>
+        {formList.map((formId, index) => (
+          
+        
+            <div
+             draggable
+             onDragStart={(event) => {handleDragStart(event, index)}} 
+            onDragEnter={dragging? (event) => {handleDragEnter(event, index)}:null}
+             className='dnd-group'
+             >
+            <ServiceForm key={formId} index={index} removeService={handleRemoveExp} id={formId} />
+              
+            </div>
+               ))
+            }
+        </div> */}
              
         </>
     )
 }
 
-export default ServiceTest;
+export default Services;
