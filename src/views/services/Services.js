@@ -197,17 +197,11 @@ import Footer from '../Footer';
 import DragItem from "./dragNdrop/DragItem";
 import { Grid, GridImage, GridItem } from "./dragNdrop/Grid";
 import GridContext from "./dragNdrop/GridContext";
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import {
     makeStyles,
-    TextField,
     Card,
-    CardActions,
     CardContent,
     Button,
-    Typography,
-    InputAdornment,
-    Slider,
 } from '@material-ui/core';
 
 
@@ -287,7 +281,7 @@ function Service() {
       const offset = destinationIndex - sourceIndex;
   
       setFormList(state => ({
-        formList: moveElement(formList, sourceIndex, offset)
+        formList: moveElement(state.formList, sourceIndex, offset)
       }));
     }
 

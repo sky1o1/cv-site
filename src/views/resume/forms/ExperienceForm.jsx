@@ -36,17 +36,17 @@ const useClasses = makeStyles(theme => ({
         color: 'red',
         textAlign: 'start',
         fontSize: '13px',
-      },
-      expGrid: {
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'space-evenly',
-          gridGap: '15px'
-      },
-      btnGrid: {
-          display: 'flex',
-          flexDirection: 'row',
-      }
+    },
+    expGrid: {
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-evenly',
+        gridGap: '15px'
+    },
+    btnGrid: {
+        display: 'flex',
+        flexDirection: 'row',
+    }
 }))
 
 
@@ -71,49 +71,51 @@ function ExperienceForm({ id, removeExp }) {
                     <div class="lonon-timeline-content">
                         <Grid container className={classes.expGrid}>
                             <Grid list>
-                            <TextField
-                                style={{paddingRight: 15}}
-                                id="date"
-                                label="Start year"
-                                type="date"
-                                name='startYear'
-                                size="small"
-                                variant="outlined"
-                                onBlur={formik.handleBlur}
-                                value={formik.values.startYear}
-                                onChange={formik.handleChange}
-                                InputLabelProps={{
-                                    shrink: true,
-                                }}
-                            />
-                            <TextField
-                                id="date"
-                                label="End year"
-                                type="date"
-                                name='endYear'
-                                size="small"
-                                variant="outlined"
-                                onBlur={formik.handleBlur}
-                                value={formik.values.endYear}
-                                onChange={formik.handleChange}
-                                InputLabelProps={{
-                                    shrink: true,
-                                }}
-                            />
-                            </Grid>
+                                <TextField
+                                    style={{ paddingRight: 15 }}
+                                    id="date"
+                                    label="Start year"
+                                    type="date"
+                                    name='startYear'
+                                    size="small"
+                                    variant="outlined"
+                                    onBlur={formik.handleBlur}
+                                    value={formik.values.startYear}
+                                    onChange={formik.handleChange}
+                                    InputLabelProps={{
+                                        shrink: true,
+                                    }}
+                                />
+                                <TextField
+                                    style={{ paddingRight: 15 }}
+                                    id="date"
+                                    label="End year"
+                                    type="date"
+                                    name='endYear'
+                                    size="small"
+                                    variant="outlined"
+                                    onBlur={formik.handleBlur}
+                                    value={formik.values.endYear}
+                                    onChange={formik.handleChange}
+                                    InputLabelProps={{
+                                        shrink: true,
+                                    }}
+                                />
+
+                                </Grid>
 
                             <Grid list>
-                            <TextField
-                                multiline
-                                onChange={formik.handleChange}
-                                name='company'
-                                placeholder="Company"
-                                size="small"
-                                variant="outlined"
-                                error={Boolean(formik.touched.company && formik.errors.company)}
-                                helperText={formik.touched.company && formik.errors.company}
-                                onBlur={formik.handleBlur}
-                            />
+                                <TextField
+                                    multiline
+                                    onChange={formik.handleChange}
+                                    name='company'
+                                    placeholder="Company"
+                                    size="small"
+                                    variant="outlined"
+                                    error={Boolean(formik.touched.company && formik.errors.company)}
+                                    helperText={formik.touched.company && formik.errors.company}
+                                    onBlur={formik.handleBlur}
+                                />
                             </Grid>
                             <Grid list>
                                 <TextField
@@ -130,45 +132,48 @@ function ExperienceForm({ id, removeExp }) {
                             </Grid>
 
                             <Grid list>
-                            <TextField
-                                multiline
-                                size="small"
-                                variant="outlined"
-                                rows={5}
-                                name='description'
-                                placeholder="Description"
-                                onChange={formik.handleChange}
-                                error={Boolean(formik.touched.description && formik.errors.description)}
-                                helperText={formik.touched.description && formik.errors.description}
-                                onBlur={formik.handleBlur}
-                            />
-                           
-
+                                <TextField
+                                    multiline
+                                    size="small"
+                                    variant="outlined"
+                                    rows={5}
+                                    name='description'
+                                    placeholder="Description"
+                                    onChange={formik.handleChange}
+                                    error={Boolean(formik.touched.description && formik.errors.description)}
+                                    helperText={formik.touched.description && formik.errors.description}
+                                    onBlur={formik.handleBlur}
+                                />
+                            </Grid>
+                            <Grid list>
+                            <Tooltip title="Delete" placement="right-start">
+                                    <IconButton
+                                        classes={{
+                                            root: classes.iconContainer
+                                        }}
+                                        onClick={() => removeExp(id)} >
+                                        <DeleteOutlineRoundedIcon style={{ fontSize: 18 }} className={classes.icon} />
+                                    </IconButton>
+                                </Tooltip>
+                                
+                                <Button
+                                    variant="contained"
+                                    color="secondary"
+                                    onClick={handleSubmit}
+                                    disabled={!formik.isValid || formik.isSubmitting}
+                                >
+                                    Submit
+                                </Button>
                             </Grid>
                         </Grid>
                     </div>
                 </li>
             </ul>
             <span>
-                <Tooltip title="Delete" placement="right-start">
-                    <IconButton
-                        classes={{
-                            root: classes.iconContainer
-                        }}
-                        onClick={() => removeExp(id)} >
-                        <DeleteOutlineRoundedIcon style={{ fontSize: 18 }} className={classes.icon} />
-                    </IconButton>
-                </Tooltip>
+
             </span>
             <span>
-                <Button
-                    variant="contained"
-                    color="secondary"
-                    onClick={handleSubmit}
-                    disabled={!formik.isValid || formik.isSubmitting}
-                >
-                    Submit
-        </Button>
+
             </span>
         </>
     )

@@ -16,8 +16,8 @@ import Tooltip from '@material-ui/core/Tooltip';
 const initialValues = {
   skill: '',
   rating: '50',
-  abilities: '',
 }
+
 const useClasses = makeStyles(theme => ({
   iconContainer: {
       "&:hover $icon": {
@@ -65,6 +65,7 @@ function SkillForm({ id, removeSkill }) {
             error={Boolean(formik.touched.skill && formik.errors.skill)}
             helperText={formik.touched.skill && formik.errors.skill}
             onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
           />
         
         </Grid>
@@ -72,7 +73,7 @@ function SkillForm({ id, removeSkill }) {
         <Grid container className="sliderGrid" item xs={10} sm={8} alignItems="center"justify="center">
     
           <Slider
-            defaultValue={80}
+            defaultValue={50}
             name='rating'
             valueLabelDisplay="auto"
             onChange={handleChange('rating')}
