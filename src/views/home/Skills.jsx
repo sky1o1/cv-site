@@ -3,16 +3,20 @@ import { v4 as uuidv4 } from 'uuid';
 import SkillForm from './forms/SkillForm';
 import { Button, TextField } from '@material-ui/core';
 import { useFormik } from 'formik';
+import validationSchema from './validationSchema/validationSchemaSkills';
 import AddCircleOutlineOutlinedIcon from '@material-ui/icons/AddCircleOutlineOutlined';
+
+
+const initialValues = {
+ abilities: ''
+}
 
 function Skills({color, greyG, blackG, whiteG, blueG}) {
   const [formList, setFormList] = useState([1])
-  // const formik = useFormik({
-  //   initialValues,
-  //   onSubmit: (values) => {
-
-  //   }
-  // })
+  const formik = useFormik({
+    initialValues,
+   validationSchema
+  })
 
   function handleAdd() {
     setFormList(prevFormList => ([
@@ -47,9 +51,10 @@ function Skills({color, greyG, blackG, whiteG, blueG}) {
                 rows={8}
                 name='abilities'
                 variant="outlined"
-                // error={Boolean(formik.touched.abilities && formik.errors.abilities)}
-                // helperText={formik.touched.abilities && formik.errors.abilities}
-                // onChange={formik.handleChange}
+                error={Boolean(formik.touched.abilities && formik.errors.abilities)}
+                helperText={formik.touched.abilities && formik.errors.abilities}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
               />
 
             </form>

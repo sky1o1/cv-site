@@ -3,7 +3,7 @@ import { createAction, handleAction } from 'redux-actions';
 export const setAuthenticate = createAction('SET_AUTHENTICATE');
 
 const INITIAL_VALUES = {
-    isAuthenticated: ''
+    isAuthenticated: false
 }
 
 const authReducer = handleAction(

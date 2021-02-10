@@ -1,8 +1,11 @@
 import React, { useRef } from 'react';
+import firebase from 'firebase/app'
 import { useDispatch, useSelector } from 'react-redux';
+import {Link, useHistory} from 'react-router-dom';
 import { setProfile, setProfileImage } from '../store/reducer/profile';
 import {useStyles} from './styles/SidebarStyle';
 import useTheme from './hooks/useTheme';
+import Routes from '../routes';
 import clsx from 'clsx';
 import {
     AppBar,
@@ -17,7 +20,6 @@ import MenuIcon from '@material-ui/icons/Menu';
 import '../new.css';
 import '../animate.css';
 import '../bootstrap.css';
-import SidebarOption from './SidebarOption';
 import * as Yup from 'yup';
 import { useFormik } from 'formik';
 
@@ -36,6 +38,7 @@ const validationSchema = Yup.object({
 function Sidebar() {
     const classes = useStyles()
     const dispatch = useDispatch()
+    const history = useHistory()
     const wrapperRef = useRef(null)
     const profile = useSelector(state => state.profile)
     const [bgColor1, textColor1, headColor, textColor2, gradColor, updateColor] = useTheme('greyColor')
@@ -57,7 +60,16 @@ function Sidebar() {
         formik.setFieldValue(inputFieldName, inputFieldValue)
     }
    
-    
+    const logout = () => {
+        firebase.auth().signOut().then(function () {
+            console.log('logged out')
+            history.push('/login')
+        
+          }).catch(function (error) {
+            console.log('error logging out')
+          });
+          console.log('logged out')
+    }
    
 
 return (
@@ -146,14 +158,19 @@ return (
                 </form>
                 <nav id="lonon-main-menu">
                     <ul>
-                        <li><a style={{ color: textColor2 }}><SidebarOption title="home" /></a></li>
-                        <li><a style={{ color: textColor2 }}><SidebarOption title="resume" /></a></li>
-                        <li><a style={{ color: textColor2 }}><SidebarOption title="portfolio" /></a> </li>
-                        <li><a style={{ color: textColor2 }}><SidebarOption title="services" /></a></li>
-                        <li><a style={{ color: textColor2 }}><SidebarOption title="contact" /></a> </li>
-                        <li><a style={{ color: textColor2 }}><SidebarOption title="login" /></a> </li>
+                        <li><Link to='/home' style={{ color: textColor2 }}>Home</Link></li>
+                        <li><Link to='/resume' style={{ color: textColor2 }}>Resume</Link></li>
+                        <li><Link to='/portfolio' style={{ color: textColor2 }}>Portfolio</Link> </li>
+                        <li><Link to='/services' style={{ color: textColor2 }}>Services</Link></li>
+                        <li><Link to='/contact' style={{ color: textColor2 }}>Contact</Link> </li>
+                        <li>
+                            <button onClick={logout}>
+                             Logout
+                            </button>
+                        </li>
                     </ul>
                 </nav>
+
                 <div class="lonon-footer">
                 <Grid container className={classes.btnDiv} >
                 <span className={ clsx(classes.btn, classes.btn1)} onClick={() => updateColor('greyColor')} />
@@ -164,6 +181,7 @@ return (
                 </div>
                
             </aside>
+            <Routes />
         </div>
     </>
 

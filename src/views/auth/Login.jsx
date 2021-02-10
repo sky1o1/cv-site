@@ -1,4 +1,6 @@
 import React, {  useEffect } from 'react';
+import {useHistory} from 'react-router-dom';
+import {useSelector} from 'react-redux';
 import firebase from 'firebase';
 import {auth} from '../../services/firebase/config';
 import * as firebaseui from 'firebaseui';
@@ -16,14 +18,20 @@ const useStyles = makeStyles((theme) => ({
 
 const Login = () => {
   const classes = useStyles();
-
+  const history = useHistory()
+  const authenticate = useSelector(state => state.auth)
 
   var uiConfig = {
-    signInSuccessUrl: '/home',
+    signInSuccessUrl: '/',
     signInOptions: [ firebase.auth.PhoneAuthProvider.PROVIDER_ID ]
   };
 
   useEffect(() => {
+
+    if(authenticate.isAuthenticated){
+      history.push('/')
+      }
+
     if (firebaseui.auth.AuthUI.getInstance()) {
       const ui = firebaseui.auth.AuthUI.getInstance()
       ui.start('#firebaseui-auth-container', uiConfig)
@@ -36,13 +44,10 @@ const Login = () => {
 
 
   return (
-    <Card
-      className={classes.root}
-      title="Login"
-    >
-        <h1 style={{paddingLeft: '500px'}}>login</h1>
+   <>
       <div id="firebaseui-auth-container"></div>
-    </Card >
+      </>
+    
   );
 };
 
