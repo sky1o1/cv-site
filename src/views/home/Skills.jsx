@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
+import {getRequest, postRequest} from '../../services/axios.config';
 import SkillForm from './forms/SkillForm';
 import { Button, TextField } from '@material-ui/core';
 import { useFormik } from 'formik';
@@ -30,6 +31,17 @@ function Skills({color, greyG, blackG, whiteG, blueG}) {
     updatedFormClone.splice(index, 1)
     setFormList(updatedFormClone)
   }
+
+    // useEffect(() => {
+    //     async function fetchApi() {
+    //         try{
+    //             let response = await postRequest('');
+    //         }catch(err){
+    //             console.log(err)
+    //         }
+    //     }
+    //      fetchApi()
+    // },[])
 
   return (
     <div class="lonon-skills">

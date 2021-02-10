@@ -2,6 +2,7 @@ import React from 'react';
 import { useFormik } from 'formik';
 import { useDispatch } from 'react-redux';
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
+import {getRequest, postRequest} from '../../../services/axios.config';
 import validationSchema from '../validationSchema/validationSchemaLanguage';
 import { setLanguage } from '../../../store/reducer/language';
 import IconButton from '@material-ui/core/IconButton';
@@ -83,7 +84,18 @@ function LanguageForm({ id, removeLanguage }) {
         // formik.setFieldValue(name, value.title)
         console.log(event.target.value)
     }
-    console.log(formik.values)
+
+      // useEffect(() => {
+    //     async function fetchApi() {
+    //         try{
+    //             let response = await postRequest('');
+    //         }catch(err){
+    //             console.log(err)
+    //         }
+    //     }
+    //      fetchApi()
+    // },[])
+    
     return (
         <MuiThemeProvider theme={theme}>
             <div class="row">

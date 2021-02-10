@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import { useFormik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
+import {getRequest, postRequest} from '../../services/axios.config';
 import validationSchema from './validationSchema/validationSchema';
 import { setProjects } from '../../store/reducer/projects';
 import {
@@ -53,6 +54,17 @@ function ProjectForm({ removeProject,id}) {
     const handleSubmit = () => {
         formik.submitForm()
     }
+
+      // useEffect(() => {
+    //     async function fetchApi() {
+    //         try{
+    //             let response = await postRequest('');
+    //         }catch(err){
+    //             console.log(err)
+    //         }
+    //     }
+    //      fetchApi()
+    // },[])
 
     return (
               <Card className={classes.root} variant="outlined" >

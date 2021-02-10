@@ -1,5 +1,6 @@
 import React, { useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
+import {getRequest, postRequest} from '../../services/axios.config';
 import {setFacebook, setInstagram, setLinkedin, setGithub, setTwitter} from '../../store/reducer/links';
 import '../../new.css'
 import {
@@ -46,7 +47,16 @@ function SocialMedia(){
         setOpen(false);
     };
 
-    console.log('links',profile)
+      // useEffect(() => {
+    //     async function fetchApi() {
+    //         try{
+    //             let response = await postRequest('');
+    //         }catch(err){
+    //             console.log(err)
+    //         }
+    //     }
+    //      fetchApi()
+    // },[])
 
     return(
         <>

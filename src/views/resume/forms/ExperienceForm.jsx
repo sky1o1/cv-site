@@ -1,6 +1,7 @@
 import React from 'react';
 import { useFormik } from 'formik';
 import { useDispatch } from 'react-redux';
+import {getRequest, postRequest} from '../../../services/axios.config';
 import validationSchema from '../validationSchema/validationSchemaExp';
 import { setExperience } from '../../../store/reducer/experience';
 import {
@@ -64,6 +65,18 @@ function ExperienceForm({ id, removeExp }) {
     const handleSubmit = async () => {
         await formik.submitForm()
     }
+
+      // useEffect(() => {
+    //     async function fetchApi() {
+    //         try{
+    //             let response = await postRequest('');
+    //         }catch(err){
+    //             console.log(err)
+    //         }
+    //     }
+    //      fetchApi()
+    // },[])
+    
     return (
         <>
             <ul class="lonon-timeline">

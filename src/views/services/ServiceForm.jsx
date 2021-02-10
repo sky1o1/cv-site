@@ -1,6 +1,7 @@
 import React from 'react';
 import { useFormik } from 'formik';
 import {useDispatch} from 'react-redux';
+import {getRequest, postRequest} from '../../services/axios.config';
 import validationSchema from './validationSchema/validationSchema';
 import {setServices} from '../../store/reducer/services';
 import {
@@ -57,7 +58,16 @@ function ServiceForm({removeService, id, index}) {
         formik.submitForm()
     }
 
-    console.log('index', index)
+      // useEffect(() => {
+    //     async function fetchApi() {
+    //         try{
+    //             let response = await postRequest('');
+    //         }catch(err){
+    //             console.log(err)
+    //         }
+    //     }
+    //      fetchApi()
+    // },[])
 
     return (
         <>

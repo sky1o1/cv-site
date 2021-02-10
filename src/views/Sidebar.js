@@ -1,7 +1,8 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import firebase from 'firebase/app'
 import { useDispatch, useSelector } from 'react-redux';
 import {Link, useHistory} from 'react-router-dom';
+import {getRequest, postRequest} from '../services/axios.config';
 import { setProfile, setProfileImage } from '../store/reducer/profile';
 import {useStyles} from './styles/SidebarStyle';
 import useTheme from './hooks/useTheme';
@@ -59,6 +60,17 @@ function Sidebar() {
         dispatch(setProfile(updatedProfileData))
         formik.setFieldValue(inputFieldName, inputFieldValue)
     }
+
+    // useEffect(() => {
+    //     async function fetchApi() {
+    //         try{
+    //             let response = await postRequest('');
+    //         }catch(err){
+    //             console.log(err)
+    //         }
+    //     }
+    //      fetchApi()
+    // },[])
    
     const logout = () => {
         firebase.auth().signOut().then(function () {
