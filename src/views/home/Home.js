@@ -1,5 +1,6 @@
 import React, { useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import {getRequest, postRequest} from '../../services/axios.config';
 import { setProfile, setImage3 } from '../../store/reducer/profile';
 import validationSchema from './validationSchema/validationSchemaHome';
 import {useStyles} from '../styles/HomeStyle';
@@ -50,6 +51,17 @@ function Home() {
         initialValues,
         validationSchema,
     })
+
+      // useEffect(() => {
+    //     async function fetchApi() {
+    //         try{
+    //             let response = await postRequest('');
+    //         }catch(err){
+    //             console.log(err)
+    //         }
+    //     }
+    //      fetchApi()
+    // },[])
 
     return (
           <div id="lonon-main">

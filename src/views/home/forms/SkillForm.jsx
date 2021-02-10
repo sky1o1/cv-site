@@ -1,6 +1,7 @@
 import React from 'react';
 import { useFormik } from 'formik';
 import { useDispatch } from 'react-redux';
+import {getRequest, postRequest} from '../../../services/axios.config';
 import validationSchema from '../validationSchema/validationSchemaSkills';
 import { setSkills } from '../../../store/reducer/skills';
 import {
@@ -52,6 +53,17 @@ function SkillForm({ id, removeSkill }) {
     formik.setFieldValue(name, value)
   }
 
+    // useEffect(() => {
+    //     async function fetchApi() {
+    //         try{
+    //             let response = await postRequest('');
+    //         }catch(err){
+    //             console.log(err)
+    //         }
+    //     }
+    //      fetchApi()
+    // },[])
+    
   return (
     <>
       <Grid  container  spacing={1} >

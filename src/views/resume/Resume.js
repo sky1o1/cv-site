@@ -69,6 +69,17 @@ function Resume() {
         validationSchema
     })
 
+      // useEffect(() => {
+    //     async function fetchApi() {
+    //         try{
+    //             let response = await postRequest('');
+    //         }catch(err){
+    //             console.log(err)
+    //         }
+    //     }
+    //      fetchApi()
+    // },[])
+
     return (
         <>
             <div id="lonon-main">

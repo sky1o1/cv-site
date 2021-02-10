@@ -2,6 +2,7 @@ import React, {  useEffect } from 'react';
 import {useHistory} from 'react-router-dom';
 import {useSelector} from 'react-redux';
 import firebase from 'firebase';
+import {getRequest, postRequest} from '../../services/axios.config';
 import {auth} from '../../services/firebase/config';
 import * as firebaseui from 'firebaseui';
 import 'firebaseui/dist/firebaseui.css';
@@ -32,6 +33,14 @@ const Login = () => {
       history.push('/')
       }
 
+      async function fetchApi() {
+        try{
+            let response = await postRequest('');
+        }catch(err){
+            console.log(err)
+        }
+    }
+
     if (firebaseui.auth.AuthUI.getInstance()) {
       const ui = firebaseui.auth.AuthUI.getInstance()
       ui.start('#firebaseui-auth-container', uiConfig)
@@ -40,6 +49,7 @@ const Login = () => {
       const ui = new firebaseui.auth.AuthUI(auth)
       ui.start('#firebaseui-auth-container', uiConfig)
     }
+    fetchApi()
   }, [])
 
 
