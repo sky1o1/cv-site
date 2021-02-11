@@ -5,7 +5,7 @@ import LanguageForm from './forms/LanguageForm';
 import { Button } from '@material-ui/core';
 
 function Language({color}) {
-    const [formList, setFormList] = useState([1])
+    const [formList, setFormList] = useState([1,2])
     
     function handleAdd() {
         setFormList(prevFormList => ([

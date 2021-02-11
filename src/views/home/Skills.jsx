@@ -13,7 +13,7 @@ const initialValues = {
 }
 
 function Skills({color, greyG, blackG, whiteG, blueG}) {
-  const [formList, setFormList] = useState([1])
+  const [formList, setFormList] = useState([1,2,3])
   const formik = useFormik({
     initialValues,
    validationSchema

@@ -190,8 +190,9 @@
 // export default Services;
 
 import React, { useState, useRef, useContext } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
+import {setServiceList} from '../../store/reducer/gridList';
 import ServiceForm from './ServiceForm';
 import Footer from '../Footer';
 import DragItem from "./dragNdrop/DragItem";
@@ -229,18 +230,19 @@ const useStyles = makeStyles({
 
 function Service() {
     const classes = useStyles()
+    const dispatch = useDispatch()
     const [formList, setFormList] = useState([])
-    const [dragging, setDragging] = useState(false)
     const colors = useSelector(state => state.colors)
-    const dragItem = useRef()
-    const dragNode = useRef()
-    // const moveItem = ''
-    // const { items, moveItem } = useContext(GridContext);
+    const { items, moveItem } = useContext(GridContext);
 
     function handleAddExp() {
         setFormList(prevFormList => ([
             ...prevFormList, uuidv4()
         ]))
+        console.log('entered')
+        console.log(formList)
+        localStorage.setItem('gridList',  JSON.stringify(formList))
+        dispatch(setServiceList(formList))
     }
 
     function handleRemoveExp(id) {
@@ -248,41 +250,6 @@ function Service() {
         const formListClone = [...formList]
         formListClone.splice(index, 1)
         setFormList(formListClone)
-    }
-
-    function move(array, oldIndex, newIndex) {
-        if (newIndex >= array.length) {
-          newIndex = array.length - 1;
-        }
-        array.splice(newIndex, 0, array.splice(oldIndex, 1)[0]);
-        return array;
-      }
-      
-      function moveElement(array, index, offset) {
-        const newIndex = index + offset;
-      
-        return move(array, index, newIndex);
-      }
-    // const setFormList = (formList) => setState({ formList });
-
-    const moveItem = (sourceId, destinationId) => {
-      const sourceIndex = formList.findIndex(
-        item => item.id === sourceId
-      );
-      const destinationIndex = formList.findIndex(
-        item => item.id === destinationId
-      );
-  
-      // If source/destination is unknown, do nothing.
-      if (sourceId === -1 || destinationId === -1) {
-        return;
-      }
-  
-      const offset = destinationIndex - sourceIndex;
-  
-      setFormList(state => ({
-        formList: moveElement(state.formList, sourceIndex, offset)
-      }));
     }
 
     return (
@@ -306,21 +273,34 @@ function Service() {
                                     </CardContent>
                                 </Card>
                             </Grid>
+
+                            <Grid>
+                                {items.map(item => (
+                                    <DragItem key={item.id} id={item.id} onMoveItem={moveItem}>
+                                        <GridItem>
+                                            <GridImage >
+                                            <ServiceForm key={item.id}  removeService={handleRemoveExp} id={item.id} />
+                                            </GridImage>
+                                        </GridItem>
+                                    </DragItem>
+                                ))}
+                            </Grid>
+{/* 
                             <Grid>
                                 {formList.map((formId, index) => (
-                                         <DragItem key={formId} id={formId} onMoveItem={moveItem}>
-                                         <GridItem>
-                                             <GridImage >
-                                             <ServiceForm key={formId} index={index} removeService={handleRemoveExp} id={formId} />
-                                             </GridImage>
-                                         </GridItem>
-                                     </DragItem>
+                                    <DragItem key={formId} id={formId} onMoveItem={moveItem}>
+                                        <GridItem>
+                                            <GridImage src={item.src}>
+                                                <ServiceForm key={formId} index={index} removeService={handleRemoveExp} id={formId} />
+                                            </GridImage>
+                                        </GridItem>
+                                    </DragItem>
 
-                                //   <ServiceForm key={formId} index={index} removeService={handleRemoveExp} id={formId} />
+                                    //   <ServiceForm key={formId} index={index} removeService={handleRemoveExp} id={formId} />
 
                                 ))
                                 }
-                                {/* {items.map(item => (
+                                {items.map(item => (
                                     <DragItem key={item.id} id={item.id} onMoveItem={moveItem}>
                                         <GridItem>
                                             <GridImage src={item.src}></GridImage>
@@ -330,7 +310,7 @@ function Service() {
                             </Grid>
                             <Grid />
                             <Grid />
-                        </Grid>
+                        {/* </Grid> */}
                     </div>
                 </div>
 

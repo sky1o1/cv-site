@@ -10,6 +10,7 @@ import services from './services';
 import projects from './projects';
 import colors from './colors';
 import links from './links';
+import gridList from './gridList';
 
 
 const rootReducer = combineReducers({
@@ -23,7 +24,8 @@ const rootReducer = combineReducers({
     services,
     projects,
     colors,
-    links
+    links,
+    gridList
 })
 
 export default rootReducer;

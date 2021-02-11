@@ -3,7 +3,6 @@ import {useSelector} from 'react-redux';
 
 function Footer() {
     const colors = useSelector(state => state.colors)
-    console.log(colors)
     
     return (
         <>

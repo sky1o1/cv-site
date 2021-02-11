@@ -5,7 +5,7 @@ const DragItem = memo(({ id, onMoveItem, children }) => {
   const ref = useRef(null);
 
   const [{ isDragging }, connectDrag] = useDrag({
-    item: { id, type: "LIST" },
+    item: { id, type: "IMG" },
     collect: monitor => {
       return {
         isDragging: monitor.isDragging()
@@ -14,7 +14,7 @@ const DragItem = memo(({ id, onMoveItem, children }) => {
   });
 
   const [, connectDrop] = useDrop({
-    accept: "LIST",
+    accept: "IMG",
     hover(hoveredOverItem) {
       if (hoveredOverItem.id !== id) {
         onMoveItem(hoveredOverItem.id, id);
