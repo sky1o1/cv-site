@@ -14,6 +14,7 @@ import Resume from './views/resume/Resume';
 import Services from './views/services/Services';
 import Contact from './views/Contact';
 import Projects from './views/project/Projects';
+import Draggable from './views/project/ProjectTest';
 
 
 function App() {
@@ -44,6 +45,7 @@ function App() {
     <PrivateRoute path='/home' component={Home} />
     <PrivateRoute path='/resume' component={Resume} />
     <PrivateRoute path='/portfolio' component={Projects} />
+    <PrivateRoute path='/drag' component={Draggable} />
     <PrivateRoute path='/services' component={Services} />
     <PrivateRoute path='/contact' component={Contact} />
 

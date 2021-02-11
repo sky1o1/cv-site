@@ -1,4 +1,6 @@
 import React, { Component, createContext } from "react";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 import sampleItems from './sampleItems';
 
 // Helper functions
@@ -23,13 +25,18 @@ const GridContext = createContext({ items: [] });
 
 export class GridProvider extends Component {
   constructor(props) {
+    var gridList = localStorage.getItem('list')
+    gridList = JSON.parse(gridList)
     super(props);
     this.state = {
-      items: sampleItems,
+      items: [1,2],
       moveItem: this.moveItem,
       setItems: this.setItems
     };
+    console.log('list', this.state.items)
+    console.log('list', gridList)
   }
+
 
   render() {
     return (
@@ -61,5 +68,14 @@ export class GridProvider extends Component {
     }));
   };
 }
+
+const mapStateToProps = (state) => ({
+  list: state.gridList
+})
+
+// export default connect(
+//   mapStateToProps,
+//   null
+// )(withRouter(GridContext))
 
 export default GridContext;

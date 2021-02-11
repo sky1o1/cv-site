@@ -7,6 +7,7 @@ import Projects from './views/project/Projects';
 import Services from './views/services/Services';
 import Contact from './views/Contact';
 import Login from './views/auth/Login';
+import Draggable from './views/project/ProjectTest';
 
 
 const Routes = () => (
@@ -17,6 +18,7 @@ const Routes = () => (
         <Route exact path='/portfolio' component={Projects}></Route>
         <Route exact path='/services' component={Services}></Route>
         <Route exact path='/contact' component={Contact}></Route>
+        <Route exact path='/drag' component={Draggable}></Route>
         {/* <Route exact path='/login' component={Login}></Route> */}
     </div>
 )
