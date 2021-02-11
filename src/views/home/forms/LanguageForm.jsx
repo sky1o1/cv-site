@@ -59,10 +59,6 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-
-
-
-
 function LanguageForm({ id, removeLanguage }) {
     const classes = useStyles();
     const dispatch = useDispatch()
@@ -81,8 +77,11 @@ function LanguageForm({ id, removeLanguage }) {
     }
 
     const handleChange = (event) => {
-        // formik.setFieldValue(name, value.title)
+        const name = event.target.name
+        const value = event.target.value
+        formik.setFieldValue(name, value)
         console.log(event.target.value)
+        console.log(event.target.name)
     }
 
       // useEffect(() => {
@@ -114,6 +113,7 @@ function LanguageForm({ id, removeLanguage }) {
                                     error={Boolean(formik.touched.language && formik.errors.language)}
                                     helperText={formik.touched.language && formik.errors.language}
                                     onBlur={formik.handleBlur}
+                                    onChange={formik.handleChange}
                                 />
                                 <Grid container>
                                     <Grid list xs>
@@ -123,7 +123,7 @@ function LanguageForm({ id, removeLanguage }) {
                                                 onChange={handleChange}
                                                 label="Reading"
                                                 defaultValue={'Beginner'}
-
+                                                name='reading'
                                                 className={`${classes.textField} without-padding`}
                                             >
                                                 <MenuItem value={'Beginner'}>Beginner</MenuItem>
@@ -140,6 +140,7 @@ function LanguageForm({ id, removeLanguage }) {
                                                 onChange={handleChange}
                                                 label="Writing"
                                                 defaultValue={'Beginner'}
+                                                name='writing'
                                             >
                                                 <MenuItem value={'Beginner'}>Beginner</MenuItem>
                                                 <MenuItem value={'Intermediate'}>Intermediate</MenuItem>
@@ -155,6 +156,7 @@ function LanguageForm({ id, removeLanguage }) {
                                                 onChange={handleChange}
                                                 label="Speaking"
                                                 defaultValue={'Beginner'}
+                                                name='speaking'
                                             >
                                                 <MenuItem value={'Beginner'}>Beginner</MenuItem>
                                                 <MenuItem value={'Intermediate'}>Intermediate</MenuItem>
@@ -170,7 +172,7 @@ function LanguageForm({ id, removeLanguage }) {
                                                 onChange={handleChange}
                                                 label="Listening"
                                                 defaultValue={'Beginner'}
-
+                                                name='listening'
                                             >
                                                 <MenuItem value={'Beginner'}>Beginner</MenuItem>
                                                 <MenuItem value={'Intermediate'}>Intermediate</MenuItem>

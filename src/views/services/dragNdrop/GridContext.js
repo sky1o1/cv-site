@@ -73,9 +73,9 @@ const mapStateToProps = (state) => ({
   list: state.gridList
 })
 
-// export default connect(
-//   mapStateToProps,
-//   null
-// )(withRouter(GridContext))
+export default connect(
+  mapStateToProps,
+  null
+)(withRouter(GridContext))
 
-export default GridContext;
+// export default GridContext;
