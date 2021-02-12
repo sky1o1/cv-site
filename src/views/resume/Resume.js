@@ -50,10 +50,10 @@ function Resume() {
     const colors = useSelector(state => state.colors)
     const wrapperRef = useRef(null)
 
-    const greyGradient = colors.bgColor =='#555' ? 'greyGrad' : '';
-    const blackGradient = colors.bgColor =='#000' ? 'blackGrad' : '';
-    const whiteGradient = colors.bgColor =='#fff' ? 'whiteGrad' : '';
-    const blueGradient = colors.bgColor =='#0000ff' ? 'blueGrad' : '';
+    const pinkGradient = colors.bgColor =='#FC698A' ? 'pinkGrad' : '';
+    const greyGradient = colors.bgColor =='#45515D' ? 'greyGrad' : '';
+    const orangeGradient = colors.bgColor =='#DF6339' ? 'orangeG' : '';
+    const blueGradient = colors.bgColor =='#007CC7' ? 'blueGrad' : '';
 
     function handleChange(event) {
         console.log(event)
@@ -218,7 +218,7 @@ function Resume() {
                                                 </Card>
 
 
-                                                <SocialMedia color={colors} greyG={greyGradient} blackG={blackGradient} whiteG={whiteGradient} blueG={blueGradient} />
+                                                <SocialMedia color={colors} greyG={pinkGradient} blackG={greyGradient} orangeG={orangeGradient} blueG={blueGradient} />
 
 
 
@@ -232,9 +232,9 @@ function Resume() {
                 </div>
 
 
-                <Experience color={colors} greyG={greyGradient} blackG={blackGradient} whiteG={whiteGradient} blueG={blueGradient} />
-                <Education color={colors} greyG={greyGradient} blackG={blackGradient} whiteG={whiteGradient} blueG={blueGradient} />
-                <Footer color={colors} greyG={greyGradient} blackG={blackGradient} whiteG={whiteGradient} blueG={blueGradient} />
+                <Experience color={colors} pinkG={pinkGradient} greyG={greyGradient} orangeG={orangeGradient} blueG={blueGradient} />
+                <Education color={colors} pinkG={pinkGradient} greyG={greyGradient} orangeG={orangeGradient} blueG={blueGradient} />
+                <Footer color={colors} pinkG={pinkGradient} greyG={greyGradient} orangeG={orangeGradient} blueG={blueGradient} />
             </div>
         </>
     )

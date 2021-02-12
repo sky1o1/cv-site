@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
+import * as Yup from 'yup';
 import {getRequest, postRequest} from '../../services/axios.config';
 import SkillForm from './forms/SkillForm';
 import { Button, TextField } from '@material-ui/core';
 import { useFormik } from 'formik';
-import validationSchema from './validationSchema/validationSchemaSkills';
 import AddCircleOutlineOutlinedIcon from '@material-ui/icons/AddCircleOutlineOutlined';
 
 
@@ -12,7 +12,12 @@ const initialValues = {
  abilities: ''
 }
 
-function Skills({color, greyG, blackG, whiteG, blueG}) {
+const validationSchema = Yup.object({
+  abilities:Yup.string().required('Skill description is required'),
+})
+
+
+function Skills({color}) {
   const [formList, setFormList] = useState([1,2,3])
   const formik = useFormik({
     initialValues,
@@ -48,8 +53,8 @@ function Skills({color, greyG, blackG, whiteG, blueG}) {
       <div class="container-fluid" >
      
         <div class="row">
-            <div class="col-md-12"> <span  class="heading-meta style-1">Job Preferences</span>
-            <h2 class="lonon-heading animate-box" data-animate-effect="fadeInLeft" >& My Skills</h2> </div>
+            <div class="col-md-12"> <span style={{color: color.headColor}} class="heading-meta style-1">Job Preferences</span>
+            <h2 class="lonon-heading animate-box" style={{color: color.headColor}} data-animate-effect="fadeInLeft" >& My Skills</h2> </div>
         </div>
      
         <div class="row">

@@ -14,24 +14,24 @@ export const useStyles = makeStyles((theme) => ({
         cardvisit: {
             opacity: 0.5,
         },
+        pinkGrad: {
+            background: '#ED9BAE',
+            background: '-webkit-linear-gradient(to right, #FC698A, #ED9BAE)',
+            background: 'linear-gradient(to right, #FC698A, #ED9BAE)',
+        },
         greyGrad: {
-            background: '#bdc3c7',
-            background: '-webkit-linear-gradient(to right, #2c3e50, #bdc3c7)',
-            background: 'linear-gradient(to right, #2c3e50, #bdc3c7)',
+            background: '#45515D',
+            background: '-webkit-linear-gradient(to right, #45515D, #63707A)',
+            background: 'linear-gradient(to right, #45515D, #63707A)',
         },
-        blackGrad: {
-            background: '#000000',
-            background: '-webkit-linear-gradient(to right, #434343, #000000)',
-            background: 'linear-gradient(to right, #434343, #000000)',
-        },
-        whiteGrad: {
-            background:' #8e9eab',
-                background:' -webkit-linear-gradient(to right, #eef2f3, #8e9eab)',
-                background: 'linear-gradient(to right, #eef2f3, #8e9eab)'
+        orangeGrad: {
+            background:' #DF6339',
+                background:' -webkit-linear-gradient(to right, #DF6339, #EF8F6A)',
+                background: 'linear-gradient(to right, #DF6339, #EF8F6A)'
         },
         blueGrad: {
             background: '#373B44',
-            background: '-webkit-linear-gradient(to right, #0000ff, #373B44)',
-            background: 'linear-gradient(to right, #0000ff, #373B44)',
+            background: '-webkit-linear-gradient(to right, #007CC7, #4DA8DA)',
+            background: 'linear-gradient(to right, #007CC7, #4DA8DA)',
         },
     }));

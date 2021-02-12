@@ -1,8 +1,8 @@
 import React from 'react';
 import { useFormik } from 'formik';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
-import {getRequest, postRequest} from '../../../services/axios.config';
+import { getRequest, postRequest } from '../../../services/axios.config';
 import validationSchema from '../validationSchema/validationSchemaLanguage';
 import { setLanguage } from '../../../store/reducer/language';
 import IconButton from '@material-ui/core/IconButton';
@@ -16,6 +16,7 @@ import {
     InputLabel,
     MenuItem,
     Input,
+    Button,
     Grid
 } from '@material-ui/core';
 
@@ -29,11 +30,11 @@ const initialValues = {
 
 const theme = createMuiTheme({
     overrides: {
-      MuiSelect:{
-          root:{
+        MuiSelect: {
+            root: {
                 padding: '10px'
-          }
-      }
+            }
+        }
     }
 });
 
@@ -62,6 +63,9 @@ const useStyles = makeStyles((theme) => ({
 function LanguageForm({ id, removeLanguage }) {
     const classes = useStyles();
     const dispatch = useDispatch()
+    const lang = useSelector(state => state.language)
+
+    console.log('language from redux', lang)
 
     const formik = useFormik({
         initialValues,
@@ -73,18 +77,19 @@ function LanguageForm({ id, removeLanguage }) {
     })
 
     const handleSubmit = async () => {
+        console.log('entered')
         await formik.submitForm()
     }
 
-    const handleChange = (event) => {
-        const name = event.target.name
-        const value = event.target.value
-        formik.setFieldValue(name, value)
-        console.log(event.target.value)
-        console.log(event.target.name)
-    }
+    // const handleChange = (event) => {
+    //     const name = event.target.name
+    //     const value = event.target.value
+    //     formik.setFieldValue(name, value)
+    //     console.log(event.target.value)
+    //     console.log(event.target.name)
+    // }
 
-      // useEffect(() => {
+    // useEffect(() => {
     //     async function fetchApi() {
     //         try{
     //             let response = await postRequest('');
@@ -94,7 +99,7 @@ function LanguageForm({ id, removeLanguage }) {
     //     }
     //      fetchApi()
     // },[])
-    
+
     return (
         <MuiThemeProvider theme={theme}>
             <div class="row">
@@ -120,9 +125,9 @@ function LanguageForm({ id, removeLanguage }) {
                                         <FormControl variant="outlined" className={classes.formControl}>
                                             <InputLabel>Reading</InputLabel>
                                             <Select
-                                                onChange={handleChange}
+                                                onChange={formik.handleChange}
                                                 label="Reading"
-                                                defaultValue={'Beginner'}
+                                                // defaultValue={'Beginner'}
                                                 name='reading'
                                                 className={`${classes.textField} without-padding`}
                                             >
@@ -137,9 +142,9 @@ function LanguageForm({ id, removeLanguage }) {
                                         <FormControl variant="outlined" className={classes.formControl}>
                                             <InputLabel>Writing</InputLabel>
                                             <Select
-                                                onChange={handleChange}
+                                                onChange={formik.handleChange}
                                                 label="Writing"
-                                                defaultValue={'Beginner'}
+                                                // defaultValue={'Beginner'}
                                                 name='writing'
                                             >
                                                 <MenuItem value={'Beginner'}>Beginner</MenuItem>
@@ -153,9 +158,9 @@ function LanguageForm({ id, removeLanguage }) {
                                         <FormControl variant="outlined" className={classes.formControl}>
                                             <InputLabel>Speaking</InputLabel>
                                             <Select
-                                                onChange={handleChange}
+                                                onChange={formik.handleChange}
                                                 label="Speaking"
-                                                defaultValue={'Beginner'}
+                                                // defaultValue={'Beginner'}
                                                 name='speaking'
                                             >
                                                 <MenuItem value={'Beginner'}>Beginner</MenuItem>
@@ -169,9 +174,9 @@ function LanguageForm({ id, removeLanguage }) {
                                         <FormControl variant="outlined" className={classes.formControl}>
                                             <InputLabel>Listening</InputLabel>
                                             <Select
-                                                onChange={handleChange}
+                                                onChange={formik.handleChange}
                                                 label="Listening"
-                                                defaultValue={'Beginner'}
+                                                // defaultValue={'Beginner'}
                                                 name='listening'
                                             >
                                                 <MenuItem value={'Beginner'}>Beginner</MenuItem>
@@ -191,6 +196,17 @@ function LanguageForm({ id, removeLanguage }) {
                                                 <DeleteOutlineRoundedIcon style={{ fontSize: 18 }} className={classes.icon} />
                                             </IconButton>
                                         </Tooltip>
+                                        <span>
+                                            <Button
+                                                onClick={handleSubmit}
+                                                variant="contained"
+                                                type="button"
+                                                color="primary"
+                                                disabled={!formik.isValid || formik.isSubmitting}
+                                            >
+                                                Submit
+        </Button>
+                                        </span>
                                     </Grid>
 
                                 </Grid>
@@ -198,10 +214,6 @@ function LanguageForm({ id, removeLanguage }) {
                         </div>
                     </li>
                 </ul>
-                {/* <div class="row">
-                    <div class="col-md-12"> <span className={`${greyG} ${blackG} ${whiteG} ${blueG} heading-meta style-1` } >Expertise</span>
-                        <h2 class="lonon-heading animate-box" className={`${greyG} ${blackG} ${whiteG} ${blueG} heading-meta style-1` } data-animate-effect="fadeInLeft">Language</h2> </div>
-                </div>  */}
             </div>
         </MuiThemeProvider>
     )

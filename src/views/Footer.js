@@ -9,7 +9,6 @@ function Footer() {
             <div
                 style={{
                     background: colors.gradColor.background,
-                    border: '1px solid black' 
                 }}
                 id="lonon-footer2">
                 <div class="lonon-narrow-content">

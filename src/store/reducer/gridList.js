@@ -1,15 +1,15 @@
-import { createAction, handleActions } from 'redux-actions';
+import { createAction, handleAction } from 'redux-actions';
 
 export const setServiceList = createAction('SET_SERVICE_LIST');
 export const setProjectList = createAction('SET_PROJECT_LIST');
 const INITIAL_STATE = {
     serviceList: [],
-    projectList: []
+    // projectList: []
 }
 
-const gridListReducer = handleActions(
-    {
-        'SET_SERVICE_LIST':
+const gridListReducer = handleAction(
+    
+        'SET_SERVICE_LIST',
         (state, action) => ({
             serviceList: [...state.serviceList, action.payload]
         }),
@@ -17,7 +17,7 @@ const gridListReducer = handleActions(
         // (state, action) => ({
         //     projectList: [state.projectList, ...action.payload]
         // }),
-    },
+   
     INITIAL_STATE
 )
 

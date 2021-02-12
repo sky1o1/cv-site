@@ -13,17 +13,16 @@ export const useStyles = makeStyles((theme) => ({
         marginRight:10,
     },
     btn1: {
-        backgroundColor: '#555',
-     
+        backgroundColor: '#FC698A',
     },
     btn2: {
-        backgroundColor: '#212121',
+        backgroundColor: '#45515D',
     },
     btn3: {
-        backgroundColor: '#fff',
+        backgroundColor: '#DF6339',
     },
     btn4: {
-        backgroundColor: '#0000ff',
+        backgroundColor: '#007CC7',
     },
     btn33: {
         borderColor: '#000'

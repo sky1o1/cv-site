@@ -1,6 +1,6 @@
 import React from 'react';
 import { useFormik } from 'formik';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {getRequest, postRequest} from '../../../services/axios.config';
 import validationSchema from '../validationSchema/validationSchemaSkills';
 import { setSkills } from '../../../store/reducer/skills';
@@ -9,6 +9,7 @@ import {
   Slider,
   makeStyles,
   Grid,
+  Button
 } from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteOutlineRoundedIcon from '@material-ui/icons/DeleteOutlineRounded';
@@ -16,7 +17,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 
 const initialValues = {
   skill: '',
-  rating: '50',
+  rating: 50,
 }
 
 const useClasses = makeStyles(theme => ({
@@ -35,6 +36,8 @@ const useClasses = makeStyles(theme => ({
 
 function SkillForm({ id, removeSkill }) {
   const dispatch = useDispatch()
+  const skill = useSelector(state => state.skills)
+  console.log('skills', skill)
   const classes = useClasses()
   const formik = useFormik({
     initialValues,
@@ -110,7 +113,7 @@ function SkillForm({ id, removeSkill }) {
         </Tooltip>
         </Grid>
       </Grid>
-      {/* <span>
+      <span>
         <Button
           onClick={handleSubmit}
           variant="contained"
@@ -120,7 +123,7 @@ function SkillForm({ id, removeSkill }) {
         >
           Submit
         </Button>
-      </span> */}
+      </span>
     </>
   )
 }

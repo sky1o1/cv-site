@@ -1,6 +1,16 @@
-import React from 'react'
+import React from 'react';
+import { useSelector } from 'react-redux';
+import Footer from './Footer';
+import {useStyles} from './styles/HomeStyle';
 
 const Contact = () => {
+    const colors = useSelector(state => state.colors)
+
+    const pinkGradient = colors.bgColor =='#FC698A' ? 'pinkGrad' : '';
+    const greyGradient = colors.bgColor =='#45515D' ? 'greyGrad' : '';
+    const orangeGradient = colors.bgColor =='#DF6339' ? 'orangeG' : '';
+    const blueGradient = colors.bgColor =='#007CC7' ? 'blueGrad' : '';
+
     return (
         <div id="lonon-main">
        
@@ -21,16 +31,16 @@ const Contact = () => {
                 <div class="row">
                     
                     <div class="col-md-6 mb-30 animate-box" data-animate-effect="fadeInLeft">
-                        <h3 class="lonon-about-heading">Contact Info</h3>
+                        <h3 style={{color: colors.headColor}} class="lonon-about-heading">Contact Info</h3>
                         <p>Qualamy nisl sodales sit amet sapien id, placerat sodales orciter.
                             <br />Vivamus nec magna rhoncus felis, faucibus printy.</p>
-                        <p><b>Phone:</b> +1 650-123-0000</p>
-                        <p><b>Email:</b> dev@lonon.com</p>
-                        <p><b>Address:</b> Camino Real, Palo Alto, CA 94306 US.</p>
+                        <p><b style={{color: colors.headColor}}>Phone:</b> +1 650-123-0000</p>
+                        <p><b style={{color: colors.headColor}}>Email:</b> dev@lonon.com</p>
+                        <p><b style={{color: colors.headColor}}>Address:</b> Camino Real, Palo Alto, CA 94306 US.</p>
                     </div>
                    
                     <div class="col-md-6 animate-box" data-animate-effect="fadeInLeft">
-                        <h3 class="lonon-about-heading">How Can I Help You?</h3>
+                        <h3 style={{color: colors.headColor}} class="lonon-about-heading">How Can I Help You?</h3>
                         <p>We would like to hear from you</p>
                         {/* <form method="post" class="row">
                             <div class="col-sm-6">
@@ -55,26 +65,7 @@ const Contact = () => {
                 </div>
             </div>
         </div>
-     
-        <div id="lonon-footer2">
-            <div class="lonon-narrow-content">
-                <div class="row">
-                    <div class="col-md-4 animate-box" data-animate-effect="fadeInLeft">
-                        <p class="lonon-lead">&copy; 2019 Lonon. All rights reserved</p>
-                    </div>
-                    <div class="col-md-4 animate-box" data-animate-effect="fadeInLeft">
-                        <h2 class="text-center">Lonon F. Smith</h2> </div>
-                    <div class="col-md-4 animate-box" data-animate-effect="fadeInLeft">
-                        <ul class="social-network">
-                            <li><a href="#"><i class="ti-facebook font-14px black-icon"></i></a></li>
-                            <li><a href="#"><i class="ti-twitter-alt font-14px black-icon"></i></a></li>
-                            <li><a href="#"><i class="ti-instagram font-14px black-icon"></i></a></li>
-                            <li><a href="#"><i class="ti-linkedin font-14px black-icon"></i></a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
+     <Footer />
     </div>
     )
 }
