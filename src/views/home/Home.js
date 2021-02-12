@@ -33,10 +33,10 @@ function Home() {
     const profile = useSelector(state => state.profile)
     const colors = useSelector(state => state.colors)
 
-    const greyGradient = colors.bgColor =='#555' ? `${classes.greyGrad}` : '';
-    const blackGradient = colors.bgColor =='#000' ? `${classes.blackGrad}` : '';
-    const whiteGradient = colors.bgColor =='#fff' ? `${classes.whiteGrad}` : '';
-    const blueGradient = colors.bgColor =='#0000ff' ? `${classes.blueGrad}` : '';
+    const pinkGradient = colors.bgColor =='#FC698A' ? 'pinkGrad' : '';
+    const greyGradient = colors.bgColor =='#45515D' ? 'greyGrad' : '';
+    const orangeGradient = colors.bgColor =='#DF6339' ? 'orangeG' : '';
+    const blueGradient = colors.bgColor =='#007CC7' ? 'blueGrad' : '';
 
     function handleChange(event) {
         const inputFieldName = event.currentTarget.name
@@ -117,7 +117,7 @@ function Home() {
                                     />
                                 </form>
                                 <div
-                                className={`${greyGradient} ${blackGradient} ${whiteGradient} ${blueGradient} cardvisit`} 
+                                className={`${pinkGradient} ${greyGradient} ${orangeGradient} ${blueGradient} cardvisit`} 
                                 >
                                     <h3 style={{color: colors.textColor}}> {profile.fullName}</h3>
                                     <p style={{color: colors.textColor}}>{profile.profession}</p>
@@ -189,9 +189,9 @@ function Home() {
                     </div>
                 </div>
                 <div class="divider1"></div>
-                <Skills color={colors} greyG={greyGradient} blackG={blackGradient} whiteG={whiteGradient} blueG={blueGradient} />
+                <Skills color={colors}  />
                 <div class="divider1"></div>
-                <Language color={colors} greyG={greyGradient} blackG={blackGradient} whiteG={whiteGradient} blueG={blueGradient} />
+                <Language color={colors} />
             </form>
             <Footer />
         </div>

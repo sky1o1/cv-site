@@ -29,7 +29,7 @@ export class GridProvider extends Component {
     gridList = JSON.parse(gridList)
     super(props);
     this.state = {
-      items: [1,2],
+      items: sampleItems,
       moveItem: this.moveItem,
       setItems: this.setItems
     };
@@ -69,13 +69,13 @@ export class GridProvider extends Component {
   };
 }
 
-const mapStateToProps = (state) => ({
-  list: state.gridList
-})
+// const mapStateToProps = (state) => ({
+//   list: state.gridList
+// })
 
-export default connect(
-  mapStateToProps,
-  null
-)(withRouter(GridContext))
+// export default connect(
+//   mapStateToProps,
+//   null
+// )(withRouter(GridContext))
 
-// export default GridContext;
+export default GridContext;
