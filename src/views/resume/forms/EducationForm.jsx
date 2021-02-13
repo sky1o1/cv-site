@@ -53,6 +53,21 @@ function EducationForm({ id, removeEdu }) {
         initialValues,
         onSubmit: (values) => {
             dispatch(setEducation(values))
+            console.log(values)
+            async function fetchApi() {
+                try{
+                    await postRequest('/api/auth/add-education',{
+                        university: values.university,
+                        course: values.degree,
+                        course_description: values.description,
+                        start_date: values.startYear,
+                        end_date: values.endyear
+                    });
+                }catch(err){
+                    console.log(err)
+                }
+            }
+             fetchApi()
         },
         validationSchema
     })
@@ -60,17 +75,6 @@ function EducationForm({ id, removeEdu }) {
     const handleSubmit = async () => {
         await formik.submitForm()
     }
-
-      // useEffect(() => {
-    //     async function fetchApi() {
-    //         try{
-    //             let response = await postRequest('');
-    //         }catch(err){
-    //             console.log(err)
-    //         }
-    //     }
-    //      fetchApi()
-    // },[])
     
     return (
         <>

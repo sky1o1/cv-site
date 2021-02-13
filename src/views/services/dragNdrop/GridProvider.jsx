@@ -17,15 +17,12 @@ function moveElement(array, index, offset) {
   return move(array, index, newIndex);
 }
 
-// Context
-
-const GridContext = createContext({ items: [] });
 
 export class GridProvider extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      items: [1,2],
+      items: sampleItems,
       moveItem: this.moveItem,
       setItems: this.setItems
     };
@@ -62,4 +59,6 @@ export class GridProvider extends Component {
   };
 }
 
-export default GridContext;
+
+
+export default connect(mapStateToProps,null)(GridProvider);

@@ -70,10 +70,11 @@ function ServiceForm({removeService, id, index}) {
     // },[])
 
     return (
-        <>
-                        <Card className={classes.root} variant="outlined" >
-                            <CardContent  >
-                                <form>
+  <>
+  <div className="">
+
+  </div>
+       
                                     <TextField
                                         name='service'
                                         size='small'
@@ -94,15 +95,11 @@ function ServiceForm({removeService, id, index}) {
                                         helperText={formik.touched.description && formik.errors.description}
                                         onChange={formik.handleChange}
                                     />
-                                </form>
-                            </CardContent>
-                        </Card>
-                        <span>
+                              
                             <Button variant="contained" type="button" color="secondary" onClick={() => removeService(id)} >
                                 X
                              </Button>
-                        </span>
-                        <span>
+                    
                             <Button 
                             variant="contained" 
                             type="button" 
@@ -112,8 +109,10 @@ function ServiceForm({removeService, id, index}) {
                             >
                                 Submit
                             </Button>
-                        </span>
-                        </>
+       
+                        
+               </>         
+            
 
     )
 }

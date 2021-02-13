@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { useFormik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
 import {getRequest, postRequest} from '../../../services/axios.config';
@@ -37,12 +37,25 @@ const useClasses = makeStyles(theme => ({
 function SkillForm({ id, removeSkill }) {
   const dispatch = useDispatch()
   const skill = useSelector(state => state.skills)
-  console.log('skills', skill)
   const classes = useClasses()
   const formik = useFormik({
     initialValues,
     onSubmit: (values) => {
+      console.log(values.skill)
+      console.log(values.rating)
       dispatch(setSkills(values))
+
+  //   async function fetchApi() {
+  //     try{
+  //         await postRequest('/api/auth/add-skills',{
+  //           skillName: values.skill,
+  //           skills_order: values.rating
+  //         });
+  //     }catch(err){
+  //         console.log(err)
+  //     }
+  // }
+  //  fetchApi()
     },
     validationSchema
   })
@@ -56,16 +69,16 @@ function SkillForm({ id, removeSkill }) {
     formik.setFieldValue(name, value)
   }
 
-    // useEffect(() => {
-    //     async function fetchApi() {
-    //         try{
-    //             let response = await postRequest('');
-    //         }catch(err){
-    //             console.log(err)
-    //         }
-    //     }
-    //      fetchApi()
-    // },[])
+    useEffect(() => {
+      async function fetchApi() {
+        try{
+            let response = await getRequest('');
+        }catch(err){
+            console.log(err)
+        }
+    }
+     fetchApi()
+    },[])
     
   return (
     <>
@@ -75,11 +88,10 @@ function SkillForm({ id, removeSkill }) {
             multiline
             size='small'
             placeholder="Skill"
-            name='skill'
             variant="outlined"
             error={Boolean(formik.touched.skill && formik.errors.skill)}
             helperText={formik.touched.skill && formik.errors.skill}
-            onChange={formik.handleChange}
+            onChange={formik.handleChange('skill')}
             onBlur={formik.handleBlur}
           />
         

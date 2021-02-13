@@ -65,19 +65,27 @@ function LanguageForm({ id, removeLanguage }) {
     const dispatch = useDispatch()
     const lang = useSelector(state => state.language)
 
-    console.log('language from redux', lang)
-
     const formik = useFormik({
         initialValues,
         onSubmit: (values) => {
             console.log(values)
             dispatch(setLanguage(values))
+
+            // async function fetchApi() {
+            //     try{
+            //         await postRequest('/api/auth/add-language',{
+
+            //         });
+            //     }catch(err){
+            //         console.log(err)
+            //     }
+            // }
+            //  fetchApi()
         },
         validationSchema
     })
 
     const handleSubmit = async () => {
-        console.log('entered')
         await formik.submitForm()
     }
 
@@ -89,16 +97,6 @@ function LanguageForm({ id, removeLanguage }) {
     //     console.log(event.target.name)
     // }
 
-    // useEffect(() => {
-    //     async function fetchApi() {
-    //         try{
-    //             let response = await postRequest('');
-    //         }catch(err){
-    //             console.log(err)
-    //         }
-    //     }
-    //      fetchApi()
-    // },[])
 
     return (
         <MuiThemeProvider theme={theme}>
