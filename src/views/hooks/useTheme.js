@@ -1,5 +1,6 @@
 import {useState} from 'react';
 import {useDispatch} from 'react-redux';
+import {postRequest} from '../../services/axios.config';
 import { setColors} from '../../store/reducer/colors';
 
 const THEME_COLOR = {

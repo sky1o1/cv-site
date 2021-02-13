@@ -42,7 +42,7 @@ function Sidebar() {
     const history = useHistory()
     const wrapperRef = useRef(null)
     const profile = useSelector(state => state.profile)
-    const [bgColor1, textColor1, headColor, textColor2, gradColor, updateColor] = useTheme('pinkColor')
+    const [bgColor1, textColor1, headColor, textColor2, gradColor, updateColor] = useTheme('greyColor')
     const formik = useFormik({
         initialValues: initValues,
         onChange: (event) => {
@@ -187,7 +187,7 @@ return (
                 <Grid container className={classes.btnDiv} >
                 <span  className={ clsx(classes.btn, classes.btn2)} onClick={() => updateColor('greyColor')} />
                 <span  className={ clsx(classes.btn, classes.btn4)} onClick={() => updateColor('blueColor')} />
-                <span  className={ clsx(classes.btn, classes.btn3, classes.btn33)} onClick={() => updateColor('orangeColor')} />
+                <span  className={ clsx(classes.btn, classes.btn3)} onClick={() => updateColor('orangeColor')} />
                 <span className={ clsx(classes.btn, classes.btn1)} onClick={() => updateColor('pinkColor')} />
                 </Grid>
                 </div>

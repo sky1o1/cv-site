@@ -193,6 +193,8 @@ import React, { useState, useRef, useContext } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
 import {setServiceList} from '../../store/reducer/gridList';
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 import ServiceForm from './ServiceForm';
 import Footer from '../Footer';
 import DragItem from "./dragNdrop/DragItem";
@@ -228,21 +230,19 @@ const useStyles = makeStyles({
 });
 
 
-function Service() {
+function Service(props) {
     const classes = useStyles()
     const dispatch = useDispatch()
     const [formList, setFormList] = useState([])
     const colors = useSelector(state => state.colors)
+    const gridArray = useSelector(state => state.gridList)
     const { items, moveItem } = useContext(GridContext);
-
+    
     function handleAddExp() {
         setFormList(prevFormList => ([
             ...prevFormList, uuidv4()
         ]))
-        console.log('entered')
-        console.log(formList)
-        localStorage.setItem('gridList',  JSON.stringify(formList))
-        dispatch(setServiceList(formList))
+        dispatch(setServiceList(uuidv4()))
     }
 
     function handleRemoveExp(id) {
@@ -252,10 +252,10 @@ function Service() {
         setFormList(formListClone)
     }
 
+    console.log('--------uuid------',[formList])
     return (
         <>
             <div id="lonon-main">
-
                 <div class="lonon-services">
                     <div class="container-fluid">
                         <div class="row">
@@ -275,11 +275,11 @@ function Service() {
                             </Grid>
 
                             <Grid>
-                                {items.map(item => (
+                                {items.map((item, index) => (
                                     <DragItem key={item.id} id={item.id} onMoveItem={moveItem}>
                                         <GridItem>
                                             <GridImage >
-                                            <ServiceForm key={item.id}  removeService={handleRemoveExp} id={item.id} />
+                                            <ServiceForm key={item.id} index={index} removeService={handleRemoveExp} id={item.id} />
                                             </GridImage>
                                         </GridItem>
                                     </DragItem>

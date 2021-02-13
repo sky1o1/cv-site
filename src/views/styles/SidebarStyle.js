@@ -24,7 +24,4 @@ export const useStyles = makeStyles((theme) => ({
     btn4: {
         backgroundColor: '#007CC7',
     },
-    btn33: {
-        borderColor: '#000'
-    },
 }))

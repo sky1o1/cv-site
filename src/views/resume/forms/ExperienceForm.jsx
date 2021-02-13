@@ -50,7 +50,6 @@ const useClasses = makeStyles(theme => ({
     }
 }))
 
-
 function ExperienceForm({ id, removeExp }) {
     const dispatch = useDispatch()
     const classes = useClasses()
@@ -58,6 +57,21 @@ function ExperienceForm({ id, removeExp }) {
         initialValues,
         onSubmit: (values) => {
             dispatch(setExperience(values))
+
+            async function fetchApi() {
+                try{
+                    await postRequest('/api/auth/add-experience',{
+                        company_name: values.company,
+                        post: values.post,
+                        description: values.description,
+                        start_date: values.startYear,
+                        end_date: values.endyear 
+                    });
+                }catch(err){
+                    console.log(err)
+                }
+            }
+             fetchApi()
         },
         validationSchema
     })
@@ -66,17 +80,6 @@ function ExperienceForm({ id, removeExp }) {
         await formik.submitForm()
     }
 
-      // useEffect(() => {
-    //     async function fetchApi() {
-    //         try{
-    //             let response = await postRequest('');
-    //         }catch(err){
-    //             console.log(err)
-    //         }
-    //     }
-    //      fetchApi()
-    // },[])
-    
     return (
         <>
             <ul class="lonon-timeline">
