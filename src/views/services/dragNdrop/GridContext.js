@@ -25,7 +25,12 @@ export class GridProvider extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      items: [1,2],
+      items: [{
+        id:'1'
+      },
+      {
+        id:'2'
+    }],
       moveItem: this.moveItem,
       setItems: this.setItems
     };

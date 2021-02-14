@@ -42,7 +42,7 @@ function Sidebar() {
     const history = useHistory()
     const wrapperRef = useRef(null)
     const profile = useSelector(state => state.profile)
-    const [bgColor1, textColor1, headColor, textColor2, gradColor, updateColor] = useTheme('greyColor')
+    const [bgColor1, textColor1, headColor, textColor2, gradColor, updateColor] = useTheme('orangeColor')
     const formik = useFormik({
         initialValues: initValues,
         onChange: (event) => {
@@ -87,20 +87,7 @@ function Sidebar() {
 return (
     <>
         <div>
-            {/* <AppBar style={{
-                backgroundColor: bgColor.backColor,
-                color: bgColor.color 
-            }} position="static">
-                <Toolbar>
-                    <IconButton edge="end" className={classes.menuButton} color="inherit" aria-label="menu">
-                        <MenuIcon />
-                    </IconButton>
-                    <Typography variant="h6" className={classes.title}>
-                        News
-          </Typography>
-                    <Button color="inherit">Login</Button>
-                </Toolbar>
-            </AppBar> */}
+           
 
             <aside
             id='lonon-aside' 
@@ -183,13 +170,11 @@ return (
                     </ul>
                 </nav>
 
-                <div class="lonon-footer">
-                <Grid container className={classes.btnDiv} >
+                <div className={classes.btnDiv}>
                 <span  className={ clsx(classes.btn, classes.btn2)} onClick={() => updateColor('greyColor')} />
                 <span  className={ clsx(classes.btn, classes.btn4)} onClick={() => updateColor('blueColor')} />
                 <span  className={ clsx(classes.btn, classes.btn3)} onClick={() => updateColor('orangeColor')} />
                 <span className={ clsx(classes.btn, classes.btn1)} onClick={() => updateColor('pinkColor')} />
-                </Grid>
                 </div>
                
             </aside>

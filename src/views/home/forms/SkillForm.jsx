@@ -125,7 +125,7 @@ function SkillForm({ id, removeSkill }) {
         </Tooltip>
         </Grid>
       </Grid>
-      <span>
+      {/* <span>
         <Button
           onClick={handleSubmit}
           variant="contained"
@@ -135,7 +135,7 @@ function SkillForm({ id, removeSkill }) {
         >
           Submit
         </Button>
-      </span>
+      </span> */}
     </>
   )
 }

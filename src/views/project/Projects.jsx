@@ -45,7 +45,7 @@ const reorder = (list, startIndex, endIndex) => {
 
 function Projects() {
     const classes = useStyles()
-    const [formList, setFormList] = useState([])
+    const [formList, setFormList] = useState([1,2])
     const colors = useSelector(state => state.colors)
 
     function handleAdd() {
@@ -85,43 +85,27 @@ function Projects() {
                             <div class="col-md-12"> <span style={{ color: colors.headColor }} class="heading-meta style-1">Take a Look at</span>
                                 <h2 class="lonon-heading animate-box" style={{ color: colors.headColor }} data-animate-effect="fadeInLeft">My Projects</h2> </div>
                         </div>
-
-                        <Grid className={classes.container} container spacing={3}>
-                            <Grid list className={classes.gridList} xs={3}>
+                        <div class="row">
                                 <Button variant="contained" style={{ display: 'none' }} type="button" color="primary" >
                                     +
                         </Button>
-                                <Card onClick={() => handleAdd()} className={classes.root} variant="outlined">
+                                {/* <Card onClick={() => handleAdd()} className={classes.root} variant="outlined">
                                     <CardContent >
                                         <img src='/static/images/plus.jpg' />
                                     </CardContent>
-                                </Card>
-                            </Grid>
-                            <DragDropContext onDragEnd={onDragEnd}>
-                                <Droppable droppableId="characters" >
-                                    {(provided) => (
-                                        <Grid {...provided.droppableProps} ref={provided.innerRef} list className={classes.gridList} list xs={3}>
-                                            {formList.map((formId, index) => (
-                                                <Draggable key={formId} draggableId={formId} index={index}>
-                                                    {(provided) => (
-                                                        <div
-                                                            ref={provided.innerRef}
-                                                            {...provided.draggableProps}
-                                                            {...provided.dragHandleProps}
-                                                            >
-                                                        <ProjectForm removeProject={handleRemove} />
-                                                        </div>  
-                                            )}
-                                                </Draggable>
-                                    ))
-                                            }
-
-                                            {provided.placeholder}
-                                        </Grid>
-                                    )}
-                                </Droppable>
-                            </DragDropContext>
-                        </Grid>
+                                </Card> */}
+                                 <div class="col-md-4">
+                            <div class="lonon-feature animate-box" data-animate-effect="fadeInLeft" onClick={handleAdd} >
+                                <div class="lonon-icon"> <span class="et-shield font-35px"></span> </div>
+                                <div class="lonon-text">
+                                    <img src='/static/images/plus.jpg' style={{width:105}}/></div>
+                            </div>
+                </div>
+                { formList.map(formId => (
+                        <ProjectForm removeProject={handleRemove} />
+                    ))}
+                            
+                </div>
                 </div>
 
             </div>

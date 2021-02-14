@@ -1431,7 +1431,9 @@ ul.social-network li {
     margin-bottom: 30px;
     position: relative;
     text-align: center;
-    padding: 30px;
+    padding-top: 10px;
+    padding-bottom: 20px;
+    
     border: 1px solid #ececec;
 }
 

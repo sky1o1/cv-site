@@ -21,11 +21,11 @@ import {
 } from '@material-ui/core';
 
 const initialValues = {
-    language: '',
-    listening: '',
-    writing: '',
-    speaking: '',
-    reading: ''
+    language: 'Beginner',
+    listening: 'Beginner',
+    writing: 'Beginner',
+    speaking: 'Beginner',
+    reading: 'Beginner'
 }
 
 const theme = createMuiTheme({
@@ -125,7 +125,7 @@ function LanguageForm({ id, removeLanguage }) {
                                             <Select
                                                 onChange={formik.handleChange}
                                                 label="Reading"
-                                                // defaultValue={'Beginner'}
+                                                defaultValue={'Beginner'}
                                                 name='reading'
                                                 className={`${classes.textField} without-padding`}
                                             >
@@ -142,7 +142,7 @@ function LanguageForm({ id, removeLanguage }) {
                                             <Select
                                                 onChange={formik.handleChange}
                                                 label="Writing"
-                                                // defaultValue={'Beginner'}
+                                                defaultValue={'Beginner'}
                                                 name='writing'
                                             >
                                                 <MenuItem value={'Beginner'}>Beginner</MenuItem>
@@ -158,7 +158,7 @@ function LanguageForm({ id, removeLanguage }) {
                                             <Select
                                                 onChange={formik.handleChange}
                                                 label="Speaking"
-                                                // defaultValue={'Beginner'}
+                                                defaultValue={'Beginner'}
                                                 name='speaking'
                                             >
                                                 <MenuItem value={'Beginner'}>Beginner</MenuItem>
@@ -174,7 +174,7 @@ function LanguageForm({ id, removeLanguage }) {
                                             <Select
                                                 onChange={formik.handleChange}
                                                 label="Listening"
-                                                // defaultValue={'Beginner'}
+                                                defaultValue={'Beginner'}
                                                 name='listening'
                                             >
                                                 <MenuItem value={'Beginner'}>Beginner</MenuItem>
@@ -194,7 +194,7 @@ function LanguageForm({ id, removeLanguage }) {
                                                 <DeleteOutlineRoundedIcon style={{ fontSize: 18 }} className={classes.icon} />
                                             </IconButton>
                                         </Tooltip>
-                                        <span>
+                                        {/* <span>
                                             <Button
                                                 onClick={handleSubmit}
                                                 variant="contained"
@@ -204,7 +204,7 @@ function LanguageForm({ id, removeLanguage }) {
                                             >
                                                 Submit
         </Button>
-                                        </span>
+                                        </span> */}
                                     </Grid>
 
                                 </Grid>
