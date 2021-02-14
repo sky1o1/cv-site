@@ -4,6 +4,7 @@ export const useStyles = makeStyles((theme) => ({
     btnDiv: {
         display:'flex',
         justifyContent: 'center',
+        marginTop: 30
     },
     btn: {
         borderRadius: '50%',

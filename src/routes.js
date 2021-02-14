@@ -12,6 +12,7 @@ import Draggable from './views/project/ProjectTest';
 
 const Routes = () => (
     <div>
+        
         <Route exact path='/' component={Index}></Route>
         <Route exact path='/home' component={Home} ></Route>
         <Route exact path='/resume' component={Resume}></Route>
