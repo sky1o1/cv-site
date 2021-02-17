@@ -96,6 +96,56 @@ function LanguageForm({ id, removeLanguage, colors }) {
     //     console.log(event.target.value)
     //     console.log(event.target.name)
     // }
+    const TimeLine = styled.ul`
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    position: relative;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    margin-right: 20px;
+    &:hover{
+        border: 1px solid grey;
+        border-radius: 20px;
+    }
+    &:active{
+        border: 1px solid grey;
+        border-radius: 20px;
+    }
+    &:before{
+        content: "";
+  position: absolute;
+  width: 1px;
+  left: 10%;
+  top: 0;
+  bottom: 0;
+  background-color: #ececec;
+    }
+    `;
+
+    const Content = styled.div`
+    padding: 0 50px;
+  position: relative;
+    `;
+
+    const Date = styled.div`
+    margin-left: -16px;
+    position: relative;
+  display: inline-block;
+  padding: 0 12px;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  margin-bottom: 15px;
+  color: #fff;
+  background-color: #101010;
+  /* height: 22px; */
+  line-height: 22px;
+  margin-left: -12px;
+  -webkit-transition: all .3s ease;
+  transition: all .3s ease;
+    `;
+
 
     const ButtonA = styled.div`
             position: absolute;
@@ -110,19 +160,20 @@ function LanguageForm({ id, removeLanguage, colors }) {
             margin-left: -10px;
             border-radius: 50%;
             border: 0;
-            &:hover{
+            ${TimeLine} :hover &{
                 background-color:${props => props.primary ? "palevioletred" : `${colors.bgColor}`};
-                transform: scale(1.5);
+            }
+            ${TimeLine} :hover &{
+                background-color:${props => props.primary ? "palevioletred" : `${colors.bgColor}`};
             }
             `;
 
     return (
         <MuiThemeProvider theme={theme}>
             <div class="row">
-                <ul class="lonon-timeline" style={{ width: '100%' }}>
+                <TimeLine >
                     <li >
-                        <div class="lonon-timeline-content"
-                        >
+                        <div>
                             <ButtonA >
 
                             </ButtonA>
@@ -135,7 +186,7 @@ function LanguageForm({ id, removeLanguage, colors }) {
                                     style={{
                                         backgroundColor: colors.bgColor
                                     }}
-                                    className="lonon-timeline-date"
+                                    className={Date}
                                     inputProps={{ style: { color: '#fff', fontSize: 15, fontWeight: '500' } }}
                                     InputLabelProps={{ style: { color: '#fff' } }}
                                     error={Boolean(formik.touched.language && formik.errors.language)}
@@ -236,7 +287,7 @@ function LanguageForm({ id, removeLanguage, colors }) {
                             </form>
                         </div>
                     </li>
-                </ul>
+                </TimeLine>
             </div>
         </MuiThemeProvider>
     )

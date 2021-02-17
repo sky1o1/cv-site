@@ -1940,35 +1940,7 @@ ul.social-network li {
   padding: 0 50px;
   position: relative;
 }
-/* .lonon-timeline > li .lonon-timeline-content:before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 8px;
-  width: 14px;
-  height: 14px;
-  background-color: #ececec;
-  -webkit-transition: all .3s ease;
-  transition: all .3s ease;
-  z-index: 100;
-  margin-left: -7px;
-  border-radius: 50%;
-} */
-.lonon-timeline > li .lonon-timeline-content h4 {
-  margin-top: 0;
-  margin-bottom: 10px;
-  font-size: 15px;
-}
-.lonon-timeline > li .lonon-timeline-content h5 {
-  display: block;
-  margin-top: 0;
-  margin-bottom: 5px;
-  font-size: 11px;
-  text-transform: uppercase;
-  color: #888;
-  letter-spacing: 0.05em;
-  font-weight: 400;
-}
+
 .lonon-timeline > li .lonon-timeline-content p {
   margin-top: 10px;
   margin-bottom: 0;
@@ -1984,7 +1956,6 @@ ul.social-network li {
   color: #fff;
   background-color: #101010;
   /* height: 22px; */
-
   line-height: 22px;
   margin-left: -12px;
   -webkit-transition: all .3s ease;
