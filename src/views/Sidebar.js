@@ -1,14 +1,14 @@
 import React, { useRef, useEffect } from 'react';
 import firebase from 'firebase/app'
 import { useDispatch, useSelector } from 'react-redux';
-import {Link, useHistory} from 'react-router-dom';
-import {getRequest, postRequest} from '../services/axios.config';
+import { Link, useHistory } from 'react-router-dom';
+import { getRequest, postRequest } from '../services/axios.config';
 import { setProfile, setProfileImage } from '../store/reducer/profile';
-import {useStyles} from './styles/SidebarStyle';
+import { useStyles } from './styles/SidebarStyle';
 import useTheme from './hooks/useTheme';
 import Routes from '../routes';
 import clsx from 'clsx';
-import {TextField} from '@material-ui/core/';
+import { TextField } from '@material-ui/core/';
 import '../new.css';
 import '../animate.css';
 import '../bootstrap.css';
@@ -61,40 +61,40 @@ function Sidebar() {
     //     }
     //      fetchApi()
     // },[])
-   
+
     const logout = () => {
         firebase.auth().signOut().then(function () {
             console.log('logged out')
             history.push('/login')
-        
-          }).catch(function (error) {
-            console.log('error logging out')
-          });
-          console.log('logged out')
-    }
-   
 
-return (
-    <>
-        <div>
-            <aside
-            id='lonon-aside' 
-            style={{
-                background: gradColor.background,
-            }}
-            >
-                <form onSubmit={formik.handleSubmit}>
-                    <section id="lonon-logo" style={{cursor:'pointer',marginBottom:2}}>
-                        <div 
-                        onClick={() => wrapperRef.current.click()}  
-                         >
-                            {
-                                formik.initialValues.profileImage &&
-                                <img src={formik.values.profileImage} />
-                            }
-                        </div>
-                    </section>
-                    <input
+        }).catch(function (error) {
+            console.log('error logging out')
+        });
+        console.log('logged out')
+    }
+
+
+    return (
+        <>
+            <div>
+                <aside
+                    id='lonon-aside'
+                    style={{
+                        background: gradColor.background,
+                    }}
+                >
+                    <form onSubmit={formik.handleSubmit}>
+                        <section id="lonon-logo" style={{ cursor: 'pointer', marginBottom: 2 }}>
+                            <div
+                                onClick={() => wrapperRef.current.click()}
+                            >
+                                {
+                                    formik.initialValues.profileImage &&
+                                    <img src={formik.values.profileImage} />
+                                }
+                            </div>
+                        </section>
+                        <input
                             fullWidth
                             type="file"
                             name="profileImage"
@@ -115,59 +115,59 @@ return (
                             rowsMax={4}
                             name='fullName'
                             inputProps={{ disableUnderline: true }}
-                            inputProps={{ style: { color: textColor2,fontSize:20,fontWeight:700,textAlign:'center'} }}
+                            inputProps={{ style: { color: textColor2, fontSize: 20, fontWeight: 700, textAlign: 'center' } }}
                             error={Boolean(formik.touched.fullName && formik.errors.fullName)}
                             helperText={formik.touched.fullName && formik.errors.fullName}
                             onBlur={formik.handleBlur}
                             value={formik.values.fullName}
                             onChange={handleChange}
-                            
+
                         />
-                        < div style={{textAlign:'center',padding:0}}> 
-                        <TextField
-                            fullWidth
-                            placeholder="Profession"
-                            multiline
-                            rowsMax={2}
-                            name='profession'
-                            inputProps={{ style: { color: textColor2 ,fontSize:13 ,textAlign:'center'} }}
-                            InputLabelProps={{ style: { color: textColor1,} }}
-                            error={Boolean(formik.touched.profession && formik.errors.profession)}
-                            helperText={formik.touched.profession && formik.errors.profession}
-                            onBlur={formik.handleBlur}
-                            value={formik.values.profession}
-                            onChange={handleChange}
-                        />
+                        < div style={{ textAlign: 'center', padding: 0 }}>
+                            <TextField
+                                fullWidth
+                                placeholder="Profession"
+                                multiline
+                                rowsMax={2}
+                                name='profession'
+                                inputProps={{ style: { color: textColor2, fontSize: 13, textAlign: 'center' } }}
+                                InputLabelProps={{ style: { color: textColor1, } }}
+                                error={Boolean(formik.touched.profession && formik.errors.profession)}
+                                helperText={formik.touched.profession && formik.errors.profession}
+                                onBlur={formik.handleBlur}
+                                value={formik.values.profession}
+                                onChange={handleChange}
+                            />
                         </div>
-                </form>
-                <nav id="lonon-main-menu">
-                    <ul>
-                        <li><Link to='/home' style={{ color: textColor2 }}>Home</Link></li>
-                        <li><Link to='/resume' style={{ color: textColor2 }}>Resume</Link></li>
-                        <li><Link to='/portfolio' style={{ color: textColor2 }}>Portfolio</Link> </li>
-                        <li><Link to='/services' style={{ color: textColor2 }}>Services</Link></li>
-                        <li><Link to='/contact' style={{ color: textColor2 }}>Contact</Link> </li>
-                        <li>
-                            <button onClick={logout}>
-                             Logout
+                    </form>
+                    <nav id="lonon-main-menu">
+                        <ul>
+                            <li><Link to='/home' style={{ color: textColor2 }}>Home</Link></li>
+                            <li><Link to='/resume' style={{ color: textColor2 }}>Resume</Link></li>
+                            <li><Link to='/portfolio' style={{ color: textColor2 }}>Portfolio</Link> </li>
+                            <li><Link to='/services' style={{ color: textColor2 }}>Services</Link></li>
+                            <li><Link to='/contact' style={{ color: textColor2 }}>Contact</Link> </li>
+                            <li>
+                                <button onClick={logout}>
+                                    Logout
                             </button>
-                        </li>
-                    </ul>
-                </nav>
+                            </li>
+                        </ul>
+                    </nav>
 
-                <div className={classes.btnDiv}>
-                <span  className={ clsx(classes.btn, classes.btn2)} onClick={() => updateColor('greyColor')} />
-                <span  className={ clsx(classes.btn, classes.btn4)} onClick={() => updateColor('blueColor')} />
-                <span  className={ clsx(classes.btn, classes.btn3)} onClick={() => updateColor('orangeColor')} />
-                <span className={ clsx(classes.btn, classes.btn1)} onClick={() => updateColor('pinkColor')} />
-                </div>
-               
-            </aside>
-            <Routes />
-        </div>
-    </>
+                    <div className={classes.btnDiv}>
+                        <span className={clsx(classes.btn, classes.btn2)} onClick={() => updateColor('greyColor')} />
+                        <span className={clsx(classes.btn, classes.btn4)} onClick={() => updateColor('blueColor')} />
+                        <span className={clsx(classes.btn, classes.btn3)} onClick={() => updateColor('orangeColor')} />
+                        <span className={clsx(classes.btn, classes.btn1)} onClick={() => updateColor('pinkColor')} />
+                    </div>
 
-)
+                </aside>
+                <Routes />
+            </div>
+        </>
+
+    )
 }
 
 export default Sidebar

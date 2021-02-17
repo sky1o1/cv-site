@@ -8,7 +8,7 @@ import Skills from './Skills';
 import Language from './Language';
 import {
     TextField,
-    Grid
+    Grid,
 } from '@material-ui/core';
 import EmailOutlinedIcon from '@material-ui/icons/EmailOutlined';
 import PhoneIphoneOutlinedIcon from '@material-ui/icons/PhoneIphoneOutlined';
@@ -70,7 +70,11 @@ function Home() {
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-md-6" style={{ cursor: 'pointer' }}>
-                                <div className="ImageBox" onClick={() => wrapperRef.current.click()}   >
+                                <div
+                                // style={{
+                                //      height: 300,
+                                // }} 
+                                className="ImageBox" onClick={() => wrapperRef.current.click()}   >
                                     {
                                         formik.initialValues.image3 &&
                                         <img src={formik.values.image3} />

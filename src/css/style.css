@@ -1957,7 +1957,7 @@ ul.social-network li {
   letter-spacing: 0.05em;
   margin-bottom: 15px;
   color: #fff;
-  background-color: #101010;
+  /* background-color: #101010; */
   height: 22px;
   line-height: 22px;
   margin-left: -12px;

@@ -8,6 +8,7 @@ import { setLanguage } from '../../../store/reducer/language';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteOutlineRoundedIcon from '@material-ui/icons/DeleteOutlineRounded';
 import Tooltip from '@material-ui/core/Tooltip';
+import styled from 'styled-components';
 import {
     makeStyles,
     TextField,
@@ -60,11 +61,10 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-function LanguageForm({ id, removeLanguage }) {
+function LanguageForm({ id, removeLanguage, colors }) {
     const classes = useStyles();
     const dispatch = useDispatch()
-    const lang = useSelector(state => state.language)
-
+    console.log(colors)
     const formik = useFormik({
         initialValues,
         onSubmit: (values) => {
@@ -97,19 +97,44 @@ function LanguageForm({ id, removeLanguage }) {
     //     console.log(event.target.name)
     // }
 
+    const ButtonA = styled.div`
+            position: absolute;
+            background-color:#000;
+            left: 0;
+            top: 8px;
+            width: 20px;
+            height: 20px;
+            -webkit-transition: all .3s ease;
+            transition: all .3s ease;
+            z-index: 100;
+            margin-left: -10px;
+            border-radius: 50%;
+            border: 0;
+            &:hover{
+                background-color:${props => props.primary ? "palevioletred" : `${colors.bgColor}`};
+                transform: scale(1.5);
+            }
+            `;
 
     return (
         <MuiThemeProvider theme={theme}>
             <div class="row">
-                <ul class="lonon-timeline " style={{ width: '100%' }}>
-                    <li>
-                        <div class="lonon-timeline-content">
+                <ul class="lonon-timeline" style={{ width: '100%' }}>
+                    <li >
+                        <div class="lonon-timeline-content"
+                        >
+                            <ButtonA >
+
+                            </ButtonA>
                             <form>
                                 <TextField
                                     placeholder="Language"
                                     multiline
                                     rowsMax={2}
                                     name='language'
+                                    style={{
+                                        backgroundColor: colors.bgColor
+                                    }}
                                     className="lonon-timeline-date"
                                     inputProps={{ style: { color: '#fff', fontSize: 15, fontWeight: '500' } }}
                                     InputLabelProps={{ style: { color: '#fff' } }}

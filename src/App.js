@@ -14,12 +14,31 @@ import Resume from './views/resume/Resume';
 import Services from './views/services/Services';
 import Contact from './views/Contact';
 import Projects from './views/project/Projects';
-import Draggable from './views/project/ProjectTest';
 import AppBarMenu from './views/AppBar';
 
 
 function App() {
   const dispatch = useDispatch()
+  var initialPage = '/'
+
+    function renderSwitch() {
+        switch (initialPage) {
+            case 'home':
+                // return <PrivateRoute component={Home} />
+                return <Home />
+            case 'resume':
+                // return <PrivateRoute component={Resume} />
+            case 'portfolio':
+                // return <PrivateRoute component={Services} />
+            case 'services':
+                // return <PrivateRoute component={Contact} />
+            case 'contact':
+                // return <PrivateRoute component={Projects} />
+            default:
+                // return <PrivateRoute component={Index} />
+                return <Sidebar />
+        }
+    }
 
   useEffect(() => {
     auth.onAuthStateChanged(async user => {
@@ -46,9 +65,9 @@ function App() {
             <PrivateRoute path='/home' component={Home} />
             <PrivateRoute path='/resume' component={Resume} />
             <PrivateRoute path='/portfolio' component={Projects} />
-            <PrivateRoute path='/drag' component={Draggable} />
             <PrivateRoute path='/services' component={Services} />
             <PrivateRoute path='/contact' component={Contact} />
+          
           </Switch>
         </Router>
       </div>
