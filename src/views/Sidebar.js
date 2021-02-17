@@ -8,16 +8,7 @@ import {useStyles} from './styles/SidebarStyle';
 import useTheme from './hooks/useTheme';
 import Routes from '../routes';
 import clsx from 'clsx';
-import {
-    AppBar,
-    TextField,
-    Toolbar,
-    IconButton,
-    Button,
-    Typography,
-    Grid
-} from '@material-ui/core/';
-import MenuIcon from '@material-ui/icons/Menu';
+import {TextField} from '@material-ui/core/';
 import '../new.css';
 import '../animate.css';
 import '../bootstrap.css';
@@ -30,10 +21,9 @@ const initValues = {
     profileImage: '/static/images/avatar.png',
 }
 
-const validationSchema = Yup.object({
-    fullName: Yup.string().required('Name is required'),
-    profession: Yup.string().required('Profession is required'),
-    profileImage: Yup.mixed().required("A file is required"),
+const validationSchema = Yup.object().shape({
+    fullName: Yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required('Name is required'),
+    profession: Yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required('Profession is required'),
 })
 
 function Sidebar() {
@@ -87,8 +77,6 @@ function Sidebar() {
 return (
     <>
         <div>
-           
-
             <aside
             id='lonon-aside' 
             style={{
@@ -99,9 +87,6 @@ return (
                     <section id="lonon-logo" style={{cursor:'pointer',marginBottom:2}}>
                         <div 
                         onClick={() => wrapperRef.current.click()}  
-                        
-                        error={Boolean(formik.touched.profileImage && formik.errors.profileImage)}
-                        helperText={formik.touched.profileImage && formik.errors.profileImage}
                          >
                             {
                                 formik.initialValues.profileImage &&
