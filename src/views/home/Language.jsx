@@ -78,7 +78,7 @@ function Language({ color }) {
                                                         {...provided.draggableProps}
                                                         {...provided.dragHandleProps}
                                                     >
-                                                        <LanguageForm ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} id={formId} removeLanguage={handleRemove} />
+                                                        <LanguageForm ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} id={formId} colors={color} removeLanguage={handleRemove} />
                                                     </div>
                                                 )}
                                             </Draggable>
