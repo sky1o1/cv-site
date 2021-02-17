@@ -61,12 +61,16 @@ function App() {
               <Login />
             </Route>
             <PrivateRoute component={Sidebar} />
-            <PrivateRoute path='/' component={Index} />
+            {/* <PrivateRoute path='/' component={Index} />
             <PrivateRoute path='/home' component={Home} />
             <PrivateRoute path='/resume' component={Resume} />
             <PrivateRoute path='/portfolio' component={Projects} />
             <PrivateRoute path='/services' component={Services} />
-            <PrivateRoute path='/contact' component={Contact} />
+            <PrivateRoute path='/contact' component={Contact} /> */}
+
+            {
+              initialPage === 'home' && <Home />
+            }
           
           </Switch>
         </Router>
