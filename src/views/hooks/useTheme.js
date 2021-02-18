@@ -5,14 +5,14 @@ import { setColors} from '../../store/reducer/colors';
 
 const THEME_COLOR = {
     pinkColor: {
-        bgColor:'#FC698A',
+        bgColor:'#BB377D',
         color: '#fff',
-        headColor: '#ED9BAE',
+        headColor: '#f15f79',
         textColor: '#fff',
         gradColor: {
-            background: '#FC698A',
-            background: '-webkit-linear-gradient(to bottom, #FC698A, #ED9BAE)',
-            background: 'linear-gradient(to bottom, #FC698A, #ED9BAE)',
+            background: 'linear-gradient(to right top, #BB377D, #f15f79)',
+            background: '-webkit-linear-gradient(to right top, #BB377D, #f15f79)',
+            background: 'linear-gradient(to right top, #BB377D, #f15f79)',
         },
     },
     greyColor: {
@@ -27,25 +27,67 @@ const THEME_COLOR = {
         }
     },
     orangeColor: {
-        bgColor:'#DF6339',
+        bgColor:'#ff4b1f',
         color: '#fff',
-        headColor: '#EF8F6A',
+        headColor: '#ff9068',
         textColor: '#fff',
         gradColor: {
-            background:' #DF6339',
-            background:' -webkit-linear-gradient(to bottom, #DF6339, #EF8F6A)',
-            background: 'linear-gradient(to bottom, #DF6339, #EF8F6A)',
+            background: 'linear-gradient(to right top,#ff4b1f,#ff9068 )',
+            background:' -webkit-linear-gradient(to right top,#ff4b1f,#ff9068 )',
+            background: 'linear-gradient(to right top,#ff4b1f,#ff9068) '
         }
     },
     blueColor: {
-        bgColor:'#007CC7',
+        bgColor:'#032481',
         color: '#fff',
-        headColor: '#007CC7',
+        headColor: '#053090',
         textColor: '#fff',
         gradColor: {
-            background: '#007CC7',
-            background: '-webkit-linear-gradient(to bottom, #007CC7, #4DA8DA)',
-            background: 'linear-gradient(to bottom, #007CC7, #4DA8DA)',
+            background: 'linear-gradient(to right top, #032481, #053090, #073da0, #0749af, #0556bf)',
+            background: 'linear-gradient(to right top, #3a7bd5, #00d2ff)',
+            background: 'linear-gradient(to right top, #005AA7, #5691c8)',
+            background: '-webkit-linear-gradient(to right top, #032481, #053090, #073da0, #0749af, #0556bf)',
+            background: '-webkit-linear-gradient(to right top, #3a7bd5, #00d2ff)',
+            background: '-webkit-linear-gradient(to right top,  #005AA7, #5691c8)',
+            background: 'linear-gradient(to right top, #032481, #053090, #073da0, #0749af, #0556bf)',
+            background: 'linear-gradient(to right top, #3a7bd5, #00d2ff)',
+            background: 'linear-gradient(to right top,  #005AA7, #5691c8)',
+        }
+    },
+    greenColor: {
+        bgColor:'#56ab2f',
+        color: '#fff',
+        headColor: '#a8e063',
+        textColor: '#fff',
+        gradColor: {
+            background: 'linear-gradient(to right top,#56ab2f, #a8e063)',
+            background: 'linear-gradient(to right top, #02aab0, #00cdac)',
+            background: '-webkit-linear-gradient(to right top,#56ab2f, #a8e063)',
+            background: '-webkit-linear-gradient(to right top, #02aab0, #00cdac',
+            background: 'linear-gradient(to right top,#56ab2f, #a8e063)',
+            background: 'linear-gradient(to right top, #02aab0, #00cdac)',
+        }
+    },
+    violetColor: {
+        bgColor:'#302b63',
+        color: '#fff',
+        headColor: '#302b63',
+        textColor: '#fff',
+        gradColor: {
+            background: 'linear-gradient(to right top, #0f0c29, #302b63)',
+            background:' -webkit-linear-gradient(to right top, #0f0c29, #302b63)',
+            background: 'linear-gradient(to right top, #0f0c29, #302b63)'
+        }
+    },
+    blackColor: {
+        bgColor:'#000',
+        color: '#fff',
+        headColor: '#000',
+        textColor: '#fff',
+        gradColor: {
+            background: 'linear-gradient(to right top,#000, #434343)',
+            background: '-webkit-linear-gradient(to right top,#000, #434343)',
+            background: 'linear-gradient(to right top,#000, #434343)',
         }
     }
 }

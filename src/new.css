@@ -1929,10 +1929,10 @@ ul.social-network li {
 .lonon-timeline > li:last-child {
   margin-bottom: 0;
 }
-/* .lonon-timeline > li:hover .lonon-timeline-content:before {
+.lonon-timeline > li:hover .lonon-timeline-content:before {
   background-color: #101010;
   box-shadow: 0 0 0 1px #101010;
-} */
+}
 .lonon-timeline > li:hover .lonon-timeline-content .lonon-timeline-date {
   margin-left: -16px;
 }
@@ -1955,7 +1955,7 @@ ul.social-network li {
   margin-bottom: 15px;
   color: #fff;
   background-color: #101010;
-  /* height: 22px; */
+  height: 22px;
   line-height: 22px;
   margin-left: -12px;
   -webkit-transition: all .3s ease;

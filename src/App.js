@@ -19,24 +19,23 @@ import AppBarMenu from './views/AppBar';
 
 function App() {
   const dispatch = useDispatch()
-  var initialPage = '/'
 
+  var initialPage = localStorage.getItem('page')
+  
     function renderSwitch() {
         switch (initialPage) {
             case 'home':
-                // return <PrivateRoute component={Home} />
-                return <Home />
+              return <Home />
             case 'resume':
-                // return <PrivateRoute component={Resume} />
+              return <Resume />
             case 'portfolio':
-                // return <PrivateRoute component={Services} />
+              return <Projects />
             case 'services':
-                // return <PrivateRoute component={Contact} />
+              return <Services />
             case 'contact':
-                // return <PrivateRoute component={Projects} />
+              return <Contact />
             default:
-                // return <PrivateRoute component={Index} />
-                return <Sidebar />
+              return <Index />
         }
     }
 
@@ -68,9 +67,7 @@ function App() {
             <PrivateRoute path='/services' component={Services} />
             <PrivateRoute path='/contact' component={Contact} /> */}
 
-            {
-              initialPage === 'home' && <Home />
-            }
+          {renderSwitch()}
           
           </Switch>
         </Router>
