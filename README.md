@@ -22,3 +22,6 @@ I think we should provide various color options in Evitae. Add 5 colors at the b
     -- #black theme
     -- background-image: linear-gradient(to right top,#000, #434343);
     
+## About the theme
+Glassmorphism : The landing page should have a glassmorphic touch. 
+* Glassmorphism CSS Generator :: https://glassmorphism.com/
