@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import firebase from 'firebase/app'
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
@@ -33,6 +33,7 @@ function Sidebar() {
     const wrapperRef = useRef(null)
     const profile = useSelector(state => state.profile)
     const [bgColor1, textColor1, headColor, textColor2, gradColor, updateColor] = useTheme('orangeColor')
+    const [initialPage, setInitialPage] = useState('/')
     const formik = useFormik({
         initialValues: initValues,
         onChange: (event) => {
@@ -73,6 +74,9 @@ function Sidebar() {
         console.log('logged out')
     }
 
+    const handleClick = name => () => {
+        localStorage.setItem('page', name)
+    }
 
     return (
         <>
@@ -90,7 +94,10 @@ function Sidebar() {
                             >
                                 {
                                     formik.initialValues.profileImage &&
-                                    <img src={formik.values.profileImage} />
+                                    <img style={{
+                                        objectFit: 'cover'
+                                    }} 
+                                    src={formik.values.profileImage} />
                                 }
                             </div>
                         </section>
@@ -142,6 +149,11 @@ function Sidebar() {
                     </form>
                     <nav id="lonon-main-menu">
                         <ul>
+                            {/* <li onClick={handleClick('home')} style={{ color: textColor2 }}><button>Home</button></li>
+                            <li onClick={handleClick('resume')} style={{ color: textColor2 }}>Resume</li>
+                            <li onClick={handleClick('portfolio')} style={{ color: textColor2 }}>Portfolio</li>
+                            <li onClick={handleClick('services')} style={{ color: textColor2 }}>Services</li>
+                            <li onClick={handleClick('contact')} style={{ color: textColor2 }}>Contact</li> */}
                             <li><Link to='/home' style={{ color: textColor2 }}>Home</Link></li>
                             <li><Link to='/resume' style={{ color: textColor2 }}>Resume</Link></li>
                             <li><Link to='/portfolio' style={{ color: textColor2 }}>Portfolio</Link> </li>
@@ -160,6 +172,9 @@ function Sidebar() {
                         <span className={clsx(classes.btn, classes.btn4)} onClick={() => updateColor('blueColor')} />
                         <span className={clsx(classes.btn, classes.btn3)} onClick={() => updateColor('orangeColor')} />
                         <span className={clsx(classes.btn, classes.btn1)} onClick={() => updateColor('pinkColor')} />
+                        <span className={clsx(classes.btn, classes.btn5)} onClick={() => updateColor('greenColor')} />
+                        <span className={clsx(classes.btn, classes.btn6)} onClick={() => updateColor('violetColor')} />
+                        <span className={clsx(classes.btn, classes.btn7)} onClick={() => updateColor('blackColor')} />
                     </div>
 
                 </aside>

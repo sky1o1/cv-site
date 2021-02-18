@@ -33,10 +33,13 @@ function Home() {
     const profile = useSelector(state => state.profile)
     const colors = useSelector(state => state.colors)
 
-    const pinkGradient = colors.bgColor == '#FC698A' ? `${classes.pinkGrad}` : '';
+    const pinkGradient = colors.bgColor == '#BB377D' ? `${classes.pinkGrad}` : '';
     const greyGradient = colors.bgColor == '#45515D' ? `${classes.greyGrad}` : '';
-    const orangeGradient = colors.bgColor == '#DF6339' ? `${classes.orangeGrad}` : '';
-    const blueGradient = colors.bgColor == '#007CC7' ? `${classes.blueGrad}` : '';
+    const orangeGradient = colors.bgColor == '#ff4b1f' ? `${classes.orangeGrad}` : '';
+    const blueGradient = colors.bgColor == '#032481' ? `${classes.blueGrad}` : '';
+    const greenGradient = colors.bgColor == '#56ab2f' ? `${classes.greenGrad}` : '';
+    const violetGradient = colors.bgColor == '#302b63' ? `${classes.violetGrad}` : '';
+    const blackGradient = colors.bgColor == '#000' ? `${classes.blackGrad}` : '';
 
     function handleChange(event) {
         const inputFieldName = event.currentTarget.name
@@ -71,13 +74,14 @@ function Home() {
                         <div class="row">
                             <div class="col-md-6" style={{ cursor: 'pointer' }}>
                                 <div
-                                // style={{
-                                //      height: 300,
-                                // }} 
                                 className="ImageBox" onClick={() => wrapperRef.current.click()}   >
                                     {
                                         formik.initialValues.image3 &&
-                                        <img src={formik.values.image3} />
+                                        <img 
+                                        style={{
+                                           objectFit: 'contain'
+                                        }} 
+                                        src={formik.values.image3} />
                                     }
                                 </div>
 
@@ -121,7 +125,7 @@ function Home() {
                                     />
                                 </form>
                                 <div
-                                    className={`${pinkGradient} ${greyGradient} ${orangeGradient} ${blueGradient} cardvisit`}
+                                    className={`${pinkGradient} ${greyGradient} ${orangeGradient} ${blueGradient} ${greenGradient} ${violetGradient} ${blackGradient} cardvisit`}
                                 >
                                     <h3 style={{ color: colors.textColor }}> {profile.fullName}</h3>
                                     <p style={{ color: colors.textColor }}>{profile.profession}</p>

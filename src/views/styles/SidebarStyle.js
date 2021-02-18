@@ -14,15 +14,24 @@ export const useStyles = makeStyles((theme) => ({
         marginRight:10,
     },
     btn1: {
-        backgroundColor: '#FC698A',
+        backgroundColor: '#BB377D',
     },
     btn2: {
         backgroundColor: '#45515D',
     },
     btn3: {
-        backgroundColor: '#DF6339',
+        backgroundColor: '#ff4b1f',
     },
     btn4: {
-        backgroundColor: '#007CC7',
+        backgroundColor: '#032481',
+    },
+    btn5: {
+        backgroundColor: '#56ab2f',
+    },
+    btn6: {
+        backgroundColor: '#302b63',
+    },
+    btn7: {
+        backgroundColor: '#000',
     },
 }))

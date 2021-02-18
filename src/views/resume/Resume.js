@@ -104,7 +104,11 @@ function Resume() {
                                 >
                                     {
                                         formik.initialValues.image2 &&
-                                        <img src={formik.values.image2} />
+                                        <img 
+                                        style={{
+                                            objectFit: 'cover'
+                                        }}
+                                        src={formik.values.image2} />
                                     }
                                 </div>
 
