@@ -19,22 +19,28 @@ import AppBarMenu from './views/AppBar';
 
 function App() {
   const dispatch = useDispatch()
-
-  var initialPage = localStorage.getItem('page')
+  const [activePage, setActivePage] = useState('home')
   
-    function renderSwitch() {
-        switch (initialPage) {
+    function renderSwitch(activePage) {
+      console.log(activePage)
+        switch (activePage) {
             case 'home':
+              console.log('entered in home')
               return <Home />
             case 'resume':
+              console.log('entered in resume')
               return <Resume />
             case 'portfolio':
+              console.log('entered in poriejct')
               return <Projects />
             case 'services':
+              console.log('entered in srevices')
               return <Services />
             case 'contact':
+              console.log('entered in constact')
               return <Contact />
             default:
+              console.log('entered in default')
               return <Index />
         }
     }
@@ -49,17 +55,20 @@ function App() {
     })
   })
 
+  console.log('actucve', activePage)
+
   return (
     <>
       <AppBarMenu />
       <div id="lonon-page"> <a href="#" class="js-lonon-nav-toggle lonon-nav-toggle"><i></i></a>
-        <Router>
-          <ScrollToTop />
-          <Switch>
+        {/* <Router>
+          <ScrollToTop /> */}
+          {/* <Switch>
             <Route exact path='/login'>
               <Login />
-            </Route>
-            <PrivateRoute component={Sidebar} />
+            </Route> */}
+            {/* <PrivateRoute component={Sidebar} /> */}
+           >
             {/* <PrivateRoute path='/' component={Index} />
             <PrivateRoute path='/home' component={Home} />
             <PrivateRoute path='/resume' component={Resume} />
@@ -67,10 +76,14 @@ function App() {
             <PrivateRoute path='/services' component={Services} />
             <PrivateRoute path='/contact' component={Contact} /> */}
 
-          {renderSwitch()}
           
-          </Switch>
-        </Router>
+         
+          
+          {/* </Switch>
+         
+        </Router> */}
+        <Sidebar setActivePage={setActivePage} />
+        {renderSwitch(activePage)}
       </div>
     </>
   );

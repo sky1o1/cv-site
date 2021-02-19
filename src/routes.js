@@ -13,11 +13,11 @@ const Routes = () => (
     <div>
         
         <Route exact path='/' component={Index}></Route>
-        <Route exact path='/home' component={Home} ></Route>
+        {/* <Route exact path='/home' component={Home} ></Route>
         <Route exact path='/resume' component={Resume}></Route>
         <Route exact path='/portfolio' component={Projects}></Route>
         <Route exact path='/services' component={Services}></Route>
-        <Route exact path='/contact' component={Contact}></Route>
+        <Route exact path='/contact' component={Contact}></Route> */}
     </div>
 )
 
