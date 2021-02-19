@@ -26,14 +26,14 @@ const validationSchema = Yup.object().shape({
     profession: Yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required('Profession is required'),
 })
 
-function Sidebar() {
+function Sidebar({setActivePage}) {
     const classes = useStyles()
     const dispatch = useDispatch()
     const history = useHistory()
     const wrapperRef = useRef(null)
     const profile = useSelector(state => state.profile)
-    const [bgColor1, textColor1, headColor, textColor2, gradColor, updateColor] = useTheme('orangeColor')
-    const [initialPage, setInitialPage] = useState('/')
+    const [bgColor1, textColor1, headColor, textColor2, gradColor, updateColor] = useTheme('greyColor')
+    
     const formik = useFormik({
         initialValues: initValues,
         onChange: (event) => {
@@ -51,6 +51,8 @@ function Sidebar() {
         dispatch(setProfile(updatedProfileData))
         formik.setFieldValue(inputFieldName, inputFieldValue)
     }
+    
+    
 
     // useEffect(() => {
     //     async function fetchApi() {
@@ -74,10 +76,7 @@ function Sidebar() {
         console.log('logged out')
     }
 
-    const handleClick = name => () => {
-        localStorage.setItem('page', name)
-    }
-
+  
     return (
         <>
             <div>
@@ -149,16 +148,16 @@ function Sidebar() {
                     </form>
                     <nav id="lonon-main-menu">
                         <ul>
-                            {/* <li onClick={handleClick('home')} style={{ color: textColor2 }}><button>Home</button></li>
-                            <li onClick={handleClick('resume')} style={{ color: textColor2 }}>Resume</li>
-                            <li onClick={handleClick('portfolio')} style={{ color: textColor2 }}>Portfolio</li>
-                            <li onClick={handleClick('services')} style={{ color: textColor2 }}>Services</li>
-                            <li onClick={handleClick('contact')} style={{ color: textColor2 }}>Contact</li> */}
-                            <li><Link to='/home' style={{ color: textColor2 }}>Home</Link></li>
+                            <li onClick={() => setActivePage('home')} style={{ color: textColor2 }}><button>Home</button></li>
+                            <li onClick={() => setActivePage('resume')} style={{ color: textColor2 }}>Resume</li>
+                            <li onClick={() => setActivePage('portfolio')} style={{ color: textColor2 }}>Portfolio</li>
+                            <li onClick={() => setActivePage('services')} style={{ color: textColor2 }}>Services</li>
+                            <li onClick={() => setActivePage('contact')} style={{ color: textColor2 }}>Contact</li>
+                            {/* <li><Link to='/home' style={{ color: textColor2 }}>Home</Link></li>
                             <li><Link to='/resume' style={{ color: textColor2 }}>Resume</Link></li>
                             <li><Link to='/portfolio' style={{ color: textColor2 }}>Portfolio</Link> </li>
                             <li><Link to='/services' style={{ color: textColor2 }}>Services</Link></li>
-                            <li><Link to='/contact' style={{ color: textColor2 }}>Contact</Link> </li>
+                            <li><Link to='/contact' style={{ color: textColor2 }}>Contact</Link> </li> */}
                             <li>
                                 <button onClick={logout}>
                                     Logout
@@ -178,7 +177,7 @@ function Sidebar() {
                     </div>
 
                 </aside>
-                <Routes />
+                {/* <Routes /> */}
             </div>
         </>
 
