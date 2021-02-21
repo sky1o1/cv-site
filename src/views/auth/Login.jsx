@@ -23,14 +23,14 @@ const Login = () => {
   const authenticate = useSelector(state => state.auth)
 
   var uiConfig = {
-    signInSuccessUrl: '/home',
+    signInSuccessUrl: '/',
     signInOptions: [ firebase.auth.PhoneAuthProvider.PROVIDER_ID ]
   };
 
   useEffect(() => {
 
     if(authenticate.isAuthenticated){
-      history.push('/home')
+      history.push('/')
       }
 
       async function fetchApi() {
