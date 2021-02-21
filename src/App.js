@@ -61,14 +61,14 @@ function App() {
     <>
       <AppBarMenu />
       <div id="lonon-page"> <a href="#" class="js-lonon-nav-toggle lonon-nav-toggle"><i></i></a>
-        {/* <Router>
-          <ScrollToTop /> */}
-          {/* <Switch>
+        <Router>
+         
+          <Switch>
             <Route exact path='/login'>
               <Login />
-            </Route> */}
+            </Route> 
             {/* <PrivateRoute component={Sidebar} /> */}
-           >
+          
             {/* <PrivateRoute path='/' component={Index} />
             <PrivateRoute path='/home' component={Home} />
             <PrivateRoute path='/resume' component={Resume} />
@@ -76,13 +76,12 @@ function App() {
             <PrivateRoute path='/services' component={Services} />
             <PrivateRoute path='/contact' component={Contact} /> */}
 
-          
+        </Switch>
          
-          
-          {/* </Switch>
-         
-        </Router> */}
+        </Router>
+        <ScrollToTop />
         <Sidebar setActivePage={setActivePage} />
+        
         {renderSwitch(activePage)}
       </div>
     </>

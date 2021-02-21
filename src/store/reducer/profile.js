@@ -7,6 +7,7 @@ export const setImage3 = createAction('SET_IMAGE');
 export const setFullname = createAction('SET_FULLNAME');
 export const setProfession = createAction('SET_PROFESSION');
 export const setInformation = createAction('SET_INFORMATION');
+export const setInformationII = createAction('SET_INFORMATIONII');
 export const setPhoneNumber = createAction('SET_PHONE_NUMBER');
 export const setEmail = createAction('SET_EMAIL');
 export const setLocation = createAction('SET_LOCATION');
@@ -25,6 +26,7 @@ const INITIAL_STATE = {
     skype: '',
     location: '',
     information: '',
+    information2: '',
     profileImage: '',
     image2: '',
     image3: '',
@@ -57,6 +59,11 @@ const profileReducer = handleActions(
     (state, action) => ({
         ...state,
         information : action.payload
+    }),
+    'SET_INFORMATIONII':
+    (state, action) => ({
+        ...state,
+        information2 : action.payload
     }),
     'SET_PHONE_NUMBER':
     (state, action) => ({
