@@ -184,10 +184,11 @@ function Resume() {
                                                         }}
                                                     />
                                                 </p>
-
                                                 {links.facebook ?
                                                     <p>
                                                         <h2>Facebook</h2>
+                                                         {/* <FbLogin /> */}
+                                                       
                                                     </p>
                                                     :
                                                     <p></p>
@@ -204,6 +205,7 @@ function Resume() {
                                                 {links.github ?
                                                     <p>
                                                         <h2>Github</h2>
+                                                        {/* <GithubLogin /> */}
                                                     </p>
                                                     :
                                                     <p></p>
@@ -222,6 +224,7 @@ function Resume() {
                                                 {links.twitter ?
                                                     <p>
                                                         <h2>Twitter</h2>
+                                                        {/* <TwitterLogin /> */}
                                                     </p>
                                                     :
                                                     <p></p>

@@ -19,11 +19,12 @@ import AppBarMenu from './views/AppBar';
 
 function App() {
   const dispatch = useDispatch()
-  const [activePage, setActivePage] = useState('home')
+  const [activePage, setActivePage] = useState('resume')
   
     function renderSwitch(activePage) {
       console.log(activePage)
         switch (activePage) {
+          
             case 'home':
               console.log('entered in home')
               return <Home />
@@ -39,6 +40,9 @@ function App() {
             case 'contact':
               console.log('entered in constact')
               return <Contact />
+            case 'login':
+              console.log('entered in constact')
+              return <Login />
             default:
               console.log('entered in default')
               return <Index />
@@ -79,7 +83,7 @@ function App() {
         </Switch>
          
         </Router>
-        <ScrollToTop />
+      
         <Sidebar setActivePage={setActivePage} />
         
         {renderSwitch(activePage)}

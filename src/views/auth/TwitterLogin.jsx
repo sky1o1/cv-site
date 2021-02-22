@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const Login = () => {
+const TwitterLogin = () => {
   const classes = useStyles();
   const history = useHistory()
   const authenticate = useSelector(state => state.auth)
@@ -25,11 +25,7 @@ const Login = () => {
   var uiConfig = {
     signInFlow: 'popup',
     signInSuccessUrl: '/',
-    signInOptions: [ firebase.auth.PhoneAuthProvider.PROVIDER_ID ],
-    // signInOptions: [ firebase.auth.GithubAuthProvider.PROVIDER_ID ],
-    // signInOptions: [ firebase.auth.TwitterAuthProvider.PROVIDER_ID ],
-    // signInOptions: [ firebase.auth.FacebookAuthProvider.PROVIDER_ID ],
-    // signInOptions: [ firebase.auth.GoogleAuthProvider.PROVIDER_ID ],
+    signInOptions: [ firebase.auth.TwitterAuthProvider.PROVIDER_ID ]
   };
 
   useEffect(() => {
@@ -66,4 +62,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default TwitterLogin;

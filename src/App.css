@@ -1,7 +1,3 @@
-.App {
-  /* text-align: center; */
-  
-}
 
 .App-logo {
   height: 40vmin;
@@ -76,4 +72,30 @@
 
 .dnd-item:not(:last-of-type) {
   margin-bottom: 5rem;
+}
+.firebaseui-idp-button,
+.firebaseui-tenant-button {
+    font-weight: 500;
+    height: auto;
+    line-height: normal;
+    max-width: 80px;
+    min-height: 40px;
+    padding: 15px;
+    text-align: left;
+    border-radius: 15px;
+    border:none;
+    cursor: pointer;
+}
+
+.firebaseui-idp-text {
+  display: none;
+}
+
+.firebaseui-idp-list{
+  display: flex;
+  padding: 0px;
+}
+
+.firebaseui-list-item{
+  margin-left: 30px
 }

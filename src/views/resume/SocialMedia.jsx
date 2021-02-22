@@ -1,8 +1,12 @@
-import React, { useState} from 'react';
+import React, { useState, useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
+import {auth} from '../../services/firebase/config';
 import {getRequest, postRequest} from '../../services/axios.config';
+import SocialMediaLogin from '../auth/SocialMediaLogin';
+import CheckCircleIcon from '@material-ui/icons/CheckCircle';
+import { green } from '@material-ui/core/colors';
 import {setFacebook, setInstagram, setLinkedin, setGithub, setTwitter} from '../../store/reducer/links';
-import '../../new.css'
+import '../../new.css';
 import {
     makeStyles,
     TextField,
@@ -29,6 +33,14 @@ const useStyles = makeStyles((theme) => ({
     },
     dialogBox: {
         width: '1000px'
+    },
+    socialGrid:{
+        display: 'flex',
+        justifyContent: 'space-evenly'
+    },
+    verifiedIcons: {
+        color: green[500],
+        fontSize: 20
     }
 }))
 
@@ -38,6 +50,7 @@ function SocialMedia(){
     const links = useSelector(state => state.links)
     const profile = useSelector(state => state.profile)
     const [open, setOpen] = useState(false);
+    const [apiData, setApiData] = useState([])
      
     const handleClickOpen = () => {
         setOpen(true);
@@ -47,16 +60,30 @@ function SocialMedia(){
         setOpen(false);
     };
 
-      // useEffect(() => {
-    //     async function fetchApi() {
-    //         try{
-    //             let response = await postRequest('');
-    //         }catch(err){
-    //             console.log(err)
-    //         }
-    //     }
-    //      fetchApi()
-    // },[])
+      useEffect(() => {
+        async function fetchApi() {
+            try{
+                let response = await getRequest('');
+                console.log(response.data.results)
+                setApiData(response.data.results[0].email)
+            }catch(err){
+                console.log(err)
+            }
+        }
+         fetchApi()
+    },[])
+    console.log(apiData)
+    
+    useEffect(() => {
+        auth.onAuthStateChanged(async user => {
+          if (user) {
+              console.log(user)
+            // dispatch(setAuthenticate(true))
+          } else {
+            // dispatch(setAuthenticate(false))
+          }
+        })
+      })
 
     return(
         <>
@@ -86,65 +113,8 @@ function SocialMedia(){
             <DialogContent>
                 <DialogContentText>
                     <Grid container className={classes.gridContainer}>
-                        <Grid list >
-                        <FacebookIcon id='icon'
-                          className={`${links.facebook ? "socialMediaActiveLink" : ""}`}
-                           onClick={() =>  dispatch(setFacebook(!(links.facebook)))} 
-                            fontSize='large'/>
-                        </Grid>
-
-                        <Grid list >
-                        <InstagramIcon 
-                         className={`${links.instagram ? "socialMediaActiveLink" : ""}`}
-                          onClick={() => dispatch(setInstagram(!(links.instagram)))} 
-                         fontSize='large'/>
-                        </Grid>
-
-                        <Grid list >
-                        <LinkedInIcon
-                        className={`${links.linkedin ? "socialMediaActiveLink" : ""}`}
-                         onClick={() =>  dispatch(setLinkedin(!(links.linkedin)))} 
-                         fontSize='large'/>
-                        </Grid>
-
-                        <Grid list >
-                        <GitHubIcon 
-                        className={`${links.github ? "socialMediaActiveLink" : ""}`}
-                         onClick={() =>  dispatch(setGithub(!(links.github)))}
-                         fontSize='large'
-                         />
-                        </Grid>
-                      </Grid>
-
-                      <Grid container className={classes.gridContainer}>
-                      <Grid list >
-                        <TwitterIcon 
-                        className={`${links.twitter ? "socialMediaActiveLink" : ""}`}
-                         onClick={() =>  dispatch(setTwitter(!(links.twitter)))}
-                         fontSize='large'
-                         />
-                        </Grid>
-                        {/* <Grid list >
-                        <TwitterIcon 
-                        className={`${links.twitter ? "socialMediaActiveLink" : ""}`}
-                         onClick={() =>  dispatch(setTwitter(!(links.twitter)))}
-                         fontSize='large'
-                         />
-                        </Grid>
-                        <Grid list >
-                        <TwitterIcon 
-                        className={`${links.twitter ? "socialMediaActiveLink" : ""}`}
-                         onClick={() =>  dispatch(setTwitter(!(links.twitter)))}
-                         fontSize='large'
-                         />
-                        </Grid>
-                        <Grid list >
-                        <TwitterIcon 
-                        className={`${links.twitter ? "socialMediaActiveLink" : ""}`}
-                         onClick={() =>  dispatch(setTwitter(!(links.twitter)))}
-                         fontSize='large'
-                         />
-                        </Grid> */}
+                    <SocialMediaLogin/>
+                   
                       </Grid>
                 </DialogContentText>
             </DialogContent>
