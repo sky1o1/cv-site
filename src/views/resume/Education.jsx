@@ -76,7 +76,7 @@ function Education({color}) {
                                                         {...provided.draggableProps}
                                                         {...provided.dragHandleProps}
                                                     >
-                                                        <EducationForm key={formId} id={formId} removeEdu={handleRemove} />
+                                                        <EducationForm key={formId} id={formId} removeEdu={handleRemove} color={color} />
                                                     </div>
                                                 )}
                                             </Draggable>

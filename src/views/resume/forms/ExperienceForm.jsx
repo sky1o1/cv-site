@@ -13,6 +13,8 @@ import {
 import IconButton from '@material-ui/core/IconButton';
 import DeleteOutlineRoundedIcon from '@material-ui/icons/DeleteOutlineRounded';
 import Tooltip from '@material-ui/core/Tooltip';
+import styled from 'styled-components';
+import { TimeLine, Content } from '../../Styled components/style';
 
 
 const initialValues = {
@@ -50,7 +52,7 @@ const useClasses = makeStyles(theme => ({
     }
 }))
 
-function ExperienceForm({ id, removeExp }) {
+function ExperienceForm({ id, removeExp, colors }) {
     const dispatch = useDispatch()
     const classes = useClasses()
     const formik = useFormik({
@@ -80,12 +82,35 @@ function ExperienceForm({ id, removeExp }) {
         await formik.submitForm()
     }
 
+    const ButtonA = styled.div`
+    position: absolute;
+    background-color:#555;
+    left: 0;
+    top: 8px;
+    width: 20px;
+    height: 20px;
+    -webkit-transition: all .3s ease;
+    transition: all .3s ease;
+    z-index: 100;
+    margin-left: -10px;
+    margin-top: 25px;
+    border-radius: 50%;
+    border: 0;
+    ${TimeLine} :hover &{
+        background-color:${props => props.primary ? "palevioletred" : `${colors.bgColor}`};
+        }
+    ${TimeLine} :active &{
+        background-color:${props => props.primary ? "palevioletred" : `${colors.bgColor}`};
+        }
+`;
     return (
         <>
-            <ul class="lonon-timeline">
+            <TimeLine>
                 <li>
-                    <div class="lonon-timeline-content">
+                    <Content>
                         <Grid container>
+
+                    <ButtonA />
                             <Grid item xs={12} sm={7}>
                                 <Grid container spacing={1} style={{ marginBottom: 4 }} >
                                     <Grid item >
@@ -187,9 +212,9 @@ function ExperienceForm({ id, removeExp }) {
 
 
                         </Grid>
-                    </div>
+                    </Content>
                 </li>
-            </ul>
+            </TimeLine>
             <span>
 
             </span>

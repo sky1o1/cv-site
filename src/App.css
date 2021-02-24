@@ -91,11 +91,15 @@
   display: none;
 }
 
+.firebaseui-idp-text, .firebaseui-idp-text-long{
+  display: none;
+}
+
 .firebaseui-idp-list{
   display: flex;
   padding: 0px;
 }
 
 .firebaseui-list-item{
-  margin-left: 30px
+  margin-left: 20px
 }

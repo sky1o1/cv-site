@@ -100,10 +100,8 @@ const SocialMediaLogin = () => {
   return (
     <>
       <div id="firebaseui-auth-container">
-
-                                <CheckCircleIcon className={classes.verifiedIcons}/> Verified
-                     
-                    </div>
+        <CheckCircleIcon className={classes.verifiedIcons}/> Verified
+     </div>
     </>
     
   );
