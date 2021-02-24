@@ -14,6 +14,7 @@ import '../animate.css';
 import '../bootstrap.css';
 import * as Yup from 'yup';
 import { useFormik } from 'formik';
+import ScrollToTop from '../services/ScrollToTop';
 
 const initValues = {
     fullName: '',
@@ -68,7 +69,7 @@ function Sidebar({setActivePage}) {
     const logout = () => {
         firebase.auth().signOut().then(function () {
             console.log('logged out')
-            history.push('/login')
+            setActivePage('login')
 
         }).catch(function (error) {
             console.log('error logging out')
@@ -148,6 +149,7 @@ function Sidebar({setActivePage}) {
                     </form>
                     <nav id="lonon-main-menu">
                         <ul>
+                            <ScrollToTop />
                             <li onClick={() => setActivePage('home')} style={{ color: textColor2 }}><button>Home</button></li>
                             <li onClick={() => setActivePage('resume')} style={{ color: textColor2 }}>Resume</li>
                             <li onClick={() => setActivePage('portfolio')} style={{ color: textColor2 }}>Portfolio</li>
