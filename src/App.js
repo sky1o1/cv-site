@@ -20,7 +20,7 @@ import AppBarMenu from './views/AppBar';
 
 function App() {
   const dispatch = useDispatch()
-  const [activePage, setActivePage] = useState('home')
+  const [activePage, setActivePage] = useState('resume')
   
     function renderSwitch(activePage) {
       console.log(activePage)

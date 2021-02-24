@@ -334,6 +334,15 @@ input[type="checkbox"] {
     box-shadow: 0 5px 20px 0 rgba(0, 0, 0, .1), 0 5px 20px 0 rgba(0, 0, 0, .1);
 }
 
+.ImageBox{
+    transition: 0.5s;
+    border:1px solid rgb(182, 182, 182)
+}
+.ImageBox:hover{
+    box-shadow: 0px 12px 28px 0px rgba(0, 0, 0, 0.20);
+    opacity: 0.8;
+    transition: 0.5s;
+}
 #lonon-logo-footer {
     text-align: center;
     font-weight: 400;

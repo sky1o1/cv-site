@@ -30,6 +30,7 @@ const useStyles = makeStyles((theme) => ({
   },
   socialGrid:{
       display: 'flex',
+      flexDirection: 'row',
       justifyContent: 'space-evenly'
   },
   verifiedIcons: {
@@ -100,7 +101,16 @@ const SocialMediaLogin = () => {
   return (
     <>
       <div id="firebaseui-auth-container">
-        <CheckCircleIcon className={classes.verifiedIcons}/> Verified
+        {
+          apiData &&
+          <Grid className={classes.socialGrid}>
+          <CheckCircleIcon className={classes.verifiedIcons}/> Verified
+          <CheckCircleIcon className={classes.verifiedIcons}/> Verified
+          <CheckCircleIcon className={classes.verifiedIcons}/> Verified
+          <CheckCircleIcon className={classes.verifiedIcons}/> Verified
+          </Grid>
+        }
+       
      </div>
     </>
     

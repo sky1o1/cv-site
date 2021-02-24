@@ -252,6 +252,11 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
+import ClickAwayListener from '@material-ui/core/ClickAwayListener';
+import Grow from '@material-ui/core/Grow';
+import Paper from '@material-ui/core/Paper';
+import Popper from '@material-ui/core/Popper';
+import MenuList from '@material-ui/core/MenuList';
 import clsx from 'clsx';
 
 const theme = createMuiTheme({
@@ -330,8 +335,8 @@ const useStyles = makeStyles((theme) => ({
             display: 'none',
         },
     },
-    iconbtn:{
-        color:'#000'
+    iconbtn: {
+        color: '#000'
     }
 }));
 
@@ -349,6 +354,38 @@ export default function PrimarySearchAppBar() {
         bottom: false,
         right: false,
     });
+
+    const [open, setOpen] = React.useState(false);
+    const anchorRef = React.useRef(null);
+  
+    const handleToggle = () => {
+      setOpen((prevOpen) => !prevOpen);
+    };
+  
+    const handleClose = (event) => {
+      if (anchorRef.current && anchorRef.current.contains(event.target)) {
+        return;
+      }
+  
+      setOpen(false);
+    };
+  
+    function handleListKeyDown(event) {
+      if (event.key === 'Tab') {
+        event.preventDefault();
+        setOpen(false);
+      }
+    }
+  
+    // return focus to the button when we transitioned from !open -> open
+    const prevOpen = React.useRef(open);
+    React.useEffect(() => {
+      if (prevOpen.current === true && open === false) {
+        anchorRef.current.focus();
+      }
+  
+      prevOpen.current = open;
+    }, [open]);
 
     const toggleDrawer = (anchor, open) => (event) => {
         if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
@@ -449,7 +486,6 @@ export default function PrimarySearchAppBar() {
                 </IconButton>
                 <p>Notifications</p>
             </MenuItem>
-
             <MenuItem >
                 <IconButton
                     aria-label="account of current user"
@@ -470,9 +506,6 @@ export default function PrimarySearchAppBar() {
             <div className={classes.grow}>
                 <AppBar position="static">
                     <Toolbar>
-
-
-
                         <div className={classes.grow} />
                         <div className={classes.sectionDesktop}>
                             <IconButton aria-label="show 4 new mails">
@@ -480,6 +513,34 @@ export default function PrimarySearchAppBar() {
                                     <MailIcon />
                                 </Badge>
                             </IconButton>
+
+                            <IconButton style={{position: 'relative'}}  ref={anchorRef}
+                                aria-controls={open ? 'menu-list-grow' : undefined}
+                                aria-haspopup="true"
+                                onClick={handleToggle}>
+                                <Badge badgeContent={4} color="secondary">
+                                    <NotificationsIcon />
+                                </Badge>
+                            </IconButton>
+            <Popper open={open} anchorEl={anchorRef.current} role={undefined} transition disablePortal>
+                {({ TransitionProps, placement }) => (
+                    <Grow
+                        {...TransitionProps}
+                        style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}
+                    >
+                        <Paper>
+                            <ClickAwayListener onClickAway={handleClose}>
+                                <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
+                                    <MenuItem onClick={handleClose}>Profile</MenuItem>
+                                    <MenuItem onClick={handleClose}>My account</MenuItem>
+                                    <MenuItem onClick={handleClose}>Logout</MenuItem>
+                                </MenuList>
+                            </ClickAwayListener>
+                        </Paper>
+                    </Grow>
+                )}
+            </Popper>
+
                             <IconButton onClick={handleProfileMenuOpen} aria-label="show 17 new notifications">
                                 <Badge badgeContent={17} color="secondary">
                                     <NotificationsIcon />
@@ -487,7 +548,7 @@ export default function PrimarySearchAppBar() {
                             </IconButton>
                             <IconButton
                                 edge="end"
-                               
+
                                 aria-label="account of current user"
                                 aria-controls={menuId}
                                 aria-haspopup="true"
@@ -497,15 +558,14 @@ export default function PrimarySearchAppBar() {
                             </IconButton>
                             <IconButton
                                 edge="end"
-                            
                                 aria-label="open drawer"
                             >
-                      
+
                                 <div>
                                     {['right'].map((anchor) => (
                                         <React.Fragment key={anchor}>
-                                        
-                                            <MenuIcon onClick={toggleDrawer(anchor, true)}/>
+
+                                            <MenuIcon onClick={toggleDrawer(anchor, true)} />
                                             <Drawer anchor={anchor} open={state[anchor]} onClose={toggleDrawer(anchor, false)}>
                                                 {list(anchor)}
                                             </Drawer>
@@ -520,7 +580,6 @@ export default function PrimarySearchAppBar() {
                                 aria-controls={mobileMenuId}
                                 aria-haspopup="true"
                                 onClick={handleMobileMenuOpen}
-                        
                             >
                                 <MoreIcon />
                             </IconButton>
