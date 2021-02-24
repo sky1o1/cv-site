@@ -1,4 +1,4 @@
-import React, {  useEffect } from 'react';
+import React, { useEffect } from 'react';
 import {useHistory} from 'react-router-dom';
 import {useSelector} from 'react-redux';
 import firebase from 'firebase';
@@ -6,7 +6,7 @@ import {getRequest, postRequest} from '../../services/axios.config';
 import {auth} from '../../services/firebase/config';
 import * as firebaseui from 'firebaseui';
 import 'firebaseui/dist/firebaseui.css';
-import { makeStyles, Card} from '@material-ui/core';
+import { makeStyles} from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -18,18 +18,13 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Login = () => {
-  const classes = useStyles();
   const history = useHistory()
   const authenticate = useSelector(state => state.auth)
 
   var uiConfig = {
     signInFlow: 'popup',
     signInSuccessUrl: '/',
-    signInOptions: [ firebase.auth.PhoneAuthProvider.PROVIDER_ID ],
-    // signInOptions: [ firebase.auth.GithubAuthProvider.PROVIDER_ID ],
-    // signInOptions: [ firebase.auth.TwitterAuthProvider.PROVIDER_ID ],
-    // signInOptions: [ firebase.auth.FacebookAuthProvider.PROVIDER_ID ],
-    // signInOptions: [ firebase.auth.GoogleAuthProvider.PROVIDER_ID ],
+    signInOptions: [ firebase.auth.PhoneAuthProvider.PROVIDER_ID ]
   };
 
   useEffect(() => {

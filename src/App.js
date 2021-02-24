@@ -14,38 +14,33 @@ import Resume from './views/resume/Resume';
 import Services from './views/services/Services';
 import Contact from './views/Contact';
 import Projects from './views/project/Projects';
+import Error from './views/Error';
 import AppBarMenu from './views/AppBar';
 
 
 function App() {
   const dispatch = useDispatch()
-  const [activePage, setActivePage] = useState('resume')
+  const [activePage, setActivePage] = useState('index')
   
     function renderSwitch(activePage) {
       console.log(activePage)
         switch (activePage) {
-          
             case 'home':
-              console.log('entered in home')
               return <Home />
             case 'resume':
-              console.log('entered in resume')
               return <Resume />
             case 'portfolio':
-              console.log('entered in poriejct')
               return <Projects />
             case 'services':
-              console.log('entered in srevices')
               return <Services />
             case 'contact':
-              console.log('entered in constact')
               return <Contact />
             case 'login':
-              console.log('entered in constact')
               return <Login />
-            default:
-              console.log('entered in default')
+            case 'index':
               return <Index />
+            default:
+              return <Error />
         }
     }
 
@@ -59,18 +54,16 @@ function App() {
     })
   })
 
-  console.log('actucve', activePage)
-
   return (
     <>
       <AppBarMenu />
       <div id="lonon-page"> <a href="#" class="js-lonon-nav-toggle lonon-nav-toggle"><i></i></a>
-        <Router>
+        {/* <Router> */}
          
-          <Switch>
+          {/* <Switch>
             <Route exact path='/login'>
               <Login />
-            </Route> 
+            </Route>  */}
             {/* <PrivateRoute component={Sidebar} /> */}
           
             {/* <PrivateRoute path='/' component={Index} />
@@ -80,10 +73,15 @@ function App() {
             <PrivateRoute path='/services' component={Services} />
             <PrivateRoute path='/contact' component={Contact} /> */}
 
-        </Switch>
+        {/* </Switch> */}
          
+        {/* </Router> */}
+        <Router>
+          <Switch>
+          <ScrollToTop />
+          </Switch>
         </Router>
-      
+        
         <Sidebar setActivePage={setActivePage} />
         
         {renderSwitch(activePage)}
