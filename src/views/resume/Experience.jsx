@@ -81,7 +81,7 @@ function Experience({ color }) {
                                                             {...provided.draggableProps}
                                                             {...provided.dragHandleProps}
                                                         >
-                                                            <ExperienceForm key={formId} id={formId} removeExp={handleRemove} />
+                                                            <ExperienceForm colors={color} key={formId} id={formId} removeExp={handleRemove} />
                                                         </div>
                                                     )}
                                                 </Draggable>

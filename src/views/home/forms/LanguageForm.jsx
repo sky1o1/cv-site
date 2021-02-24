@@ -9,6 +9,7 @@ import IconButton from '@material-ui/core/IconButton';
 import DeleteOutlineRoundedIcon from '@material-ui/icons/DeleteOutlineRounded';
 import Tooltip from '@material-ui/core/Tooltip';
 import styled from 'styled-components';
+import { TimeLine, Content } from '../../Styled components/style';
 import {
     makeStyles,
     TextField,
@@ -95,84 +96,30 @@ function LanguageForm({ id, removeLanguage, colors }) {
     //     console.log(event.target.value)
     //     console.log(event.target.name)
     // }
-    const TimeLine = styled.ul`
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    position: relative;
-    padding-top: 30px;
-    padding-bottom: 30px;
-    margin-right: 20px;
-    margin-left: 50px;
-    // &:hover{
-    //     border: 1px solid grey;
-    //     border-radius: 20px;
-    // }
-    // &:active{
-    //     border: 1px solid grey;
-    //     border-radius: 20px;
-    // }
-    &:before{
-        content: "";
-        position: absolute;
-        width: 1px;
-        top: 0;
-        bottom: 0;
-        background-color: #ececec;
-    }
-    &.li {
-        margin-bottom: 35px;
-        margin-left: 10%;
-    }
-    &.li > :last-child {
-        margin-bottom: 0;
-    }
-    `;
-
-    const Content = styled.div`
-    padding: 0 70px;
-    position: relative;
-    `;
-
-    // const Date = styled.div`
-    // margin-left: 500px;
-    // position: relative;
-    // display: inline-block;
-    // padding: 0 12px;
-    // font-size: 11px;
-    // font-weight: 500;
-    // letter-spacing: 0.05em;
-    // margin-bottom: 15px;
-    // color: #fff;
-    // background-color: #101010;
-    // /* height: 22px; */
-    // line-height: 22px;
-    // margin-left: -12px;
-    // -webkit-transition: all .3s ease;
-    // transition: all .3s ease;
-    // `;
 
 
-    const ButtonA = styled.div`
-        position: absolute;
-        background-color:#555;
-        left: 0;
-        top: 8px;
-        width: 20px;
-        height: 20px;
-        -webkit-transition: all .3s ease;
-        transition: all .3s ease;
-        z-index: 100;
-        margin-left: -10px;
-        border-radius: 50%;
-        border: 0;
-        ${TimeLine} :hover &{
-            background-color:${props => props.primary ? "palevioletred" : `${colors.bgColor}`};
-            }
-        ${TimeLine} :active &{
-            background-color:${props => props.primary ? "palevioletred" : `${colors.bgColor}`};
-            }
-    `;
+
+const ButtonA = styled.div`
+    position: absolute;
+    background-color:#555;
+    left: 0;
+    top: 8px;
+    width: 20px;
+    height: 20px;
+    -webkit-transition: all .3s ease;
+    transition: all .3s ease;
+    z-index: 100;
+    margin-left: -10px;
+    margin-top: 25px;
+    border-radius: 50%;
+    border: 0;
+    ${TimeLine} :hover &{
+        background-color:${props => props.primary ? "palevioletred" : `${colors.bgColor}`};
+        }
+    ${TimeLine} :active &{
+        background-color:${props => props.primary ? "palevioletred" : `${colors.bgColor}`};
+        }
+`;
 
     return (
         <MuiThemeProvider theme={theme}>
@@ -180,10 +127,9 @@ function LanguageForm({ id, removeLanguage, colors }) {
                 <TimeLine >
                     <li >
                         <Content>
-                            <ButtonA >
-
-                            </ButtonA>
                             <form>
+                                <ButtonA />
+
                                 <TextField
                                     placeholder="Language"
                                     multiline

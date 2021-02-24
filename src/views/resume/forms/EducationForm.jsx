@@ -13,7 +13,8 @@ import {
 import IconButton from '@material-ui/core/IconButton';
 import DeleteOutlineRoundedIcon from '@material-ui/icons/DeleteOutlineRounded';
 import Tooltip from '@material-ui/core/Tooltip';
-
+import styled from 'styled-components';
+import { TimeLine, Content } from '../../Styled components/style';
 
 const initialValues = {
     university: '',
@@ -46,7 +47,7 @@ const useClasses = makeStyles(theme => ({
     }
 }))
 
-function EducationForm({ id, removeEdu }) {
+function EducationForm({ id, removeEdu, color }) {
     const classes = useClasses()
     const dispatch = useDispatch()
 
@@ -77,12 +78,35 @@ function EducationForm({ id, removeEdu }) {
         await formik.submitForm()
     }
 
+    const ButtonA = styled.div`
+    position: absolute;
+    background-color:#555;
+    left: 0;
+    top: 8px;
+    width: 20px;
+    height: 20px;
+    -webkit-transition: all .3s ease;
+    transition: all .3s ease;
+    z-index: 100;
+    margin-left: -10px;
+    margin-top: 25px;
+    border-radius: 50%;
+    border: 0;
+    ${TimeLine} :hover &{
+        background-color:${props => props.primary ? "palevioletred" : `${color.bgColor}`};
+        }
+    ${TimeLine} :active &{
+        background-color:${props => props.primary ? "palevioletred" : `${color.bgColor}`};
+        }
+`;
+
     return (
         <>
-            <ul class="lonon-timeline">
+            <TimeLine>
                 <li>
-                    <div class="lonon-timeline-content">
+                    <Content>
                         <Grid container>
+                        <ButtonA />
                             <Grid item xs={12} sm={7}>
                                 <Grid container spacing={1} style={{ marginBottom: 4 }} >
                                     <Grid item >
@@ -187,94 +211,9 @@ function EducationForm({ id, removeEdu }) {
 
 
                         </Grid>
-
-                        {/*                   
-                                <Grid item  >
-                                    <TextField
-                                        style={{paddingRight: 15}}
-                                        id="date"
-                                        label="Start year"
-                                        type="date"
-                                        name='startYear'
-                                        size="small"
-                                        variant="outlined"
-                                        onChange={formik.handleChange}
-                                        error={Boolean(formik.touched.startYear && formik.errors.startYear)}
-                                        helperText={formik.touched.startYear && formik.errors.startYear}
-                                        onBlur={formik.handleBlur}
-                                        InputLabelProps={{
-                                            shrink: true,
-                                        }}
-                                    />
-                                    </Grid>
-                                    <Grid item  >
-                                        <TextField
-                                            id="date"
-                                            label="End year"
-                                            type="date"
-                                            name='endYear'
-                                            size="small"
-                                            variant="outlined"
-                                            onChange={formik.handleChange}
-                                            error={Boolean(formik.touched.endYear && formik.errors.endYear)}
-                                            helperText={formik.touched.endYear && formik.errors.endYear}
-                                            onBlur={formik.handleBlur}
-                                            InputLabelProps={{
-                                                shrink: true,
-                                            }}
-                                        />
-                                    </Grid>
-
-
-                            <Grid item>
-                                <TextField
-                                    multiline
-                                    name='university'
-                                    label="University"
-                                    size="small"
-                                    variant="outlined"
-                                    onChange={formik.handleChange}
-                                    error={Boolean(formik.touched.university && formik.errors.university)}
-                                    helperText={formik.touched.university && formik.errors.university}
-                                    onBlur={formik.handleBlur}
-                                />
-                            </Grid>
-
-                            <Grid item >
-                                <TextField
-                                    multiline
-                                    name='degree'
-                                    label="Degree"
-                                    size="small"
-                                    variant="outlined"
-                                    onChange={formik.handleChange}
-                                    error={Boolean(formik.touched.degree && formik.errors.degree)}
-                                    helperText={formik.touched.degree && formik.errors.degree}
-                                    onBlur={formik.handleBlur}
-                                />
-                            </Grid>
-
-                     
-                            <Grid list xs={6}>
-                                <TextField
-                                    multiline
-                                    size='small'
-                                    rows={5}
-                                    name='description'
-                                    label="Description"
-                                    variant="outlined"
-                                    onChange={formik.handleChange}
-                                    error={Boolean(formik.touched.description && formik.errors.description)}
-                                    helperText={formik.touched.description && formik.errors.description}
-                                    onBlur={formik.handleBlur}
-                                />
-                            </Grid>
-                             */}
-
-
-                    </div>
+                    </Content>
                 </li>
-            </ul>
+            </TimeLine>
             <Grid container className={classes.btnGrid}>
 
                 {/* <Grid list>
