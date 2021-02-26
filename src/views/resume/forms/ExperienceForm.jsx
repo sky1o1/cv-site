@@ -8,13 +8,17 @@ import {
     TextField,
     Button,
     Grid,
-    makeStyles
+    makeStyles,
+    withStyles
 } from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
+import Checkbox from '@material-ui/core/Checkbox';
 import DeleteOutlineRoundedIcon from '@material-ui/icons/DeleteOutlineRounded';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Tooltip from '@material-ui/core/Tooltip';
 import styled from 'styled-components';
 import { TimeLine, Content } from '../../Styled components/style';
+import { green } from '@material-ui/core/colors';
 
 
 const initialValues = {
@@ -23,6 +27,7 @@ const initialValues = {
     description: '',
     startYear: '',
     endYear: '',
+    present: false,
 }
 
 const useClasses = makeStyles(theme => ({
@@ -55,6 +60,18 @@ const useClasses = makeStyles(theme => ({
 function ExperienceForm({ id, removeExp, colors }) {
     const dispatch = useDispatch()
     const classes = useClasses()
+
+      const GreenCheckbox =withStyles
+      ({
+        root: {
+          color: green[400],
+          '&$checked': {
+            color: green[600],
+          },
+        },
+        checked: {},
+      })((props) => <Checkbox color="default" {...props} />);
+
     const formik = useFormik({
         initialValues,
         onSubmit: (values) => {
@@ -67,7 +84,8 @@ function ExperienceForm({ id, removeExp, colors }) {
                         post: values.post,
                         description: values.description,
                         start_date: values.startYear,
-                        end_date: values.endyear
+                        end_date: values.endyear,
+                        present: values.present
                     });
                 } catch (err) {
                     console.log(err)
@@ -103,6 +121,8 @@ function ExperienceForm({ id, removeExp, colors }) {
         background-color:${props => props.primary ? "palevioletred" : `${colors.bgColor}`};
         }
 `;
+
+console.log(formik.values.present)
     return (
         <>
             <TimeLine>
@@ -110,7 +130,7 @@ function ExperienceForm({ id, removeExp, colors }) {
                     <Content>
                         <Grid container>
 
-                    <ButtonA />
+                            <ButtonA />
                             <Grid item xs={12} sm={7}>
                                 <Grid container spacing={1} style={{ marginBottom: 4 }} >
                                     <Grid item >
@@ -130,7 +150,9 @@ function ExperienceForm({ id, removeExp, colors }) {
                                             }}
                                         />
                                     </Grid>
-                                    <Grid item>
+                                    {
+                                        (!formik.values.present) ?
+                                        <Grid item>
                                         <TextField
                                             style={{ width: 185 }}
                                             id="date"
@@ -147,7 +169,17 @@ function ExperienceForm({ id, removeExp, colors }) {
                                             }}
                                         />
                                     </Grid>
+                                    :
+                                    <Grid item>
+                                        <h2>Current</h2>
+                                    </Grid>
+                                    }
+                                    
                                 </Grid>
+                                <FormControlLabel
+                                    control={<GreenCheckbox checked={formik.values.present} onChange={formik.handleChange} name="present" />}
+                                    label="I curently work here"
+                                />
                                 <Grid container spacing={1}>
                                     <Grid item>
                                         <TextField

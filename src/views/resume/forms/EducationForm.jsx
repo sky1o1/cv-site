@@ -8,13 +8,17 @@ import {
     TextField,
     Button,
     Grid,
-    makeStyles
+    makeStyles,
+    withStyles
 } from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
+import Checkbox from '@material-ui/core/Checkbox';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 import DeleteOutlineRoundedIcon from '@material-ui/icons/DeleteOutlineRounded';
 import Tooltip from '@material-ui/core/Tooltip';
 import styled from 'styled-components';
 import { TimeLine, Content } from '../../Styled components/style';
+import { green } from '@material-ui/core/colors';
 
 const initialValues = {
     university: '',
@@ -22,6 +26,7 @@ const initialValues = {
     description: '',
     startYear: '',
     endYear: '',
+    present: false
 }
 
 const useClasses = makeStyles(theme => ({
@@ -51,6 +56,17 @@ function EducationForm({ id, removeEdu, color }) {
     const classes = useClasses()
     const dispatch = useDispatch()
 
+    const GreenCheckbox =withStyles
+    ({
+      root: {
+        color: green[400],
+        '&$checked': {
+          color: green[600],
+        },
+      },
+      checked: {},
+    })((props) => <Checkbox color="default" {...props} />);
+
     const formik = useFormik({
         initialValues,
         onSubmit: (values) => {
@@ -63,7 +79,8 @@ function EducationForm({ id, removeEdu, color }) {
                         course: values.degree,
                         course_description: values.description,
                         start_date: values.startYear,
-                        end_date: values.endyear
+                        end_date: values.endyear,
+                        present: values.present
                     });
                 } catch (err) {
                     console.log(err)
@@ -127,6 +144,8 @@ function EducationForm({ id, removeEdu, color }) {
                                             }}
                                         />
                                     </Grid>
+                                    {
+                                        (!formik.values.present)?
                                     <Grid item>
                                         <TextField
                                             style={{ width: 185 }}
@@ -145,8 +164,17 @@ function EducationForm({ id, removeEdu, color }) {
                                             }}
                                         />
                                     </Grid>
+                                    :
+                                    <Grid item>
+                                        <h2>Current</h2>
+                                    </Grid>
+                                    }
                                 </Grid>
-                                <Grid container spacing={1}>
+                                <FormControlLabel
+                                    control={<GreenCheckbox checked={formik.values.present} onChange={formik.handleChange} name="present" />}
+                                    label="I curently study here"
+                                />
+                                <Grid container spacing={2}>
                                     <Grid item>
                                         <TextField
                                             multiline

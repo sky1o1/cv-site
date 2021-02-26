@@ -107,8 +107,10 @@ function Sidebar({ setActivePage }) {
                                     hoverText &&
                                     <div style={{
                                         position: "absolute",
-                                        height: '125px',
-                                        width: '70%',
+                                        // height: '125px',
+                                        // width: '70%',
+                                        marginTop: 50,
+                                        marginLeft: 57,
                                         display: 'flex',
                                         flexDirection: 'column',
                                         justifyContent: 'center',
