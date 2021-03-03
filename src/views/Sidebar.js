@@ -1,5 +1,4 @@
 import React, { useRef, useEffect, useState } from 'react';
-import firebase from 'firebase/app'
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
 import { getRequest, postRequest } from '../services/axios.config';
@@ -67,17 +66,7 @@ function Sidebar({ setActivePage }) {
     //      fetchApi()
     // },[])
 
-    const logout = () => {
-        firebase.auth().signOut().then(function () {
-            console.log('logged out')
-            setActivePage('login')
-
-        }).catch(function (error) {
-            console.log('error logging out')
-        });
-        console.log('logged out')
-    }
-
+ 
     const mouseOver = () => {
         setHoverText(true)
     }
@@ -186,11 +175,6 @@ function Sidebar({ setActivePage }) {
                             <li><Link to='/portfolio' style={{ color: textColor2 }}>Portfolio</Link> </li>
                             <li><Link to='/services' style={{ color: textColor2 }}>Services</Link></li>
                             <li><Link to='/contact' style={{ color: textColor2 }}>Contact</Link> </li> */}
-                        <li>
-                            <button onClick={logout}>
-                                Logout
-                            </button>
-                        </li>
                     </ul>
                 </nav>
 

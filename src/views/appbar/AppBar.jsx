@@ -365,7 +365,7 @@ const StyledMenuItem = withStyles((theme) => ({
 }))(MenuItem);
 //custom menu end
 
-export default function PrimarySearchAppBar() {
+export default function PrimaryAppBar({setActivePage}) {
 
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = useState(null);
@@ -473,13 +473,9 @@ export default function PrimarySearchAppBar() {
                         <div className={classes.grow} />
                         <div className={classes.sectionDesktop}>
 
-
-
                             {/* mail icon */}
                            <Mail />
                             {/* end of mail icon */}
-
-
 
 
                             {/* custmonized menu */}
@@ -533,7 +529,7 @@ export default function PrimarySearchAppBar() {
 
 
                             {/* account circle */}
-                           <Account />
+                           <Account activePage={setActivePage}/>
                             {/* end of account circle */}
 
                             <DrawerMenu />
