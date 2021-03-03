@@ -247,6 +247,7 @@ import SendIcon from '@material-ui/icons/Send';
 import Tooltip from '@material-ui/core/Tooltip';
 
 import Mail from './Mail';
+import ThemeColors from './ThemeColors';
 import Notifications from './Notifications'
 import Account from './Account';
 import DrawerMenu from './Drawer';
@@ -365,7 +366,7 @@ const StyledMenuItem = withStyles((theme) => ({
 }))(MenuItem);
 //custom menu end
 
-export default function PrimaryAppBar({setActivePage}) {
+export default function PrimaryAppBar({ setActivePage }) {
 
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = useState(null);
@@ -388,7 +389,7 @@ export default function PrimaryAppBar({setActivePage}) {
         setCustomMenu(null);
     };
 
-//menu mobile
+    //menu mobile
     const handleProfileMenuOpen = (event) => {
         setAnchorEl(event.currentTarget);
     };
@@ -474,10 +475,10 @@ export default function PrimaryAppBar({setActivePage}) {
                         <div className={classes.sectionDesktop}>
 
                             {/* mail icon */}
-                           <Mail />
+                            <Mail />
                             {/* end of mail icon */}
 
-
+                            <ThemeColors />
                             {/* custmonized menu */}
                             <Tooltip title="Custom Menu" placement="bottom">
                                 <IconButton style={{ position: 'relative' }} ref={customMenu}
@@ -522,14 +523,14 @@ export default function PrimaryAppBar({setActivePage}) {
 
 
                             {/* notification */}
-                           <Notifications />
+                            <Notifications />
                             {/* end of notification */}
 
 
 
 
                             {/* account circle */}
-                           <Account activePage={setActivePage}/>
+                            <Account activePage={setActivePage} />
                             {/* end of account circle */}
 
                             <DrawerMenu />

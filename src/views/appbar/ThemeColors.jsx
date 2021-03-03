@@ -1,17 +1,12 @@
 import React from 'react';
 import { fade, makeStyles } from '@material-ui/core/styles';
+import useTheme from '../hooks/useTheme';
+import {Grid} from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
-import MailIcon from '@material-ui/icons/Mail';
 import Drawer from '@material-ui/core/Drawer';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
 import Tooltip from '@material-ui/core/Tooltip';
 import clsx from 'clsx';
-import Button from '@material-ui/core/Button';
+import ColorLensIcon from '@material-ui/icons/ColorLens';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -59,7 +54,6 @@ const useStyles = makeStyles((theme) => ({
     },
     inputInput: {
         padding: theme.spacing(1, 1, 1, 0),
-        // vertical padding + font size from searchIcon
         paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
         transition: theme.transitions.create('width'),
         width: '100%',
@@ -81,6 +75,22 @@ const useStyles = makeStyles((theme) => ({
     },
     iconbtn: {
         color: '#000'
+    },
+    themeGrid: {
+        display: 'flex',
+        flexDirection: 'column',
+    },
+    themeGridList: {
+        marginTop: 10,
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-around'
+    },
+    divColor: {
+        height: 60,
+        width: 90,
+        borderRadius: '20px',
+        cursor: 'pointer',
     }
 }));
 
@@ -88,6 +98,7 @@ const useStyles = makeStyles((theme) => ({
 function ThemeColors() {
 
     const classes = useStyles();
+    const [bgColor1, textColor1, headColor, textColor2, gradColor, updateColor] = useTheme('greyColor')
     const [state, setState] = React.useState({
         top: false,
         left: false,
@@ -113,13 +124,26 @@ function ThemeColors() {
             onClick={toggleDrawer(anchor, false)}
             onKeyDown={toggleDrawer(anchor, false)}
         >
-            <List>
-                    <ListItem button>
-                    <Button variant="contained" color="primary">
-        Primary
-      </Button>
-                    </ListItem>
-            </List>
+            <Grid className={classes.themeGrid}>
+                <Grid item className={classes.themeGridList}>
+                    <button className={classes.divColor} style={{backgroundColor:'#45515D'}} onClick={() => updateColor('greyColor') }/>
+                    <button className={classes.divColor} style={{backgroundColor:'#000'}} onClick={() => updateColor('blackColor') }/>
+                </Grid>
+
+                <Grid item className={classes.themeGridList}>
+                    <button className={classes.divColor} style={{backgroundColor:'#ff4b1f'}}  onClick={() => updateColor('orangeColor') }/>
+                    <button className={classes.divColor} style={{backgroundColor:'#BB377D'}}  onClick={() => updateColor('pinkColor') }/>
+                </Grid>
+
+                <Grid item className={classes.themeGridList}>
+                    <button className={classes.divColor} style={{backgroundColor:'#032481'}} onClick={() => updateColor('blueColor') }/>
+                    <button className={classes.divColor} style={{backgroundColor:'#56ab2f'}} onClick={() => updateColor('greenColor') }/>
+                </Grid>
+
+                <Grid item className={classes.themeGridList}>
+                    <button className={classes.divColor} style={{backgroundColor:'#302b63'}}  onClick={() => updateColor('violetColor') }/>
+                </Grid>
+            </Grid>
         </div>
     );
 
@@ -133,8 +157,7 @@ function ThemeColors() {
                     <div>
                         {['right'].map((anchor) => (
                             <React.Fragment key={anchor}>
-
-                                <MenuIcon onClick={toggleDrawer(anchor, true)} />
+                                <ColorLensIcon onClick={toggleDrawer(anchor, true)} />
                                 <Drawer anchor={anchor} open={state[anchor]} onClose={toggleDrawer(anchor, false)}>
                                     {list(anchor)}
                                 </Drawer>

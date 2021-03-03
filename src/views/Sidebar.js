@@ -67,11 +67,6 @@ function Sidebar({ setActivePage }) {
     // },[])
 
  
-    const mouseOver = () => {
-        setHoverText(true)
-    }
-
-
     return (
         <>
             <div>
@@ -165,11 +160,11 @@ function Sidebar({ setActivePage }) {
                 <nav id="lonon-main-menu">
                     <ul>
                         <ScrollToTop />
-                        <li onClick={() => setActivePage('home')} style={{ color: textColor2 }}><button>Home</button></li>
-                        <li onClick={() => setActivePage('resume')} style={{ color: textColor2 }}>Resume</li>
-                        <li onClick={() => setActivePage('portfolio')} style={{ color: textColor2 }}>Portfolio</li>
-                        <li onClick={() => setActivePage('services')} style={{ color: textColor2 }}>Services</li>
-                        <li onClick={() => setActivePage('contact')} style={{ color: textColor2 }}>Contact</li>
+                        <li onClick={() => setActivePage('home')} style={{ color: textColor2, cursor: 'pointer' }}>Home</li>
+                        <li onClick={() => setActivePage('resume')} style={{ color: textColor2, cursor: 'pointer' }}>Resume</li>
+                        <li onClick={() => setActivePage('portfolio')} style={{ color: textColor2, cursor: 'pointer' }}>Portfolio</li>
+                        <li onClick={() => setActivePage('services')} style={{ color: textColor2, cursor: 'pointer' }}>Services</li>
+                        <li onClick={() => setActivePage('contact')} style={{ color: textColor2, cursor: 'pointer' }}>Contact</li>
                         {/* <li><Link to='/home' style={{ color: textColor2 }}>Home</Link></li>
                             <li><Link to='/resume' style={{ color: textColor2 }}>Resume</Link></li>
                             <li><Link to='/portfolio' style={{ color: textColor2 }}>Portfolio</Link> </li>
