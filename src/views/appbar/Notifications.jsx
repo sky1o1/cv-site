@@ -14,7 +14,6 @@ import DraftsIcon from '@material-ui/icons/Drafts';
 import SendIcon from '@material-ui/icons/Send';
 import Tooltip from '@material-ui/core/Tooltip';
 
-// custom menu
 const StyledMenu = withStyles({
     paper: {
         border: '1px solid #d3d4d5',
