@@ -12,7 +12,6 @@ import InboxIcon from '@material-ui/icons/MoveToInbox';
 import Tooltip from '@material-ui/core/Tooltip';
 import clsx from 'clsx';
 
-
 const useStyles = makeStyles((theme) => ({
     grow: {
         flexGrow: 1,

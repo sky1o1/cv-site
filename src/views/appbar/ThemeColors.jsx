@@ -8,7 +8,6 @@ import Tooltip from '@material-ui/core/Tooltip';
 import clsx from 'clsx';
 import ColorLensIcon from '@material-ui/icons/ColorLens';
 
-
 const useStyles = makeStyles((theme) => ({
     grow: {
         flexGrow: 1,
