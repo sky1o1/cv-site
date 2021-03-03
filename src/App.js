@@ -15,7 +15,7 @@ import Services from './views/services/Services';
 import Contact from './views/Contact';
 import Projects from './views/project/Projects';
 import Error from './views/Error';
-import AppBarMenu from './views/AppBar';
+import AppBarMenu from './views/appbar/AppBar';
 
 
 function App() {

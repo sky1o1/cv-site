@@ -225,39 +225,31 @@
 // export default AppBarMenu;
 
 
-import React from 'react';
-import { fade, makeStyles } from '@material-ui/core/styles';
+import React, { useState } from 'react';
+import { fade, makeStyles, withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
-import InputBase from '@material-ui/core/InputBase';
 import Badge from '@material-ui/core/Badge';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
-import MenuIcon from '@material-ui/icons/Menu';
-import SearchIcon from '@material-ui/icons/Search';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 
-
-import Drawer from '@material-ui/core/Drawer';
-import Button from '@material-ui/core/Button';
-import List from '@material-ui/core/List';
-import Divider from '@material-ui/core/Divider';
-import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
-import ClickAwayListener from '@material-ui/core/ClickAwayListener';
-import Grow from '@material-ui/core/Grow';
-import Paper from '@material-ui/core/Paper';
-import Popper from '@material-ui/core/Popper';
-import MenuList from '@material-ui/core/MenuList';
-import clsx from 'clsx';
+import DraftsIcon from '@material-ui/icons/Drafts';
+import SendIcon from '@material-ui/icons/Send';
+import Tooltip from '@material-ui/core/Tooltip';
+
+import Mail from './Mail';
+import Notifications from './Notifications'
+import Account from './Account';
+import DrawerMenu from './Drawer';
 
 const theme = createMuiTheme({
     overrides: {
@@ -340,91 +332,63 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
+// custom menu
+const StyledMenu = withStyles({
+    paper: {
+        border: '1px solid #d3d4d5',
+    },
+})((props) => (
+    <Menu
+        elevation={0}
+        getContentAnchorEl={null}
+        anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'center',
+        }}
+        transformOrigin={{
+            vertical: 'top',
+            horizontal: 'center',
+        }}
+        {...props}
+    />
+));
+
+const StyledMenuItem = withStyles((theme) => ({
+    root: {
+        '&:focus': {
+            backgroundColor: theme.palette.primary.main,
+            '& .MuiListItemIcon-root, & .MuiListItemText-primary': {
+                color: theme.palette.common.white,
+            },
+        },
+    },
+}))(MenuItem);
+//custom menu end
+
 export default function PrimarySearchAppBar() {
+
     const classes = useStyles();
-    const [anchorEl, setAnchorEl] = React.useState(null);
-    const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+    const [anchorEl, setAnchorEl] = useState(null);
+    const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
 
     const isMenuOpen = Boolean(anchorEl);
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
-    const [state, setState] = React.useState({
-        top: false,
-        left: false,
-        bottom: false,
-        right: false,
-    });
 
-    const [open, setOpen] = React.useState(false);
-    const anchorRef = React.useRef(null);
-  
-    const handleToggle = () => {
-      setOpen((prevOpen) => !prevOpen);
-    };
-  
-    const handleClose = (event) => {
-      if (anchorRef.current && anchorRef.current.contains(event.target)) {
-        return;
-      }
-  
-      setOpen(false);
-    };
-  
-    function handleListKeyDown(event) {
-      if (event.key === 'Tab') {
-        event.preventDefault();
-        setOpen(false);
-      }
-    }
-  
-    // return focus to the button when we transitioned from !open -> open
-    const prevOpen = React.useRef(open);
-    React.useEffect(() => {
-      if (prevOpen.current === true && open === false) {
-        anchorRef.current.focus();
-      }
-  
-      prevOpen.current = open;
-    }, [open]);
+    const [customMenu, setCustomMenu] = useState(null);
 
-    const toggleDrawer = (anchor, open) => (event) => {
-        if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
-            return;
-        }
+    const [open, setOpen] = useState(false);
 
-        setState({ ...state, [anchor]: open });
+    // for customized menu
+    const handleClickMenu = (event) => {
+        setCustomMenu(event.currentTarget);
     };
 
+    const handleCloseMenu = () => {
+        setCustomMenu(null);
+    };
 
-    const list = (anchor) => (
-        <div
-            className={clsx(classes.list, {
-                [classes.fullList]: anchor === 'top' || anchor === 'bottom',
-            })}
-            role="presentation"
-            onClick={toggleDrawer(anchor, false)}
-            onKeyDown={toggleDrawer(anchor, false)}
-        >
-            <List>
-                {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-                    <ListItem button key={text}>
-                        <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                        <ListItemText primary={text} />
-                    </ListItem>
-                ))}
-            </List>
-            <Divider />
-            <List>
-                {['All mail', 'Trash', 'Spam'].map((text, index) => (
-                    <ListItem button key={text}>
-                        <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                        <ListItemText primary={text} />
-                    </ListItem>
-                ))}
-            </List>
-        </div>
-    );
-
+//menu mobile
     const handleProfileMenuOpen = (event) => {
         setAnchorEl(event.currentTarget);
     };
@@ -508,71 +472,73 @@ export default function PrimarySearchAppBar() {
                     <Toolbar>
                         <div className={classes.grow} />
                         <div className={classes.sectionDesktop}>
-                            <IconButton aria-label="show 4 new mails">
-                                <Badge badgeContent={4} color="secondary">
-                                    <MailIcon />
-                                </Badge>
-                            </IconButton>
 
-                            <IconButton style={{position: 'relative'}}  ref={anchorRef}
-                                aria-controls={open ? 'menu-list-grow' : undefined}
-                                aria-haspopup="true"
-                                onClick={handleToggle}>
-                                <Badge badgeContent={4} color="secondary">
-                                    <NotificationsIcon />
-                                </Badge>
-                            </IconButton>
-            <Popper open={open} anchorEl={anchorRef.current} role={undefined} transition disablePortal>
-                {({ TransitionProps, placement }) => (
-                    <Grow
-                        {...TransitionProps}
-                        style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}
-                    >
-                        <Paper>
-                            <ClickAwayListener onClickAway={handleClose}>
-                                <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
-                                    <MenuItem onClick={handleClose}>Profile</MenuItem>
-                                    <MenuItem onClick={handleClose}>My account</MenuItem>
-                                    <MenuItem onClick={handleClose}>Logout</MenuItem>
-                                </MenuList>
-                            </ClickAwayListener>
-                        </Paper>
-                    </Grow>
-                )}
-            </Popper>
 
-                            <IconButton onClick={handleProfileMenuOpen} aria-label="show 17 new notifications">
-                                <Badge badgeContent={17} color="secondary">
-                                    <NotificationsIcon />
-                                </Badge>
-                            </IconButton>
-                            <IconButton
-                                edge="end"
 
-                                aria-label="account of current user"
-                                aria-controls={menuId}
-                                aria-haspopup="true"
+                            {/* mail icon */}
+                           <Mail />
+                            {/* end of mail icon */}
 
+
+
+
+                            {/* custmonized menu */}
+                            <Tooltip title="Custom Menu" placement="bottom">
+                                <IconButton style={{ position: 'relative' }} ref={customMenu}
+                                    aria-controls={open ? 'menu-list-grow' : undefined}
+                                    aria-haspopup="true"
+                                    onClick={handleClickMenu}>
+                                    <Badge badgeContent={4} color="secondary">
+                                        <NotificationsIcon />
+                                    </Badge>
+                                </IconButton>
+                            </Tooltip>
+
+                            <StyledMenu
+                                id="customized-menu"
+                                anchorEl={customMenu}
+                                keepMounted
+                                open={Boolean(customMenu)}
+                                onClose={handleCloseMenu}
                             >
-                                <AccountCircle />
-                            </IconButton>
-                            <IconButton
-                                edge="end"
-                                aria-label="open drawer"
-                            >
+                                <StyledMenuItem>
+                                    <ListItemIcon>
+                                        <SendIcon fontSize="small" />
+                                    </ListItemIcon>
+                                    <ListItemText primary="Sent mail" />
+                                </StyledMenuItem>
+                                <StyledMenuItem>
+                                    <ListItemIcon>
+                                        <DraftsIcon fontSize="small" />
+                                    </ListItemIcon>
+                                    <ListItemText primary="Drafts" />
+                                </StyledMenuItem>
+                                <StyledMenuItem>
+                                    <ListItemIcon>
+                                        <InboxIcon fontSize="small" />
+                                    </ListItemIcon>
+                                    <ListItemText primary="Inbox" />
+                                </StyledMenuItem>
+                            </StyledMenu>
+                            {/* end customized menu */}
 
-                                <div>
-                                    {['right'].map((anchor) => (
-                                        <React.Fragment key={anchor}>
 
-                                            <MenuIcon onClick={toggleDrawer(anchor, true)} />
-                                            <Drawer anchor={anchor} open={state[anchor]} onClose={toggleDrawer(anchor, false)}>
-                                                {list(anchor)}
-                                            </Drawer>
-                                        </React.Fragment>
-                                    ))}
-                                </div>
-                            </IconButton>
+
+
+                            {/* notification */}
+                           <Notifications />
+                            {/* end of notification */}
+
+
+
+
+                            {/* account circle */}
+                           <Account />
+                            {/* end of account circle */}
+
+                            <DrawerMenu />
+
+
                         </div>
                         <div className={classes.sectionMobile}>
                             <IconButton

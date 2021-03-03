@@ -34,7 +34,12 @@ const theme = createMuiTheme({
     overrides: {
         MuiSelect: {
             root: {
-                padding: '10px'
+                padding: 10,
+            }
+        },
+        MuiInput: {
+            root: {
+                marginLeft: 10
             }
         }
     }
