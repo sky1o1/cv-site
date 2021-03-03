@@ -2,10 +2,9 @@ import React, { useState } from 'react';
 import {useSelector} from 'react-redux';
 import firebase from 'firebase/app'
 import { withStyles, makeStyles } from '@material-ui/core/styles';
-import IconButton from '@material-ui/core/IconButton';
+import Divider from '@material-ui/core/Divider';
 import Typography from '@material-ui/core/Typography';
 import Menu from '@material-ui/core/Menu';
-import AccountCircle from '@material-ui/icons/AccountCircle';
 import Tooltip from '@material-ui/core/Tooltip';
 import Avatar from '@material-ui/core/Avatar';
 import Card from '@material-ui/core/Card';
@@ -96,6 +95,7 @@ const profile = useSelector(state => state.profile)
                         <button onClick={logout}>
                                 Logout
                             </button>
+                            <Divider />
                             <Typography color="textSecondary" gutterBottom>
                           Privacy Policy Terms of Services
                         </Typography>

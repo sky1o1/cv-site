@@ -142,6 +142,7 @@ function ThemeColors() {
 
                 <Grid item className={classes.themeGridList}>
                     <button className={classes.divColor} style={{backgroundColor:'#302b63'}}  onClick={() => updateColor('violetColor') }/>
+                    <button className={classes.divColor} style={{backgroundColor:'#302b63'}}  onClick={() => updateColor('violetColor') }/>
                 </Grid>
             </Grid>
         </div>
