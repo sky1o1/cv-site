@@ -56,7 +56,7 @@ function App() {
 
   return (
     <>
-      <AppBarMenu />
+      <AppBarMenu activePage={setActivePage} />
       <div id="lonon-page"> <a href="#" class="js-lonon-nav-toggle lonon-nav-toggle"><i></i></a>
         {/* <Router> */}
          
